@@ -11,16 +11,10 @@
 </head>
 <body>
     <section class="sub-header">
-        <nav>
-            <a href="../index.html"><img src="../images/pinkpostlogo.png"></a>
-            <div class="nav-links" id="navLinks">  
-                <ul>
-                    <li><a href="../index.html">HOME</a></li>
-                    <li><a href="../pages/index-login.html">REGISTER / SIGN IN</a></li>
-                    <li><a href="../pages/index-contact.html">CONTACT</a></li>
-                </ul>
-            </div>
-        </nav>
+        <?php
+            include_once '../header.php';
+        ?>
+        <!--End General Header Code-->
             <h1>Contact Us</h1>
     </section>
     

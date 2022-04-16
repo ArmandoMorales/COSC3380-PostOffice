@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pink Pastel Post Office</title>
 <!-- page style -->
-<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="../css/index.css">
 <!-- font for webpage -->
 <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
 <!-- icons -->
@@ -11,18 +11,17 @@
 </head>
 <body>
     <section class="header">
-        <nav>
-            <a href="index.html"><img src="images/pinkpostlogo.png"></a>
-            <div class="nav-links" id="navLinks">
-                <ul>
-                    <li><a href="index.html">HOME</a></li>
-                    <li><a href="pages/index-login.html">REGISTER / SIGN IN</a></li>
-                    <li><a href="pages/index-contact.html">CONTACT</a></li>
-                </ul>
-            </div>
-        </nav>
-
+        <?php
+            include_once '../header.php';
+        ?>
+<!--End General Header code-->
         <div class="text-box">
+            <?php
+            if (isset($_SESSION["useruid"]))
+                {
+                    echo '<p>Welcome ' . $_SESSION["useruid"] . '!</p>';
+                }
+            ?>
             <h1>Our Priority Is You</h1>
             <p>Pink Pastel Post Office remains committed to providing all customers with essential mailing and shipping services.<br>We're delivering with advanced technology and equipment to over 160 million addresses across the country.</p>
             <a href="#about-us" class="hero-btn">Visit Us to Know More</a>
@@ -55,19 +54,19 @@
         <p>See some of our most popular locations below. Originating from Houston, Texas, we're continuing to grow and expect to be available nationwide by 2030.</p>
             <div class="row">
                 <div class="locations-col">
-                    <img src="images/houston.jpeg">
+                    <img src="../images/houston.jpeg">
                     <div class="layer">
                         <h3>HOUSTON</h3>
                     </div>
                 </div>
                 <div class="locations-col">
-                    <img src="images/austin.jpeg">
+                    <img src="../images/austin.jpeg">
                     <div class="layer">
                         <h3>AUSTIN</h3>
                     </div>
                 </div>
                 <div class="locations-col">
-                    <img src="images/dallas.jpeg">
+                    <img src="../images/dallas.jpeg">
                     <div class="layer">
                         <h3>DALLAS</h3>
                     </div>

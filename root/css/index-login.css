@@ -218,7 +218,19 @@ nav img {
     cursor: pointer;
     transition: all 0.3s ease;
 }
-
+/*EXPERIMENT START - Change login button in registration form*/
+.form button {
+    border: none;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    background-color: #4070f4;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+/*EXPERIMENT END*/
 .button input:hover {
     background-color: #265df2;
 }
