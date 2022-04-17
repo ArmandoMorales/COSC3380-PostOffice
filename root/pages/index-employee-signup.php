@@ -1,3 +1,9 @@
+<?php
+//Temporary registration page
+//Either move code to manager-services.php when available, or make into an include file
+
+?>
+
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,7 +56,11 @@
                                     echo "<p>Fill in all fields!</p>";
                                 }
 
-                                else if($_GET["error"] == "wronglogin")
+                                else if($_GET["error"] == "wronglogin1")
+                                {
+                                    echo "<p>Incorrect login information!</p>";
+                                }
+                                else if($_GET["error"] == "wronglogin2")
                                 {
                                     echo "<p>Incorrect login information!</p>";
                                 }
@@ -72,9 +82,9 @@
     
                 <!-- Registration Form that appears upon clicking -->
                 <div class="form signup">
-                    <span class="title">Registration</span>
+                    <span class="title">Employee Registration</span>
     
-                    <form action="../includes/signup.inc.php" method="post">
+                    <form action="../includes/employee-signup.inc.php" method="post">
                         <div class="input-field">
                             <input type="text" name="fname" placeholder="Enter first name" required>
                             <i class="uil uil-user"></i>

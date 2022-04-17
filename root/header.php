@@ -11,11 +11,16 @@
             <?php
                 if (isset($_SESSION["useruid"]))
                 {
-                    echo '<li><a href="index-contact.php">Fake Account Link !</a></li>';
+                    if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "employee"))
+                    {
+                        echo '<li><a href="employee-services.html">Employee Services</a></li>';
+                    }
+                    echo '<li><a href="index-contact.php">Fake Account Link</a></li>';
                     echo '<li><a href="../includes/logout.inc.php">Log out</a></li>';
                 }
                 else
                 {
+                    echo '<li><a href="index-employee-signup.php">EMPLOYEE REGISTRATION</a></li>';
                     echo '<li><a href="index-login.php">REGISTER / SIGN IN</a></li>';
                 }
             ?>
