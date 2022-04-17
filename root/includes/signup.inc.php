@@ -1,27 +1,32 @@
 <?php
 
+//CUSTOMER-ONLY Registration (Create separate file for employee registration)
+
 if (isset($_POST["submit"]))
 {
-    $name = $_POST["name"];
+    $fname = $_POST["fname"];
+    $lname = $_POST["lname"];
     $email = $_POST["email"];
-    $username = $_POST["uid"];
     $pwd = $_POST["pwd"];
     $pwdrepeat = $_POST["pwdrepeat"];
 
     require_once 'dbh.inc.php';
     require_once 'functions.inc.php';
 
-    if(emptyInputSignup($name, $email, $username, $pwd, $pwdrepeat) !== false)
+    /*COMPLETE - Removed $username and added $fname, $lname -- Also updated the function*/
+    if(emptyInputSignup($fname, $lname, $email, $pwd, $pwdrepeat) !== false)
     {
         header("location: ../pages/index-login.php?error=emptyinput");
         exit();
     }
 
-    if(invalidUid($username) !== false) //Redundant maybe?  Could use email as uid
+    /*FUNCTION NO LONGER USED*/
+
+    /*if(invalidUid($username) !== false)
     {
         header("location: ../pages/index-login.php?error=invaliduid");
         exit();
-    }
+    }*/
     if(invalidEmail($email) !== false)
     {
         header("location: ../pages/index-login.php?error=invalidemail");
@@ -32,13 +37,16 @@ if (isset($_POST["submit"]))
         header("location: ../pages/index-login.php?error=passwordsdontmatch");
         exit();
     }
-    if(uidExists($conn, $username, $email) !== false)
+    /* COMPLETE - REMOVED $username - Actual function updated too */
+    if(uidExists($conn, $email) !== false)
     {
         header("location: ../pages/index-login.php?error=usernametaken");
         exit();
     }
 
-    createUser($conn, $name, $email, $username, $pwd);
+    /* UPDATE - REMOVED $username & added $fname, $lname
+       Updated actual function - WILL NOT WORK UNTIL I HAVE IT INSERT INTO CUSTOMER*/
+    createUser($conn, $fname, $lname, $email, $pwd);
 
 
 }

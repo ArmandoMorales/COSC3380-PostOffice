@@ -1,5 +1,7 @@
 <?php
 
+//Login for everyone - customers, employees, and managers.
+
 if(isset($_POST["submit"]))
 {
     $username = $_POST["uid"];
