@@ -36,7 +36,7 @@
         <div class="side-bar" id="sidebar">
             <div class="list">
                 <a href="employee-services.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Employee Information</p></div></a>
-                <a href="emp-create-pkg-1.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Create Package</p></div></a>
+                <a href="emp-create-pkg-1.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Start Package</p></div></a>
                 <a href="emp-update-trk-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Update Tracking</p></div></a>
                 <a href="emp-update-inv-1.php"><div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Update Inventory</p></div></a>
             </div>
@@ -100,7 +100,7 @@
                                 <h2>Enter Date</h2>
                             </span>
                         </div>
-                        <input type="text" name="fname" placeholder="Enter today's date" required>
+                        <input type="datetime-local" name="fname" placeholder="Enter today's date" required>
                     <button type="submit" class="hero-btn red-btn" id="update-track-enter">Enter</button>
 
                     <!-- TODO: can't remove: will mess up side bar, so just hide by using color white in css -->

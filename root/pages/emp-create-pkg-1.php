@@ -10,9 +10,15 @@
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+<section class="sub-header">
+    <?php
+        include_once '../header.php';
+    ?>
+    
+    <!--
     <section class="sub-header">
         <nav>
-            <!-- TODO: add redirects based on employee permissions -->
+        
             <a href=""><img src="../images/pinkpostlogo.png"></a>
             <div class="nav-links" id="navLinks">  
                 <ul>
@@ -24,14 +30,14 @@
             </div>
         </nav>
             <h1></h1>
-    </section>
+    </section> -->
 
     <!-- Side Bar -->
     <section class="side-bar-container">
         <div class="side-bar" id="sidebar">
             <div class="list">
                 <a href="employee-services.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Employee Information</p></div></a>
-                <a href="emp-create-pkg-1.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Create Package</p></div></a>
+                <a href="emp-create-pkg-1.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Start Package</p></div></a>
                 <a href="emp-update-trk-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Update Tracking</p></div></a>
                 <a href="emp-update-inv-1.php"><div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Update Inventory</p></div></a>
             </div>
@@ -44,18 +50,18 @@
             <div>
                     <i class="fa fa-dropbox" aria-hidden="true"></i>
                     <span>
-                        <h5>Create Package</h5>
+                        <h5>Start Package</h5>
                     </span>
                 </div>
 
                 <form method="post" action="emp-create-pkg-2.php">
                     <div>
                         <span>
-                            <h2>Customer ID</h2>
+                            <h2>Package ID</h2>
                         </span>
                     </div>
-                    <input type="text" name="customer-id" placeholder="Enter customer's id">
-                <button type="submit" class="hero-btn red-btn" id="create-get-pkg-info-btn">Get Package Info</button>
+                    <input type="text" name="package-id" placeholder="Enter package ID">
+                    <button type="submit" class="hero-btn red-btn" id="create-get-pkg-info-btn">Get Package Info</button>
 
                 <!-- TODO: can't remove: will mess up side bar, so just hide by using color white in css -->
                 <p class="heading"> HEADING </p>
