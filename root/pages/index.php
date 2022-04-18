@@ -19,8 +19,9 @@
             <?php
             if (isset($_SESSION["useruid"]))
                 {
-                    echo '<p>Welcome ' . $_SESSION["useruid"] . '!</p>';
-                    echo '<p>You are a(n) ' . $_SESSION["role"] . '!</p>'; 
+                    //commented out because this textbox covered the navbar
+                    //echo '<p>Welcome ' . $_SESSION["useruid"] . '!</p>';
+                    //echo '<p>You are a(n) ' . $_SESSION["role"] . '!</p>'; 
                 }
             ?>
             <h1>Our Priority Is You</h1>
