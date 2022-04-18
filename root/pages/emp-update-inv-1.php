@@ -40,7 +40,7 @@
         <div class="side-bar" id="sidebar">
             <div class="list">
                 <a href="employee-services.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Employee Information</p></div></a>
-                <a href="emp-create-pkg-1.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Create Package</p></div></a>
+                <a href="emp-create-pkg-1.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Start Package</p></div></a>
                 <a href="emp-update-trk-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Update Tracking</p></div></a>
                 <a href="emp-update-inv-1.php"><div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Update Inventory</p></div></a>
             </div>
@@ -79,7 +79,7 @@
                                 //Check for results
                                 if($resultDataitem_check > 0){
                                     while($check = mysqli_fetch_assoc($resultDataitem)){ 
-                                        //compare each row's PO ID to 1, return if match
+                                        //compare each row's PO ID to session id, return if match
                                         if($check["PO_ID"] == $_SESSION["officeID"])
                                         {
                                             echo "<tr> 

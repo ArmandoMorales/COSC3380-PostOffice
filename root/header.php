@@ -15,6 +15,11 @@
                     {
                         echo '<li><a href="../pages/employee-services.php">Employee Services</a></li>';
                     }
+                    else if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "customer"))
+                    {
+                        
+                        echo '<li><a href="../pages/customer-services.php">Customer Services</a></li>';
+                    }
                     echo '<li><a href="index-contact.php">Fake Account Link</a></li>';
                     echo '<li><a href="../includes/logout.inc.php">Log out</a></li>';
                 }

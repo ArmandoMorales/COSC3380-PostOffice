@@ -10,9 +10,16 @@
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+<section class="sub-header">
+        <?php
+            include_once '../header.php';
+        ?>
+</section>
+    
+    <!-- This section replaced with universal header above
     <section class="sub-header">
         <nav>
-            <!-- TODO: add redirects based on employee permissions -->
+            
             <a href=""><img src="../images/pinkpostlogo.png"></a>
             <div class="nav-links" id="navLinks">  
                 <ul>
@@ -24,7 +31,7 @@
             </div>
         </nav>
             <h1></h1>
-    </section>
+    </section> -->
 
     <!-- Side Bar -->
     <section class="side-bar-container">
@@ -44,7 +51,7 @@
                 <div>
                     <i class="fa fa-user" aria-hidden="true"></i>
                     <span>
-                        <h5>Employee Information</h5>
+                        <h5>Customer Information</h5>
                     </span>
                 </div>
 
@@ -56,7 +63,15 @@
 
                 <div>
                     <span>
-                        <p id="display-info">Johnny</p>
+                        <p id="display-info">
+                            <?php
+                                if (isset($_SESSION["firstName"]))
+                                {
+                                    echo $_SESSION["firstName"];
+                                    
+                                }
+                            ?>
+                        </p>
                     </span>
                 </div>
 
@@ -68,7 +83,15 @@
 
                 <div>
                     <span>
-                        <p id="display-info">Smith</p>
+                        <p id="display-info">
+                            <?php
+                                if (isset($_SESSION["lastName"]))
+                                {
+                                    echo $_SESSION["lastName"];
+                                    
+                                }
+                            ?>
+                        </p>
                     </span>
                 </div>
 
@@ -80,7 +103,15 @@
 
                 <div>
                     <span>
-                        <p id="display-info">123 Sesame Street</p>
+                        <p id="display-info">
+                            <?php
+                                if (isset($_SESSION["custAddressKey"]))
+                                {
+                                    echo $_SESSION["custAddressKey"];
+                                    
+                                }
+                            ?>
+                        </p>
                     </span>
                 </div>
 
@@ -92,7 +123,15 @@
 
                 <div>
                     <span>
-                        <p id="display-info">0123456789</p>
+                        <p id="display-info">
+                            <?php
+                                if (isset($_SESSION["custpnum"]))
+                                {
+                                    echo $_SESSION["custpnum"];
+                                    
+                                }
+                            ?>
+                        </p>
                     </span>
                 </div>
 

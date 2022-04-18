@@ -202,6 +202,8 @@ function loginUser($conn, $username, $pwd)
         $_SESSION["empid"] = $uidExists["Employee_ID"];
         $_SESSION["empAddressKey"] = $uidExists["Employee_Address_Key"];
         $_SESSION["officeID"] = $uidExists["Office_ID"];
+        $_SESSION["custAddressKey"] = $uidExists["Customer_Address_Key"];
+        $_SESSION["custpnum"] = $uidExists["Customer_Phone_Num"];
         header("location: ../pages/index.php");
         exit();
     }

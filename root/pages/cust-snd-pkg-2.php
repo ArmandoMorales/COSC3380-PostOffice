@@ -14,9 +14,20 @@
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+<?php
+    include("../includes/dbh.inc.php");
+?>
+<section class="header">
+    <?php
+        include_once '../header.php';
+    ?>
+</section>    
+    
+    
+    <!-- 
     <section class="sub-header">
         <nav>
-            <!-- TODO: add redirects based on employee permissions -->
+        
             <a href=""><img src="../images/pinkpostlogo.png"></a>
             <div class="nav-links" id="navLinks">  
                 <ul>
@@ -28,7 +39,7 @@
             </div>
         </nav>
             <h1></h1>
-    </section>
+    </section> -->
 
     <!-- Side Bar -->
     <section class="side-bar-container">
@@ -43,7 +54,140 @@
 
         <!-- content -->
         <div class="content">
+            <?php
+                $Rbuildingnum = $_POST['Rbuilding-num'];
+                $Rbnum_converted = (int) $Rbuildingnum;
+                $Rstreet = $_POST['Rstreet-name'];
+                $Rcity = $_POST['Rcity'];
+                $Rstate = $_POST['Rstate'];
+                $Rzipcode = $_POST['Rzip'];
+                $Rzipcode_coverted = (int) $Rzipcode;
+                
+                $Dbuildingnum = $_POST['Dbuilding-num'];
+                $Dbnum_converted = (int) $Dbuildingnum;
+                $Dstreet = $_POST['Dstreet-name'];
+                $Dcity = $_POST['Dcity'];
+                $Dstate = $_POST['Dstate'];
+                $Dzipcode = $_POST['Dzip'];
+                $Dzipcode_coverted = (int) $Dzipcode;
+                
+                $ptype = $_POST['ptype'];
+                $weight = $_POST['weight'];
+                $vol = $_POST['vol'];
+                $vol_converted = (int) $vol;
+                
+                
+                //New (return) Address tuple 
+                $sqlRaddr = "INSERT INTO PostOffice.Address (Building_Num, Street_Name, City, State, Zipcode)
+                VALUES (?, ?, ?, ?, ?);";
+                $stmtRaddr = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmtRaddr, $sqlRaddr))
+                {
+                    header("location: ../pages/index-login.php?error=stmtfailed");
+                    exit();
+                }
+                mysqli_stmt_bind_param($stmtRaddr, "isssi", $Rbnum_converted, $Rstreet, $Rcity, $Rstate, $Rzipcode_coverted );
+                mysqli_stmt_execute($stmtRaddr);
+            
+                //New (destination) Address tuple
+                $sqlDaddr = "INSERT INTO PostOffice.Address (Building_Num, Street_Name, City, State, Zipcode)
+                VALUES (?, ?, ?, ?, ?);";
+                $stmtDaddr = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmtDaddr, $sqlDaddr))
+                {
+                    header("location: ../pages/index-login.php?error=stmtfailed");
+                    exit();
+                }
+                mysqli_stmt_bind_param($stmtDaddr, "isssi", $Dbnum_converted, $Dstreet, $Dcity, $Dstate, $Dzipcode_coverted);
+                mysqli_stmt_execute($stmtDaddr);
 
+                //Retrieve Returning Destination Address Keys
+                $addrRKeys = "SELECT Address_Key FROM PostOffice.Address 
+                                WHERE Building_Num = ? AND Street_Name = ? AND City = ? AND State = ? AND Zipcode = ?;";
+                
+                $stmtRKeys = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmtRKeys, $addrRKeys))
+                {
+                    header("location: ../pages/index-login.php?error=stmtfailed");
+                    exit();   
+                }
+                mysqli_stmt_bind_param($stmtRKeys, "isssi", $Rbnum_converted, $Rstreet, $Rcity, $Rstate, $Rzipcode_coverted );
+                mysqli_stmt_execute($stmtRKeys);
+
+                $resultRKey = mysqli_stmt_get_result($stmtRKeys);
+                $resultRKeyCheck = mysqli_num_rows($resultRKey);
+                
+                $holdRaddr = -1;
+                
+                if($resultRKeyCheck > 0)
+                {
+                    while($resultRKeyCheck = mysqli_fetch_assoc($resultRKey))
+                    {
+                        $holdRaddr = $resultRKeyCheck["Address_Key"];       
+                    }
+ 
+                }
+                else
+                {
+                    echo "error";
+                }
+
+                //Retrieve Destination Destination Address Keys
+                $addrDKeys = "SELECT Address_Key FROM PostOffice.Address 
+                                WHERE Building_Num = ? AND Street_Name = ? AND City = ? AND State = ? AND Zipcode = ?;";
+                
+                $stmtDKeys = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmtDKeys, $addrDKeys))
+                {
+                    header("location: ../pages/index-login.php?error=stmtfailed");
+                    exit();   
+                }
+                mysqli_stmt_bind_param($stmtDKeys, "isssi", $Dbnum_converted, $Dstreet, $Dcity, $Dstate, $Dzipcode_coverted );
+                mysqli_stmt_execute($stmtDKeys);
+
+                $resultDKey = mysqli_stmt_get_result($stmtDKeys);
+                
+                $resultDKeyCheck = mysqli_num_rows($resultDKey);
+                
+                $holdDaddr = -1;
+                
+                if($resultDKeyCheck > 0)
+                {
+                    while($resultDKeyCheck = mysqli_fetch_assoc($resultDKey))
+                    {
+                        $holdDaddr = $resultDKeyCheck["Address_Key"];       
+                    }
+ 
+                }
+                else
+                {
+                    echo "error";
+                }
+
+                //echo $holdRaddr;
+                //echo $holdDaddr;
+
+                
+                $notReceived = 0;
+                //Create Package
+                $newPkg = "INSERT INTO PostOffice.Package (Customer_ID, Package_Type, Package_Weight, Package_Volume, IC_Address_Key, OT_Address_Key, Recieved)
+                            VALUES(?,?,?,?,?,?,?);";
+                $stmtPkg = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmtPkg, $newPkg))
+                {
+                    header("location: ../pages/index-login.php?error=stmtfailed");
+                    exit();
+                }
+                mysqli_stmt_bind_param($stmtPkg, "isddiii", $_SESSION["userid"], $ptype, $weight, $vol_converted, $holdRaddr,$holdDaddr, $notReceived);
+                mysqli_stmt_execute($stmtPkg);            
+
+            ?>
+            
+        
+        
+        
+            
+            
             <div class="form-col">
                 <div>
                 <i class="fa fa-truck" aria-hidden="true"></i>

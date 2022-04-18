@@ -10,9 +10,15 @@
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+<section class="sub-header">
+    <?php
+        include_once '../header.php';
+    ?>
+</section>
+    <!-- This section replaced with universal header above
     <section class="sub-header">
         <nav>
-            <!-- TODO: add redirects based on employee permissions -->
+           
             <a href=""><img src="../images/pinkpostlogo.png"></a>
             <div class="nav-links" id="navLinks">  
                 <ul>
@@ -24,7 +30,7 @@
             </div>
         </nav>
             <h1></h1>
-    </section>
+    </section> -->
 
     <!-- Side Bar -->
     <section class="side-bar-container">
@@ -65,10 +71,38 @@
 
                     <div>
                         <span>
-                            <h2>Address</h2>
+                            <h2>Building #</h2>
                         </span>
                     </div>
-                    <input type="text" name="address" placeholder="Enter your updated address">
+                    <input type="text" name="building-num" placeholder="Enter your updated building number">
+
+                    <div>
+                        <span>
+                            <h2>Street Name</h2>
+                        </span>
+                    </div>
+                    <input type="text" name="street-name" placeholder="Enter your updated street name" maxlength="25">
+
+                    <div>
+                        <span>
+                            <h2>City</h2>
+                        </span>
+                    </div>
+                    <input type="text" name="city" placeholder="Enter your updated city" maxlength="20">
+                    
+                    <div>
+                        <span>
+                            <h2>State</h2>
+                        </span>
+                    </div>
+                    <input type="text" name="state" placeholder="Enter your updated state">
+
+                    <div>
+                        <span>
+                            <h2>Zipcode</h2>
+                        </span>
+                    </div>
+                    <input type="text" name="zip" placeholder="Enter your updated zipcode">
 
                     <div>
                         <span>
