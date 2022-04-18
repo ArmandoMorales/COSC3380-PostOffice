@@ -6,14 +6,14 @@
     <a href="index.php"><img src="../images/pinkpostlogo.png"></a>
     <div class="nav-links" id="navLinks">
         <ul>
-            <li><a href="index.php">HOME</a></li>
-            <li><a href="index-contact.php">CONTACT</a></li>
+            <li><a href="../pages/index.php">HOME</a></li>
+            <li><a href="../pages/index-contact.php">CONTACT</a></li>
             <?php
                 if (isset($_SESSION["useruid"]))
                 {
                     if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "employee"))
                     {
-                        echo '<li><a href="employee-services.html">Employee Services</a></li>';
+                        echo '<li><a href="../pages/employee-services.php">Employee Services</a></li>';
                     }
                     echo '<li><a href="index-contact.php">Fake Account Link</a></li>';
                     echo '<li><a href="../includes/logout.inc.php">Log out</a></li>';

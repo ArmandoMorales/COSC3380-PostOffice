@@ -196,6 +196,12 @@ function loginUser($conn, $username, $pwd)
         $_SESSION["userid"] = $uidExists["Customer_ID"];
         $_SESSION["useruid"] = $uidExists["email"];
         $_SESSION["role"] = $uidExists["role"];
+        $_SESSION["firstName"] = $uidExists["First_Name"];
+        $_SESSION["lastName"] = $uidExists["Last_Name"];
+        $_SESSION["pnum"] = $uidExists["Employee_Phone_Num"];
+        $_SESSION["empid"] = $uidExists["Employee_ID"];
+        $_SESSION["empAddressKey"] = $uidExists["Employee_Address_Key"];
+        $_SESSION["officeID"] = $uidExists["Office_ID"];
         header("location: ../pages/index.php");
         exit();
     }
