@@ -51,6 +51,8 @@
         }
         mysqli_stmt_bind_param($stmt1, "ss", $fname, $_SESSION["useruid"]);
         mysqli_stmt_execute($stmt1);
+
+        $_SESSION["firstName"] = $fname;
     }
     
     // if they entered last name to be edited
@@ -65,6 +67,8 @@
         }
         mysqli_stmt_bind_param($stmt2, "ss", $lname, $_SESSION["useruid"]);
         mysqli_stmt_execute($stmt2);
+
+        $_SESSION["lastName"] = $lname;
     }
 
     // if they enter Building#
@@ -149,6 +153,8 @@
         }
         mysqli_stmt_bind_param($stmt8, "is", $pnumber, $_SESSION["useruid"]);
         mysqli_stmt_execute($stmt8);
+
+        $_SESSION["pnum"] = $pnumber;
     }
     
     else {

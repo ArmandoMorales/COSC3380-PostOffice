@@ -60,7 +60,7 @@
                 <a href="emp-create-pkg-1.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Create Package</p></div></a>
                 <a href="emp-update-trk-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Update Tracking</p></div></a>
                 <a href="emp-update-inv-1.php"><div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Update Inventory</p></div></a>
-                <a href="emp-pkg-report-1.php"><div class="icons"><i class="fa fa-database" aria-hidden="true"></i><p id="icon-txt">Package Report</p></div></a>
+                <a href="emp-notifications-1.php"><div class="icons"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><p id="icon-txt">Notifications</p></div></a>
             </div>
         </div>
 
@@ -192,18 +192,18 @@
                 <div>
                     <i class="fa fa-dropbox" aria-hidden="true"></i>
                     <span>
-                        <h5>Package Info For Johnny</h5>
+                        <h5>Package Sent</h5>
                     </span>
                 </div>
 
                 <div>
                     <span>
-                        <h2>Package Sent</h2>
+                        <h2>Thank you! Package has been created and added to the database. Please be sure to send it out to it's next location.</h2>
                     </span>
                 </div>
 
                 <form method="post" action="emp-create-pkg-3.php">
-                <button type="submit" class="hero-btn red-btn" id="create-pkg-send-to">Send To Next Post Office</button>
+                <button type="submit" class="hero-btn red-btn" id="create-pkg-send-to">Create Another Package</button>
                 <?php
                     $notReceived = 0;
                     //Create Package

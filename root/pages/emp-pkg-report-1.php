@@ -42,6 +42,7 @@
                 <a href="emp-update-trk-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Update Tracking</p></div></a>
                 <a href="emp-update-inv-1.php"><div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Update Inventory</p></div></a>
                 <a href="emp-pkg-report-1.php"><div class="icons"><i class="fa fa-database" aria-hidden="true"></i><p id="icon-txt">Package Report</p></div></a>
+                <a href="emp-notifications-1.php"><div class="icons"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><p id="icon-txt">Notifications</p></div></a>
 
             </div>
         </div>
@@ -91,7 +92,7 @@
                             <h2>Due Within</h2>
                         </span>
                     </div>
-                    <input type="text" name="due" placeholder="Enter max days until due...">
+                  <input type="text" name="due" placeholder="Enter max days until due...">
 
                     <div>
                         <span>
@@ -99,6 +100,8 @@
                         </span>
                     </div>
                     <input type="text" name="cost" placeholder="Enter max price in dollars...">
+
+                    <input type="text" name="type" placeholder="Enter date">
 
 
                 <button type="submit" class="hero-btn red-btn" id="pkg-report-info">Generate Report</button>

@@ -14,7 +14,7 @@
         <?php
             include_once '../header.php';
         ?>
-        <?php
+       <?php
             include_once '../includes/dbh.inc.php';
             $prio = $_POST['prio-num'];
             $weight = $_POST['weight'];
@@ -52,6 +52,7 @@
                 <a href="emp-update-trk-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Update Tracking</p></div></a>
                 <a href="emp-update-inv-1.php"><div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Update Inventory</p></div></a>
                 <a href="emp-pkg-report-1.php"><div class="icons"><i class="fa fa-database" aria-hidden="true"></i><p id="icon-txt">Package Report</p></div></a>
+                <a href="emp-notifications-1.php"><div class="icons"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><p id="icon-txt">Notifications</p></div></a>
 
             </div>
         </div>
@@ -60,16 +61,13 @@
         <div class="content">
 
             <div class="form-col">
-                <div>
-                    <i class="fa fa-database" aria-hidden="true"></i>
-                        <span>
-                            <h5>Package Report</h5>
-                            
-                        </span>
+            <div>
+            <i class="fa fa-database" aria-hidden="true"></i>
+                    <span>
+                        <h5>Package Report</h5>
+                    </span>
                 </div>
-
-
-            <table class="content-table">
+             <table class="content-table">
                 <thead>
                     <tr>
                         <!--Package_ID, StopNum, DateArrived, DateSent, Tracking_Office_ID-->
@@ -227,7 +225,6 @@
                 ?>
                 </tbody>
             </table>
-
                 <!-- TODO: can't remove: will mess up side bar, so just hide by using color white in css -->
                 <p class="heading"> HEADING </p>
                 <p class="paragraph"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus blanditiis cumque voluptate laboriosam? Voluptate delectus saepe impedit, dolores aliquam in possimus corporis rerum a quam itaque dolor animi cupiditate expedita.</p>
