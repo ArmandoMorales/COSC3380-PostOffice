@@ -15,16 +15,34 @@
 
     if (isset($nextPackageID) && $nextPackageID !==""){
         
+
+        $sql1 = "SELECT count(*) FROM Tracking WHERE Package_ID = ?;";
+        $stmt1 = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt1, $sql1))
+        {
+            header("location: ../pages/admin-services-addPerm2.php?error=stmtfailed");
+            exit();
+        }
+        mysqli_stmt_bind_param($stmt1, "i", $_SESSION['packageIDglobal']);
+        mysqli_stmt_execute($stmt1);
+
+        $mngRow  = mysqli_stmt_get_result($stmt1);
+        $mngOut1 = mysqli_fetch_all($mngRow);
+
+            
+
+
+           
         $publish_date = date("Y-m-d H:i:s");
-        $sqlSend1 = "INSERT INTO Tracking (Package_ID, DateArrived, DateSent, Tracking_Office_ID)
-                        VALUES (?,?,?,?);";
+        $sqlSend1 = "INSERT INTO Tracking (Package_ID, StopNum, DateArrived, DateSent, Tracking_Office_ID)
+                        VALUES (?,?,?,?,?);";
         $stmtSend1 = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmtSend1, $sqlSend1))
         {
             header("location: ../pages/index-login.php?error=stmtfailed");
             exit();
         }
-        mysqli_stmt_bind_param($stmtSend1, "issi", $_SESSION['packageIDglobal'], $publish_date, $publish_date, $_SESSION["officeID"]);
+        mysqli_stmt_bind_param($stmtSend1, "iissi", $_SESSION['packageIDglobal'], $mngout1[0][0], $publish_date, $publish_date, $nextPackageID);
         mysqli_stmt_execute($stmtSend1);
     
         //Destroys session variable
