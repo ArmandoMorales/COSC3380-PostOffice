@@ -32,6 +32,8 @@
         }
         mysqli_stmt_bind_param($stmt1, "ss", $fname, $_SESSION["useruid"]);
         mysqli_stmt_execute($stmt1);
+
+        $_SESSION["firstName"] = $fname;
     }
 
     // if they entered last name to be edited
@@ -46,6 +48,8 @@
         }
         mysqli_stmt_bind_param($stmt2, "ss", $lname, $_SESSION["useruid"]);
         mysqli_stmt_execute($stmt2);
+
+        $_SESSION["lastName"] = $lname;
     }
     // if they enter Building#
     if (isset($buildingnum) && $buildingnum !==""){
@@ -120,7 +124,7 @@
     // if they entered last name to be edited
     if (isset($pnumber) && $pnumber !==""){
         $sql8 = "UPDATE PostOffice.Customer
-        SET Employee_Phone_Num = ?
+        SET Customer_Phone_Num = ?
         WHERE email = ?;"; 
         $stmt8 = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt8,$sql8)){
@@ -129,6 +133,8 @@
         }
         mysqli_stmt_bind_param($stmt8, "is", $pnumber, $_SESSION["useruid"]);
         mysqli_stmt_execute($stmt8);
+
+        $_SESSION["custpnum"] = $pnumber;
     }
 
     else {
