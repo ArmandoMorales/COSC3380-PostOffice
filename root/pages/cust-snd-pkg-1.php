@@ -165,6 +165,13 @@
                         </span>
                     </div>
                     <input type="text" name="vol" placeholder="Enter package volume">
+
+                    <div>
+                        <span>
+                            <h2>Priority</h2>
+                        </span>
+                    </div>
+                    <input type="text" name="prio" placeholder="Enter priority: 1 2 3">
                     
                     <button type="submit" class="hero-btn red-btn" id="cust-conf-ship-btn">Save Information</button>
 
