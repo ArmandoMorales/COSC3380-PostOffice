@@ -45,7 +45,7 @@
                 <div>
                     <i class="fa fa-user" aria-hidden="true"></i>
                     <span>
-                        <h5>View Post Offices</h5>
+                        <h5>Post Offices Report</h5>
                     </span>
                 </div>
 
