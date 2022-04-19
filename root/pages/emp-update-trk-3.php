@@ -28,7 +28,9 @@
 
         $mngRow  = mysqli_stmt_get_result($stmt1);
         $mngOut1 = mysqli_fetch_all($mngRow);
-
+        echo $mngOut1[0][0];
+        $mngOut1[0][0] = $mngOut1[0][0]+1;
+        echo $mngOut1[0][0];
             
 
 
@@ -42,14 +44,14 @@
             header("location: ../pages/index-login.php?error=stmtfailed");
             exit();
         }
-        mysqli_stmt_bind_param($stmtSend1, "iissi", $_SESSION['packageIDglobal'], $mngout1[0][0], $publish_date, $publish_date, $nextPackageID);
+        mysqli_stmt_bind_param($stmtSend1, "iissi", $_SESSION['packageIDglobal'], $mngOut1[0][0], $publish_date, $publish_date, $nextPackageID);
         mysqli_stmt_execute($stmtSend1);
     
         //Destroys session variable
         unset($_SESSION['packageIDglobal']);
     
         // redirect to emp-create-pkg-1.php incase they'd like to repeat all of this with a new user.
-        echo "<script> location.href='emp-create-pkg-1.php'; </script>";
+        //echo "<script> location.href='emp-create-pkg-1.php'; </script>";
         exit;
     }
 
