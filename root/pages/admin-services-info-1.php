@@ -1,13 +1,8 @@
 <html>
 <head>
-<section class="sub-header">
-    <?php
-    include_once '../header.php';
-    ?>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Administrator Services</title>
-<link rel="stylesheet" href="../css/admin-services.css">
+<link rel="stylesheet" href="../css/employee-services.css">
 <!-- font -->
 <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
 <!-- icons -->
@@ -15,7 +10,26 @@
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    
+<section class="sub-header">
+    <?php
+        include_once '../header.php';
+    ?>
+</section>
+    <!-- This section replaced with universal header above
+    <section class="sub-header">
+        <nav>
+            <a href=""><img src="../images/pinkpostlogo.png"></a>
+            <div class="nav-links" id="navLinks">  
+                <ul>
+                    <li><a href="">HOME</a></li>
+                    <li><a href="">CONTACT</a></li>
+                    <li><a href="employee-services.php">EMPLOYEE SELF SERVICES</a></li>
+                    <li><a href="">LOGOUT</a></li>
+                </ul>
+            </div>
+        </nav>
+            <h1></h1>
+    </section> -->
 
     <!-- Side Bar -->
     <section class="side-bar-container">
@@ -37,113 +51,79 @@
         </div>
 
         <!-- content -->
-        <div class="content", id="EmpInfo">
+        <div class="content">
 
             <div class="form-col">
-                <div>
+            <div>
                     <i class="fa fa-user" aria-hidden="true"></i>
                     <span>
-                        <h5>New Employee Information</h5>
+                        <h5>Employee Information</h5>
                     </span>
                     </div>
 
-                    <form method="post" action="admin-services-newEmp2.php">
+                    <form method="post" action="emp-edit-info-2.php">
                     <div>
                         <span>
                             <h2>First Name</h2>
                         </span>
                     </div>
-                    <input type="text" name="fname" placeholder="John" required>
-
-                    <div>
-                        <span>
-                            <h2>Middle Initial</h2>
-                        </span>
-                    </div>
-                    <input type="text" name="mname" placeholder="B" >
+                    <input type="text" name="fname" placeholder="Enter your updated first name">
 
                     <div>
                         <span>
                             <h2>Last Name</h2>
                         </span>
                     </div>
-                    <input type="text" name="lname" placeholder="Doe" required>
+                    <input type="text" name="lname" placeholder="Enter your updated last name">
 
                     <div>
                         <span>
-                            <h2>Phone Number</h2>
+                            <h2>Building #</h2>
                         </span>
                     </div>
-                    <input type="text" name="phone-number" placeholder="**********" required>
-
-
-                    <!-- This section should be automatic if they are a normal manager -->
-                    <div>
-                        <span>
-                            <h2>Works At</h2>
-                        </span>
-                    </div>
-                    <input type="text" name="location" placeholder="Post Office ID" required>
-
-                    <div>
-                        <span>
-                            <h2>Supervisor ID</h2>
-                        </span>
-                    </div>
-                    <input type="text" name="supervisor" placeholder="****">
-
-                    <div>
-                        <span>
-                            <h2>Email</h2>
-                        </span>
-                    </div>
-                    <input type="text" name="email" placeholder="jDoe321@postOffice.com" required>
-
-                    <div>
-                        <span>
-                            <h2>password</h2>
-                        </span>
-                    </div>
-                    <input type="text" name="pwd" placeholder="*****" required>
-
-                    <div>
-                        <span>
-                            <h2>Building Number</h2>
-                        </span>
-                    </div>
-                    <input type="text" name="building-number" placeholder="****" required>
-                    
-                    <div>
-                        <span>
-                            <h2>City</h2>
-                        </span>
-                    </div>
-                    <input type="text" name="city" placeholder="Houston" required>
+                    <input type="text" name="building-num" placeholder="Enter your updated building number">
 
                     <div>
                         <span>
                             <h2>Street Name</h2>
                         </span>
                     </div>
-                    <input type="text" name="street-name" placeholder="2nd Street" required>
+                    <input type="text" name="street-name" placeholder="Enter your updated street name" maxlength="25">
+
                     <div>
                         <span>
-                            <h2>Zipcode</h2>
+                            <h2>City</h2>
                         </span>
                     </div>
-                    <input type="text" name="zipcode" placeholder="*****" required>
+                    <input type="text" name="city" placeholder="Enter your updated city" maxlength="20">
+                    
                     <div>
                         <span>
                             <h2>State</h2>
                         </span>
                     </div>
-                    <input type="text" name="state" placeholder="Texas" required>
+                    <input type="text" name="state" placeholder="Enter your updated state">
 
-                    <button type="submit" class="hero-btn red-btn" id="emp-add-emp-btn">Add Employee</button>
+                    <div>
+                        <span>
+                            <h2>Zipcode</h2>
+                        </span>
+                    </div>
+                    <input type="text" name="zip" placeholder="Enter your updated zipcode">
+                    
+                    <div>
+                        <span>
+                            <h2>Phone Number</h2>
+                        </span>
+                    </div>
+                    <input type="text" name="phone-number" placeholder="Enter your updated phone number">
+                    
+                    <button type="submit" class="hero-btn red-btn" id="emp-save-info-btn">Save Information</button>
 
                     <p class="heading"> HEADING </p>
                     <p class="paragraph"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus blanditiis cumque voluptate laboriosam? Voluptate delectus saepe impedit, dolores aliquam in possimus corporis rerum a quam itaque dolor animi cupiditate expedita.</p>
 
+                    </form>
             </div> 
             
         </div>
