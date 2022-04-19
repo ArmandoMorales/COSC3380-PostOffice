@@ -1,5 +1,9 @@
 <html>
 <head>
+<section class="sub-header">
+    <?php
+    include_once '../header.php';
+    ?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Administrator Services</title>
 <link rel="stylesheet" href="../css/admin-services.css">
@@ -10,21 +14,7 @@
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <section class="sub-header">
-        <nav>
-            <!-- TODO: add redirects based on employee permissions -->
-            <a href=""><img src="../images/pinkpostlogo.png"></a>
-            <div class="nav-links" id="navLinks">  
-                <ul>
-                    <li><a href="">HOME</a></li>
-                    <li><a href="">CONTACT</a></li>
-                    <li><a href="employee-services.html">EMPLOYEE SELF SERVICES</a></li>
-                    <li><a href="">LOGOUT</a></li>
-                </ul>
-            </div>
-        </nav>
-            <h1></h1>
-    </section>
+    
 
     <script src="../scripts/add-Perms.js"></script>
 
@@ -32,14 +22,14 @@
     <section class="side-bar-container">
         <div class="side-bar" id="sidebar">
             <div class="list">
-                <div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Employee Information</p></div>
-                <div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Create Package</p></div>
-                <div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Update Tracking</p></div>
-                <div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Update Inventory</p></div>
-                <div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Create New Employee</p></div>
-                <div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Add Employee Permissions</p></div>
-                <div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Remove Employee Permissions</p></div>
-                <div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Create New Post Office</p></div>
+                <a><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Employee Information</p></div></a>
+                <a><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Create Package</p></div></a>
+                <a><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Update Tracking</p></div></a>
+                <a><div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Update Inventory</p></div></a>
+                <a href="admin-services-newEmp.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Create New Employee</p></div></a>
+                <a href="admin-services-addPerm.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Add Employee Permissions</p></div></a>
+                <a href="admin-services-remPerm.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Remove Employee Permissions</p></div></a>
+                <a href="admin-services-ViewEmp.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">View Employees</p></div></a>
             </div>
         </div>
 

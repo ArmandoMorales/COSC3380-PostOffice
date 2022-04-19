@@ -20,6 +20,16 @@
                         
                         echo '<li><a href="../pages/customer-services.php">Customer Services</a></li>';
                     }
+                    else if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "manager"))
+                    {
+                        
+                        echo '<li><a href="../pages/admin-services-addPerm.php">Manager Services</a></li>';
+                    }
+                    else if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "hq manager"))
+                    {
+                        
+                        echo '<li><a href="../pages/admin-services-addPerm.php">Manager Services</a></li>';
+                    }
                     echo '<li><a href="index-contact.php">Fake Account Link</a></li>';
                     echo '<li><a href="../includes/logout.inc.php">Log out</a></li>';
                 }

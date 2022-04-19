@@ -33,6 +33,11 @@
         }
 
     ?>
+
+    <section class="sub-header">
+    <?php
+    include_once '../header.php';
+    ?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Administrator Services</title>
 <link rel="stylesheet" href="../css/admin-services.css">
@@ -43,22 +48,7 @@
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <section class="sub-header">
-        <nav>
-            <!-- TODO: add redirects based on employee permissions -->
-            <a href=""><img src="../images/pinkpostlogo.png"></a>
-            <div class="nav-links" id="navLinks">  
-                <ul>
-                    <li><a href="">HOME</a></li>
-                    <li><a href="">CONTACT</a></li>
-                    <li><a href="employee-services.html">EMPLOYEE SELF SERVICES</a></li>
-                    <li><a href="">LOGOUT</a></li>
-                </ul>
-            </div>
-        </nav>
-            <h1></h1>
-    </section>
-
+    
     <script src="../scripts/add-Perms.js"></script>
 
     <!-- Side Bar -->

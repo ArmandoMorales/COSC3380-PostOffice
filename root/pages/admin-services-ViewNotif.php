@@ -3,6 +3,7 @@
 <section class="sub-header">
     <?php
     include_once '../header.php';
+    include("../includes/dbh.inc.php");
     ?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Administrator Services</title>
@@ -37,48 +38,17 @@
         <div class="content", id="EmpInfo">
 
             <div class="form-col">
-                <div>
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <span>
-                    <h5>View Post Office Employees</h5>
-                </span>
-                </div>
-
-                <form method="post" action="../pages/admin-services-ViewEmp2.php">
-                <div>
-                <span>
-                    <h2>Post Office ID</h2>
-                </span>
-                </div>
-                <input type="text" name="pID" placeholder="*******" required>
-                <div>
-                <span>
-                    <h2>Optional: State</h2>
-                </span>
-                </div>
-                <input type="text" name="state" placeholder="TX">
-                <div>
-                <span>
-                    <h2>Optional: City</h2>
-                </span>
-                </div>
-                <input type="text" name="city" placeholder="Houston">
-                <div>
-                <span>
-                    <h2>Optional: First Name</h2>
-                </span>
-                </div>
-                <input type="text" name="fname" placeholder="John">
-                <div>
-                <span>
-                    <h2>Optional: Last Name</h2>
-                </span>
-                </div>
-                <input type="text" name="lname" placeholder="Doe">
-                <input type="submit" name="choosePO" value="Select Office"/>
-                </form>
-
-
+                <?php
+                    $officesql = "UPDATE Notification_New_Employee SET isAdd = 0 where N_number > 0;";
+                    $stmtOffice = mysqli_stmt_init($conn);
+                             
+                    if (!mysqli_stmt_prepare($stmtOffice, $officesql)){
+                        header("location: ../pages/index-login.php?error=stmtfailed");
+                        exit();
+                    }
+                    mysqli_stmt_execute($stmtOffice);
+                    echo "<script> location.href='admin-services-ViewNotif2.php'; </script>";
+                ?>
                 <p class="heading"> HEADING </p>
                 <p class="paragraph"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus blanditiis cumque voluptate laboriosam? Voluptate delectus saepe impedit, dolores aliquam in possimus corporis rerum a quam itaque dolor animi cupiditate expedita.</p>
 
