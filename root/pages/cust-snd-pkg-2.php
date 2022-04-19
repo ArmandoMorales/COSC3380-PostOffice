@@ -77,37 +77,11 @@
                 $vol_converted = (int) $vol;
                 
                 
-                //New (return) Address tuple 
-                $sqlRaddr = "INSERT INTO PostOffice.Address (Building_Num, Street_Name, City, State, Zipcode)
-                VALUES (?, ?, ?, ?, ?);";
-                $stmtRaddr = mysqli_stmt_init($conn);
-                if (!mysqli_stmt_prepare($stmtRaddr, $sqlRaddr))
-                {
-                    header("location: ../pages/index-login.php?error=stmtfailed");
-                    exit();
-                }
-                mysqli_stmt_bind_param($stmtRaddr, "isssi", $Rbnum_converted, $Rstreet, $Rcity, $Rstate, $Rzipcode_coverted );
-                mysqli_stmt_execute($stmtRaddr);
-            
-                //New (destination) Address tuple
-                $sqlDaddr = "INSERT INTO PostOffice.Address (Building_Num, Street_Name, City, State, Zipcode)
-                VALUES (?, ?, ?, ?, ?);";
-                $stmtDaddr = mysqli_stmt_init($conn);
-                if (!mysqli_stmt_prepare($stmtDaddr, $sqlDaddr))
-                {
-                    header("location: ../pages/index-login.php?error=stmtfailed");
-                    exit();
-                }
-                mysqli_stmt_bind_param($stmtDaddr, "isssi", $Dbnum_converted, $Dstreet, $Dcity, $Dstate, $Dzipcode_coverted);
-                mysqli_stmt_execute($stmtDaddr);
-
-                //Retrieve Returning Destination Address Keys
                 $addrRKeys = "SELECT Address_Key FROM PostOffice.Address 
                                 WHERE Building_Num = ? AND Street_Name = ? AND City = ? AND State = ? AND Zipcode = ?;";
                 
                 $stmtRKeys = mysqli_stmt_init($conn);
-                if (!mysqli_stmt_prepare($stmtRKeys, $addrRKeys))
-                {
+                if (!mysqli_stmt_prepare($stmtRKeys, $addrRKeys)){
                     header("location: ../pages/index-login.php?error=stmtfailed");
                     exit();   
                 }
@@ -119,26 +93,55 @@
                 
                 $holdRaddr = -1;
                 
-                if($resultRKeyCheck > 0)
-                {
+                if($resultRKeyCheck > 0) {
                     while($resultRKeyCheck = mysqli_fetch_assoc($resultRKey))
                     {
                         $holdRaddr = $resultRKeyCheck["Address_Key"];       
                     }
- 
-                }
-                else
-                {
+                } else {
+                    $sqlRaddr = "INSERT INTO PostOffice.Address (Building_Num, Street_Name, City, State, Zipcode)
+                    VALUES (?, ?, ?, ?, ?);";
+                    $stmtRaddr = mysqli_stmt_init($conn);
+                    if (!mysqli_stmt_prepare($stmtRaddr, $sqlRaddr)) {
+                        header("location: ../pages/index-login.php?error=stmtfailed");
+                        exit();
+                    }
+                    mysqli_stmt_bind_param($stmtRaddr, "isssi", $Rbnum_converted, $Rstreet, $Rcity, $Rstate, $Rzipcode_coverted );
+                    mysqli_stmt_execute($stmtRaddr);
+                
+                    $addrRKeys = "SELECT Address_Key FROM PostOffice.Address 
+                                WHERE Building_Num = ? AND Street_Name = ? AND City = ? AND State = ? AND Zipcode = ?;";
+                
+                    $stmtRKeys = mysqli_stmt_init($conn);
+                    if (!mysqli_stmt_prepare($stmtRKeys, $addrRKeys)) {
+                        header("location: ../pages/index-login.php?error=stmtfailed");
+                        exit();   
+                    }
+                    mysqli_stmt_bind_param($stmtRKeys, "isssi", $Rbnum_converted, $Rstreet, $Rcity, $Rstate, $Rzipcode_coverted );
+                    mysqli_stmt_execute($stmtRKeys);
+
+                    $resultRKey = mysqli_stmt_get_result($stmtRKeys);
+                    $resultRKeyCheck = mysqli_num_rows($resultRKey);
+                
+                    $holdRaddr = -1;
+                
+                    if($resultRKeyCheck > 0) {
+                        while($resultRKeyCheck = mysqli_fetch_assoc($resultRKey)) {
+                            $holdRaddr = $resultRKeyCheck["Address_Key"];       
+                        }
+                    }
+                    else {
                     echo "error";
+                    }
                 }
+
 
                 //Retrieve Destination Destination Address Keys
                 $addrDKeys = "SELECT Address_Key FROM PostOffice.Address 
                                 WHERE Building_Num = ? AND Street_Name = ? AND City = ? AND State = ? AND Zipcode = ?;";
                 
                 $stmtDKeys = mysqli_stmt_init($conn);
-                if (!mysqli_stmt_prepare($stmtDKeys, $addrDKeys))
-                {
+                if (!mysqli_stmt_prepare($stmtDKeys, $addrDKeys)) {
                     header("location: ../pages/index-login.php?error=stmtfailed");
                     exit();   
                 }
@@ -151,17 +154,48 @@
                 
                 $holdDaddr = -1;
                 
-                if($resultDKeyCheck > 0)
-                {
+                if($resultDKeyCheck > 0){
                     while($resultDKeyCheck = mysqli_fetch_assoc($resultDKey))
                     {
                         $holdDaddr = $resultDKeyCheck["Address_Key"];       
                     }
- 
-                }
-                else
-                {
-                    echo "error";
+                } else {
+                    //New (destination) Address tuple
+                    $sqlDaddr = "INSERT INTO PostOffice.Address (Building_Num, Street_Name, City, State, Zipcode)
+                    VALUES (?, ?, ?, ?, ?);";
+                    $stmtDaddr = mysqli_stmt_init($conn);
+                    if (!mysqli_stmt_prepare($stmtDaddr, $sqlDaddr)) {
+                        header("location: ../pages/index-login.php?error=stmtfailed");
+                        exit();
+                    }
+                    mysqli_stmt_bind_param($stmtDaddr, "isssi", $Dbnum_converted, $Dstreet, $Dcity, $Dstate, $Dzipcode_coverted);
+                    mysqli_stmt_execute($stmtDaddr);
+                    //Retrieve Destination Destination Address Keys
+                    $addrDKeys = "SELECT Address_Key FROM PostOffice.Address 
+                                WHERE Building_Num = ? AND Street_Name = ? AND City = ? AND State = ? AND Zipcode = ?;";
+                
+                    $stmtDKeys = mysqli_stmt_init($conn);
+                    if (!mysqli_stmt_prepare($stmtDKeys, $addrDKeys)) {
+                        header("location: ../pages/index-login.php?error=stmtfailed");
+                        exit();   
+                    }
+                    mysqli_stmt_bind_param($stmtDKeys, "isssi", $Dbnum_converted, $Dstreet, $Dcity, $Dstate, $Dzipcode_coverted );
+                    mysqli_stmt_execute($stmtDKeys);
+
+                    $resultDKey = mysqli_stmt_get_result($stmtDKeys);
+                
+                    $resultDKeyCheck = mysqli_num_rows($resultDKey);
+                
+                    $holdDaddr = -1;
+                
+                    if($resultDKeyCheck > 0) {
+                        while($resultDKeyCheck = mysqli_fetch_assoc($resultDKey)) {
+                            $holdDaddr = $resultDKeyCheck["Address_Key"];       
+                        }
+                    }
+                    else {
+                        echo "error";
+                    }
                 }
 
                 //echo $holdRaddr;
