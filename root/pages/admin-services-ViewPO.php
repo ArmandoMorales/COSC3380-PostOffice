@@ -41,57 +41,72 @@
         <div class="content", id="EmpInfo">
 
             <div class="form-col">
+                
                 <div>
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <span>
-                    <h5>View Post Office Employees</h5>
-                </span>
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <span>
+                        <h5>View Post Office Employees</h5>
+                    </span>
                 </div>
 
                 <form method="post" action="../pages/admin-services-ViewPO2.php">
-                <div>
-                <span>
-                    <h2>Optional: Post Office Name</h2>
-                </span>
-                </div>
-                <input type="text" name="pName" placeholder="*******">
-                <h2>Optional: Manager ID</h2>
-                </span>
-                </div>
-                <input type="text" name="mID" placeholder="Enter 0 for unmanged Post Offices">
-                <div>
-                <span>
-                    <h2>Optional: Post Office ID</h2>
-                </span>
-                </div>
-                <input type="text" name="mID" placeholder="***">
-                    <h2>Optional: State</h2>
-                </span>
-                </div>
-                <input type="text" name="state" placeholder="TX">
-                <div>
-                <span>
-                    <h2>Optional: City</h2>
-                </span>
-                </div>
-                <input type="text" name="city" placeholder="Houston">
-                <div>
-                <span> 
-                <div>
-                <span>
-                    <h2>Optional: Phone Number</h2>
-                </span>
-                </div>
-                <input type="text" name="pNum" placeholder="**********">
-                    <h2>Optional: Less than X Employees</h2>
-                </span>
-                </div>
-                <input type="text" name="xPloy" placeholder="Not Currently Implemented">
-                    <h2>Optional: Greater than X Packages</h2>
-                </span>
-                </div>
-                <input type="text" name="lname" placeholder="Doe">
-                <input type="submit" name="xPack" value="Not Currently Implemented"/>
+                    <div>
+                        <span>
+                            <h2>Optional: Post Office Name</h2>
+                        </span>
+                    </div>
+                    <input type="text" name="pName" placeholder="*******">
+                    
+                    <div>
+                        <span>
+                            <h2>Optional: Manager ID</h2>
+                        </span>
+                    </div>
+                    <input type="text" name="mID" placeholder="Enter 0 for unmanged Post Offices">
+                
+                    <div>
+                        <span>
+                            <h2>Optional: Post Office ID</h2>
+                        </span>
+                    </div>
+                    <input type="text" name="mID" placeholder="***">
+                    
+                    <div>
+                        <span>
+                            <h2>Optional: State</h2>
+                        </span>
+                    </div>
+                    <input type="text" name="state" placeholder="TX">
+                    
+                    <div>
+                        <span>
+                            <h2>Optional: City</h2>
+                        </span>
+                    </div>
+                    <input type="text" name="city" placeholder="Houston">
+                
+                    <div>
+                        <span>
+                            <h2>Optional: Phone Number</h2>
+                        </span>
+                    </div>
+                    
+                    <input type="text" name="pNum" placeholder="**********">
+                    <div>
+                        <span>
+                            <h2>Optional: Less than X Employees</h2>
+                        </span>
+                    </div>
+                    <input type="text" name="xPloy" placeholder="Not Currently Implemented">
+                    
+                    <div>
+                        <span>
+                            <h2>Optional: Greater than X Packages</h2>
+                        </span>
+                    </div>
+                    <input type="text" name="xPloy" placeholder="Not Currently Implemented">
+                    <input type="submit" name="viewPO" value="Search for Post Offices"/>
+                    
                 </form>
 
 
