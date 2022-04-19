@@ -20,11 +20,11 @@
     require_once '../includes/dbh.inc.php';
     require_once '../includes/functions.inc.php';
 
-    if(emptyInputEmp($fname, $lname, $email, $pwd, $phone, $office_id) !== false)
+    /*if(emptyInputEmp($fname, $lname, $email, $pwd, $phone, $office_id) !== false)
     {
         header("location: ../pages/admin-services-newEmp.php?error=emptyinput");
         exit();
-    }
+    }*/
     if(invalidEmail($email) !== false)
     {
         header("location: ../pages/admin-services-newEmp.php?error=invalidemail");
