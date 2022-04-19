@@ -4,6 +4,10 @@
 <?php
     include("../includes/dbh.inc.php");
     $postOff = $_POST['pID'];
+    $state = $_POST['state'];
+    $city = $_POST['city'];
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
 ?>
 
 <section class="sub-header">
@@ -104,10 +108,30 @@
                                             }
                                             mysqli_stmt_bind_param($stmtOffice, "i", $check['Employee_Address_Key']);
                                             mysqli_stmt_execute($stmtOffice);
-
+                                            $a=0;
                                             $officeNameRow = mysqli_stmt_get_result($stmtOffice);
                                             $officeNameRow = mysqli_fetch_assoc($officeNameRow);
-
+                                            if(!empty($fname)){
+                                                if($check['First_Name'] != $fname){
+                                                    $a=1;
+                                                }
+                                            }
+                                            if(!empty($state)){
+                                                if($officeNameRow['State'] != $state){
+                                                    $a=1;
+                                                }
+                                            }
+                                            if(!empty($city)){
+                                                if($officeNameRow['City'] != $city){
+                                                    $a=1;
+                                                }
+                                            }
+                                            if(!empty($lname)){
+                                                if($check['Last_Name'] != $lname){
+                                                    $a=1;
+                                                }
+                                            }
+                                        if($a==0){
                                         echo "<tr> 
                                         <td>" . $check['First_Name'] . "</td>
                                         <td>" . $check['Last_Name'] . "</td>
@@ -119,6 +143,7 @@
                                         <td>" . $officeNameRow['Zipcode'] . "</td>
                                     
                                         </tr>";
+                                        }
 
                                     }
                                 }

@@ -61,6 +61,30 @@
                 </span>
                 </div>
                 <input type="text" name="pID" placeholder="*******" required>
+                <div>
+                <span>
+                    <h2>Optional: State</h2>
+                </span>
+                </div>
+                <input type="text" name="state" placeholder="TX">
+                <div>
+                <span>
+                    <h2>Optional: City</h2>
+                </span>
+                </div>
+                <input type="text" name="city" placeholder="Houston">
+                <div>
+                <span>
+                    <h2>Optional: First Name</h2>
+                </span>
+                </div>
+                <input type="text" name="fname" placeholder="John">
+                <div>
+                <span>
+                    <h2>Optional: Last Name</h2>
+                </span>
+                </div>
+                <input type="text" name="lname" placeholder="Doe">
                 <input type="submit" name="choosePO" value="Select Office"/>
                 </form>
 
