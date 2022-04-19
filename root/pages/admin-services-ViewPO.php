@@ -45,7 +45,7 @@
                 <div>
                     <i class="fa fa-user" aria-hidden="true"></i>
                     <span>
-                        <h5>View Post Office Employees</h5>
+                        <h5>View Post Offices</h5>
                     </span>
                 </div>
 
@@ -69,7 +69,7 @@
                             <h2>Optional: Post Office ID</h2>
                         </span>
                     </div>
-                    <input type="text" name="mID" placeholder="***">
+                    <input type="text" name="pID" placeholder="***">
                     
                     <div>
                         <span>
