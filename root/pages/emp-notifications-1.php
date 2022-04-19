@@ -89,7 +89,7 @@
                                 // log in as digdug@gmail who belongs to office ID 1 and you'll see he gets back the item low in stock
                                 // belonging to PO_ID 1.
                                 $officeID = $_SESSION["officeID"];
-                                $tracksql = "SELECT * from Item_Restock_Notifications WHERE PO_ID = ?;";
+                                $tracksql = "SELECT * from Item_Restock_Notifications WHERE PO_ID = ? AND isNew = 1;";
                                 $stmtTrack = mysqli_stmt_init($conn);
                              
                                     if (!mysqli_stmt_prepare($stmtTrack, $tracksql))

@@ -78,7 +78,7 @@
                         <tbody>
                             <?php
                                 //query Tracking row
-                                $tracksql = "SELECT * FROM Employee WHERE Office_ID = ?;";
+                                $tracksql = "SELECT * FROM Employee WHERE Office_ID = ? AND Employee.isAdd = 1;";
                                 $stmtTrack = mysqli_stmt_init($conn);
                              
                                 if (!mysqli_stmt_prepare($stmtTrack, $tracksql)){

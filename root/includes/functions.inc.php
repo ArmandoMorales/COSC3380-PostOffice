@@ -74,7 +74,7 @@ function uidExists($conn, $email)
     $resultData1 = mysqli_stmt_get_result($stmt1);
 
     //Statement two
-    $sql2 = "SELECT * FROM Employee WHERE email = ?;";
+    $sql2 = "SELECT * FROM Employee WHERE email = ? AND Employee.isAdd = 1;";
     $stmt2 = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt2, $sql2))
     {
