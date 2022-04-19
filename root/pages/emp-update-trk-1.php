@@ -68,11 +68,29 @@
                         <input type="text" name="package-id" placeholder="Enter package id">
                     <button type="submit" class="hero-btn red-btn" id="update-track-get-info">Get Package Info</button>
 
+            </div> 
+            
+            <div class="form-col">
+                    <div>
+                        <i class="fa fa-truck" aria-hidden="true"></i>
+                        <span>
+                            <h5>Update Tracking</h5>
+                        </span>
+                    </div>
+
+                    
+                        <div>
+                            <span>
+                                <h2>Package ID</h2>
+                            </span>
+                        </div>
+                        
+
                     <!-- TODO: can't remove: will mess up side bar, so just hide by using color white in css -->
                     <p class="heading"> HEADING </p>
                     <p class="paragraph"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus blanditiis cumque voluptate laboriosam? Voluptate delectus saepe impedit, dolores aliquam in possimus corporis rerum a quam itaque dolor animi cupiditate expedita.</p>
             </div> 
-            
+
         </div>
 
     </section>

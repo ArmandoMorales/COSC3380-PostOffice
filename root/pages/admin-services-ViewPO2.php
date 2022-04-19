@@ -3,7 +3,7 @@
 
 <?php
     include("../includes/dbh.inc.php");
-    $pname = $_POST['pname'];
+    $pname = $_POST['pName'];
     $mID = $_POST['mID'];
     $pID = $_POST['pID'];
     $state = $_POST['state'];
@@ -55,7 +55,7 @@
                 <div>
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <span>
-                    <h5>View Post Office Employees</h5>
+                    <h5>View Post Offices</h5>
                 </span>
                 </div>
 
@@ -70,7 +70,7 @@
                             <tr>
                                 <!--Package_ID, StopNum, DateArrived, DateSent, Tracking_Office_ID-->
                                 
-                                <th>Post Office Name & ID</th>
+                                <th>Post Office Name</th>
                                 <th>Office Manager</th>
                                 <th>Phone Number</th>
                                 <th>Address</th>
@@ -81,7 +81,9 @@
                         <tbody>
                             <?php
                                 //query Tracking row
-                                $tracksql = "SELECT * FROM Post_Office, Employee, Address WHERE Post_Office.Supervisor_ID = Employee.Employee_ID AND Post_Office.PO_Address_Key = Address.Address_Key;";
+                                $tracksql = "SELECT Post_Office.Office_ID, Office_Name, First_Name, Last_Name, Employee_ID, Building_Num, Street_Name, City, PostOffice.Address.State, Zipcode, PO_Phone_Num, Supervisor_ID FROM Post_Office, Employee, PostOffice.Address 
+                                WHERE Post_Office.Supervisor_ID = Employee.Employee_ID 
+                                AND Post_Office.PO_Address_Key = PostOffice.Address.Address_Key;";
                                 $stmtTrack = mysqli_stmt_init($conn);
                              
                                 if (!mysqli_stmt_prepare($stmtTrack, $tracksql)){
@@ -100,18 +102,18 @@
                                     while($check = mysqli_fetch_assoc($trackStartRow)){
                                         $a=0;
                                         //get office name
-                                            if(!empty($pName)){
-                                                if($check['Office_Name'] != $pName){
+                                            if(!empty($pname)){
+                                                if($check['Office_Name'] != $pname){
                                                     $a=1;
                                                 }
                                             }
                                             if(!empty($state)){
-                                                if($officeNameRow['State'] != $state){
+                                                if($check['State'] != $state){
                                                     $a=1;
                                                 }
                                             }
                                             if(!empty($city)){
-                                                if($officeNameRow['City'] != $city){
+                                                if($check['City'] != $city){
                                                     $a=1;
                                                 }
                                             }
@@ -126,19 +128,19 @@
                                                 }
                                             }
                                             if(!empty($pNum)){
-                                                if($check['PO_Phone_Number'] != $pNum){
+                                                if($check['PO_Phone_Num'] != $pNum){
                                                     $a=1;
                                                 }
                                             }
                                             
                                         if($a==0){
                                         echo "<tr> 
-                                        <td>" . $check['Office_Name'] . " " | " " . $check['Office_ID'] . "</td>
-                                        <td>" . $check['First_Name'] . " " . $check['Last_Name'] . " " | " " . $check['Employee_ID'] . "</td>
-                                        <td>" . $check['PO_Phone_Number'] . "</td>
-                                        <td>" . $officeNameRow['Building_Num'] . " " . $officeNameRow['Street_Name'] .", " . $officeNameRow['City'] . "</td>
-                                        <td>" . $officeNameRow['State'] . "</td>
-                                        <td>" . $officeNameRow['Zipcode'] . "</td>
+                                        <td>" . $check['Office_Name'] . "</td>
+                                        <td>" . $check['First_Name'] . " " . $check['Last_Name'] . " | ID: " . $check['Employee_ID'] . "</td>
+                                        <td>" . $check['PO_Phone_Num'] . "</td>
+                                        <td>" . $check['Building_Num'] . " " . $check['Street_Name'] .", " . $check['City'] . "</td>
+                                        <td>" . $check['State'] . "</td>
+                                        <td>" . $check['Zipcode'] . "</td>
                                     
                                         </tr>";
                                         }
