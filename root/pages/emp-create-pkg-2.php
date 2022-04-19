@@ -59,6 +59,7 @@
         $pkgID = $_POST['package-id'];
         $pkgIDConverted = (int) $pkgID;
         
+
         $pkgsql = "SELECT * FROM PostOffice.Package WHERE PACKAGE_ID = ?;";
         $stmtpkg = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmtpkg, $pkgsql))
@@ -79,13 +80,17 @@
 
         if ($pkgStartRowCheck > 0)
         { 
-            
+            //This will be used and get deleted later in emp-create-pjg-3.php
+            $_SESSION['packageIDglobal'] = $pkgIDConverted;
+         
             while($pkgStartRowCheck = mysqli_fetch_assoc($pkgStartRow))
             {
                 $holdPkgKey = $pkgStartRowCheck["Package_ID"];
                 $holdPkgWeight = $pkgStartRowCheck["Package_Weight"];     
                 $holdPkgVol = $pkgStartRowCheck["Package_Volume"];  
             }
+
+            
         }
 
         else {
@@ -114,7 +119,7 @@
                 $holdZip = $resultAddrRowCheck['Zipcode'];
             }
 
-
+            
         //Get Destination  Address
         $addrSql2 = "SELECT Building_Num, Street_Name, City, State, Zipcode FROM PostOffice.Address, PostOffice.Package WHERE Address.Address_Key = Package.OT_Address_Key;";
         $resultAddrRow2 = mysqli_query($conn, $addrSql2);
@@ -137,7 +142,7 @@
             }
 
         }
-        }
+        } //VERY SUSSY CLOSING BRACKET, IF THIS PAGE IS BROKEN SOMEHOW THIS MIGHT BE THE CULPRIT!
         ?>
 
             <div class="form-col">
@@ -187,12 +192,12 @@
                     <tbody>
                         <tr>
                             <td><?php echo $holdPkgKey; ?></td>
-                            <td><?php echo $holdDAddrBnum . " " . $holdDStreet . " " . $holdDCity;  ?></td>
+                            <td><?php echo $holdDAddrBnum . " " . $holdDStreet . "," . $holdDCity;  ?></td>
                             <td><?php echo "hewo"; ?></td>
                             <td><?php echo $holdDState; ?></td>
                             <td><?php echo $holdDZip ?></td>
                             <td>30</td>
-                            <td>40</td>
+                            <td>40</td> 
                         </tr>
                     </tbody>
                 </table>
@@ -233,7 +238,6 @@
                     <div>
                         <span>
                             <h2>Send To Next Post Office</h2>
-                            <input>
                         </span>
                     </div>
                     <input type="text" name="nextPO" placeholder="Enter new post office to ship to" required>
