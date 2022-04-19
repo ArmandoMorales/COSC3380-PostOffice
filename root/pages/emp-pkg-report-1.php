@@ -91,7 +91,7 @@
                             <h2>Due By Date</h2>
                         </span>
                     </div>
-                    <input type="text" name="type" placeholder="Enter date">
+                    <input type="text" name="due" placeholder="Enter date">
 
 
                 <button type="submit" class="hero-btn red-btn" id="pkg-report-info">Generate Report</button>
