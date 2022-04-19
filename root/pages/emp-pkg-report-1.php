@@ -63,35 +63,42 @@
                             <h2>Priority Number</h2>
                         </span>
                     </div>
-                    <input type="text" name="prio-num" placeholder="<xxx >xxx =xxx">
+                    <input type="text" name="prio-num" placeholder="1, 2, or 3...">
 
                     <div>
                         <span>
                             <h2>Weight</h2>
                         </span>
                     </div>
-                    <input type="text" name="weight" placeholder="<xxx >xxx =xxx">
+                    <input type="text" name="weight" placeholder="Enter max weight in pounds...">
 
                     <div>
                         <span>
-                            <h2>Time Since</h2>
+                            <h2>Volume</h2>
                         </span>
                     </div>
-                    <input type="text" name="time-since" placeholder="<xxx, >xxx, =xxx">
+                    <input type="text" name="volume" placeholder="insert max package volume in inches...">
 
                     <div>
                         <span>
                             <h2>Package Type</h2>
                         </span>
                     </div>
-                    <input type="text" name="type" placeholder="std, fra">
+                    <input type="text" name="type" placeholder="Enter 'Standard' or 'Fragile' [Case sensitive]...">
 
                     <div>
                         <span>
-                            <h2>Due By Date</h2>
+                            <h2>Due Within</h2>
                         </span>
                     </div>
-                    <input type="text" name="due" placeholder="Enter date">
+                    <input type="text" name="due" placeholder="Enter max days until due...">
+
+                    <div>
+                        <span>
+                            <h2>Max Price</h2>
+                        </span>
+                    </div>
+                    <input type="text" name="cost" placeholder="Enter max price in dollars...">
 
 
                 <button type="submit" class="hero-btn red-btn" id="pkg-report-info">Generate Report</button>

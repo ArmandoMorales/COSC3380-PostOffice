@@ -16,6 +16,13 @@
         ?>
         <?php
             include_once '../includes/dbh.inc.php';
+            $prio = $_POST['prio-num'];
+            $weight = $_POST['weight'];
+            $volume = $_POST['volume'];
+            $type = $_POST['type'];
+            $due = $_POST['due'];
+            $cost = $_POST['cost'];
+
         ?>
     </section>
 
@@ -74,6 +81,7 @@
                         <th>Package Volume</th>
                         <th>Priority Level</th>
                         <th>Price</th> <!--Price = Priority * 5.00-->
+                        <th>Days Before Due</th>
                         <!--Due by date = (priority * 7) - (current date - sent date);-->
                     </tr>
                 </thead>
@@ -138,7 +146,60 @@
                                             while($row3 = mysqli_fetch_assoc($result3))
                                             {
                                                 $a = 0;
-                                                $price = "$" . strval($row3["Priority"] * 3.00);    
+                                                $value = $row3["Priority"] * 3.00 + 0.5 * $row3["Package_Weight"];
+                                                $price = "$" . strval($value);
+                                                
+                                                date_default_timezone_set("America/Los_Angeles");
+
+                                                $origin = new DateTime($row1["DateSent"]);
+                                                $current = new DateTime(date("Y-m-d H:i:s"));
+                                                $interval = date_diff($origin, $current);
+                                                $daysPassed = intval($interval->format("%d"));
+                                                $dueDate = (7 * $row3["Priority"]) - ($daysPassed);
+                                                
+                                                if(!empty($prio))
+                                                {
+                                                    if($row3["Priority"] != $prio)
+                                                    {
+                                                        $a = 1;
+                                                    }
+                                                }
+                                                if(!empty($weight))
+                                                {
+                                                    if($row3["Package_Weight"] > $weight)
+                                                    {
+                                                        $a = 1;
+                                                    }
+                                                }
+                                                if(!empty($volume))
+                                                {
+                                                    if($row3["Package_Volume"] > $volume)
+                                                    {
+                                                        $a = 1;
+                                                    }
+                                                }
+                                                if(!empty($type))
+                                                {
+                                                    if($row3["Package_Type"] != $type)
+                                                    {
+                                                        $a = 1;
+                                                    }
+                                                }
+                                                if(!empty($due))
+                                                {
+                                                    if($dueDate > $due)
+                                                    {
+                                                        $a = 1;
+                                                    }
+                                                }
+                                                if(!empty($cost))
+                                                {
+                                                    if(floatval($cost) < $value)
+                                                    {
+                                                        $a = 1;
+                                                    }
+                                                }
+
 
                                                 if ($a == 0)
                                                 {
@@ -151,6 +212,7 @@
                                                             <td>" . $row3['Package_Volume'] . "</td>
                                                             <td>" . $row3['Priority'] . "</td>
                                                             <td>" . $price . "</td>
+                                                            <td>" . $dueDate . "</td>
                                                         
                                                             </tr>";
                                                 }
