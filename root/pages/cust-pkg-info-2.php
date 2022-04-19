@@ -10,9 +10,18 @@
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <section class="sub-header">
+
+<?php
+    include("../includes/dbh.inc.php");
+?>
+<section class="sub-header">
+    <?php
+        include_once '../header.php';
+    ?>
+</section>   
+
+   <!-- <section class="sub-header">
         <nav>
-            <!-- TODO: add redirects based on employee permissions -->
             <a href=""><img src="../images/pinkpostlogo.png"></a>
             <div class="nav-links" id="navLinks">  
                 <ul>
@@ -24,7 +33,7 @@
             </div>
         </nav>
             <h1></h1>
-    </section>
+    </section> -->
 
     <!-- Side Bar -->
     <section class="side-bar-container">
@@ -40,11 +49,35 @@
         <!-- content -->
         <div class="content">
 
+            <?php
+                $packageID = $_POST['pkg-id'];
+                //$packageIDConverted = (int) $packageID;
+                $pkgLocation = "SELECT * FROM Tracking WHERE Package_ID = ?;";
+
+    
+                $stmtRKeys = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmtRKeys, $pkgLocation)){
+                    header("location: ../pages/index-login.php?error=stmtfailed");
+                    exit();   
+                }
+                
+                mysqli_stmt_bind_param($stmtRKeys, "i", $packageID);
+                mysqli_stmt_execute($stmtRKeys);
+
+                
+                $results  = mysqli_stmt_get_result($stmtRKeys);
+                $rowsWithPkgID = mysqli_num_rows($results); // rows
+                $output = mysqli_fetch_all($results); // columns
+
+                $currentOfficeID = $output[$rowsWithPkgID - 1][4];
+                $dateArrived = $output[$rowsWithPkgID - 1][2]; // DateArrived col from tracking table
+            ?>
+
             <div class="form-col">
                 <div>
                     <i class="fa fa-dropbox" aria-hidden="true"></i>
                     <span>
-                        <h5>Package Info For ID: 123456789</h5>
+                        <h5>Package Info For ID: <?php echo "$packageID" ?></h5>
                     </span>
                 </div>
 
@@ -56,7 +89,7 @@
 
                 <div>
                     <span>
-                        <p id="display-info">Post Office 1</p>
+                        <p id="display-info">Post Office <?php echo "$currentOfficeID" ?></p>
                     </span>
                 </div>
 
@@ -68,7 +101,7 @@
 
                 <div>
                     <span>
-                        <p id="display-info">4/17/2022 3:00PM</p>
+                        <p id="display-info"><?php echo "$dateArrived" ?></p>
                     </span>
                 </div>
 
@@ -76,13 +109,37 @@
 
             <div class="location-history-list"> 
                     <h2>Package Location History</h2>
-                    <ul>
-                        <li><span>1</span>Post Office 1</li>
-                        <li><span>2</span>Post Office 2</li>
-                        <li><span>3</span>Post Office 3</li>
-                        <li><span>4</span>Post Office 4</li>
-                        <li><span>5</span>Post Office 5</li>
-                    </ul>
+                  
+
+                            <?php
+                            include("../includes/dbh.inc.php");
+                            ?>
+                            <?php
+                                //query Items row
+                                $packageID = $_POST['pkg-id'];
+                                //$packageIDConverted = (int) $packageID;
+                                $pkgLocation = "SELECT * FROM Tracking WHERE Package_ID = ?;";
+
+                    
+                                $stmtRKeys = mysqli_stmt_init($conn);
+                                if (!mysqli_stmt_prepare($stmtRKeys, $pkgLocation)){
+                                    header("location: ../pages/index-login.php?error=stmtfailed");
+                                    exit();   
+                                }
+                                
+                                mysqli_stmt_bind_param($stmtRKeys, "i", $packageID);
+                                mysqli_stmt_execute($stmtRKeys);
+
+                                $results  = mysqli_stmt_get_result($stmtRKeys);
+                                $rowsWithPkgID = mysqli_num_rows($results); // rows
+                                $output = mysqli_fetch_all($results); // columns
+                                echo "<ul>";
+                                for ($x = 0; $x <= $rowsWithPkgID-1; $x++) {
+                                    //echo $output[$x][4];
+                                    echo '<li><span>' .$x. '</span>'. 'Post Office ' .$output[$x][4].'</li>';
+                                  }
+                                echo '</ul>';
+                            ?>
             </div>
 
             <!-- TODO: can't remove: will mess up side bar, so just hide by using color white in css -->
