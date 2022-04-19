@@ -13,7 +13,7 @@
 <section class="sub-header">
     <?php
         include_once '../header.php';
-?>
+    ?>
     <!-- This section replaced with universal header above
     <section class="sub-header">
         <nav>

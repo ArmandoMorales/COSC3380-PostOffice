@@ -14,20 +14,6 @@ function emptyInputSignup($fname, $lname, $email, $pwd, $pwdrepeat)
     return $result;
 }
 
-function emptyInputEmp($fname, $lname, $email, $pwd, $phone, $office_id)
-{
-    $result = 'null'; //Error $result;
-    if (empty($fname || $lname || $email || $pwd || $phone || $office_id))
-    {
-        $result = true;
-    }
-    else
-    {
-        $result = false;
-    }
-    return $result;
-}
-
 /*FUNCTION RETIRED*/
 function invalidUid($username)
 {
@@ -236,60 +222,6 @@ function createEmployee($conn, $fname, $lname, $address, $phone, $office, $email
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
     mysqli_stmt_bind_param($stmt, "ssiiiss", $fname, $lname, $address, $phone, $office, $email, $hashedPwd);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-    header("location: ../pages/index.php?error=none");
-        exit();
-}
-function createEmployee1($conn, $fname, $lname, $address, $phone, $office, $email, $pwd, $supervisor)
-{
-    $sql = "INSERT INTO Employee (First_Name, Last_Name, Employee_Address_Key, Employee_Phone_Num, Office_ID, email, pass, Super_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql))
-    {
-        header("location: ../pages/index-login.php?error=stmtfailed");
-        exit();
-    }
-
-    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-
-    mysqli_stmt_bind_param($stmt, "ssiiissi", $fname, $lname, $address, $phone, $office, $email, $hashedPwd, $supervisor);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-    header("location: ../pages/index.php?error=none");
-        exit();
-}
-function createEmployee2($conn, $fname, $lname, $address, $phone, $office, $email, $pwd, $mname)
-{
-    $sql = "INSERT INTO Employee (First_Name, Last_Name, Employee_Address_Key, Employee_Phone_Num, Office_ID, email, pass, Middle_Init) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql))
-    {
-        header("location: ../pages/index-login.php?error=stmtfailed");
-        exit();
-    }
-
-    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-
-    mysqli_stmt_bind_param($stmt, "ssiiisss", $fname, $lname, $address, $phone, $office, $email, $hashedPwd, $mname);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-    header("location: ../pages/index.php?error=none");
-        exit();
-}
-function createEmployee3($conn, $fname, $lname, $address, $phone, $office, $email, $pwd)
-{
-    $sql = "INSERT INTO Employee (First_Name, Last_Name, Employee_Address_Key, Employee_Phone_Num, Office_ID, email, pass, Middle_Init, Super_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql))
-    {
-        header("location: ../pages/index-login.php?error=stmtfailed");
-        exit();
-    }
-
-    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-
-    mysqli_stmt_bind_param($stmt, "ssiiisssi", $fname, $lname, $address, $phone, $office, $email, $hashedPwd, $mname, $supervisor);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     header("location: ../pages/index.php?error=none");

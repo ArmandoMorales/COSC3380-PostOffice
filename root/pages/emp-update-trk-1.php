@@ -10,9 +10,19 @@
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+<?php
+    include("../includes/dbh.inc.php");
+?>
+
+<section class="sub-header">
+    <?php
+    include_once '../header.php';
+    ?>
+</section>
+    <!--
     <section class="sub-header">
         <nav>
-            <!-- TODO: add redirects based on employee permissions -->
+           
             <a href=""><img src="../images/pinkpostlogo.png"></a>
             <div class="nav-links" id="navLinks">  
                 <ul>
@@ -24,7 +34,7 @@
             </div>
         </nav>
             <h1></h1>
-    </section>
+    </section> -->
 
     <!-- Side Bar -->
     <section class="side-bar-container">
@@ -54,7 +64,7 @@
                                 <h2>Package ID</h2>
                             </span>
                         </div>
-                        <input type="text" name="customer-id" placeholder="Enter package's id">
+                        <input type="text" name="package-id" placeholder="Enter package id">
                     <button type="submit" class="hero-btn red-btn" id="update-track-get-info">Get Package Info</button>
 
                     <!-- TODO: can't remove: will mess up side bar, so just hide by using color white in css -->

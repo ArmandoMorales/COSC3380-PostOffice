@@ -149,18 +149,12 @@
                                 if (isset($_SESSION["officeID"]))
                                 {
                                     if ($_SESSION["officeID"] === 2){
-                                        echo "MyCity Branch";
-                                    }
-                                }
-                                if (isset($_SESSION["officeID"]))
-                                {
-                                    if ($_SESSION["officeID"] === 3){
                                         echo "Austin Branch";
                                     }
                                 }
                                 if (isset($_SESSION["officeID"]))
                                 {
-                                    if ($_SESSION["officeID"] === 4){
+                                    if ($_SESSION["officeID"] === 3){
                                         echo "Dallas Branch";
                                     }
                                 }

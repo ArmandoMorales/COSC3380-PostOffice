@@ -88,6 +88,8 @@
                                             <td>" . $check['Item_Count'] . "</td>
                                             </tr>";
                                         }
+                                        
+                                        
                                         /**else if($check["PO_ID"] == "2")
                                         {
                                             echo "<tr> 
