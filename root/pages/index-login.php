@@ -50,16 +50,18 @@
                                     echo "<p>Fill in all fields!</p>";
                                 }
 
-                                else if($_GET["error"] == "wronglogin")
+                                else if($_GET["error"] == "wronglogin2")
                                 {
-                                    echo "<p>Incorrect login information!</p>";
+                                    // echo "<p>Incorrect login information!</p>";
+                                    echo "<br>";
+                                    echo "<p style='color:red';>Incorrect login information!</p>";
                                 }
                             }
                         ?>
                         <!--Submit Button Here-->
                         <div class="input-field button">
                             <!--<input type="button" value="Login Now">-->
-                            <button type="submit" name="submit">Login now</button>
+                            <button type="submit" name="submit" id="login-btn">Login now</button>
                         </div>
                     </form>
     
@@ -71,7 +73,7 @@
                 </div>
     
                 <!-- Registration Form that appears upon clicking -->
-                <div class="form signup">
+                <div class="form signup" id="sign-up-form">
                     <span class="title">Registration</span>
     
                     <form action="../includes/signup.inc.php" method="post">
@@ -87,6 +89,12 @@
                             <input type="text" name="email" placeholder="Enter your email" required>
                             <i class="uil uil-envelope icon"></i>
                         </div>
+                        
+                        <div class="input-field">
+                            <input type="text" name="pnum" placeholder="Enter Phone Number" required>
+                            <i class="uil uil-phone icon"></i>
+                        </div>
+
                         <div class="input-field">
                             <input type="password" name="pwd" class="password" placeholder="Create a password" required>
                             <i class="uil uil-lock icon"></i>
@@ -95,6 +103,27 @@
                             <input type="password" name="pwdrepeat" class="password" placeholder="Confirm a password" required>
                             <i class="uil uil-lock icon"></i>
                             <i class="uil uil-eye-slash showHidePw"></i>
+                        </div>
+
+                        <div class="input-field">
+                            <input type="text" name="bnum" placeholder="Building Number" required>
+                            <i class="uil uil-home icon"></i>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" name="street-name" placeholder="Street Name" required>
+                            <i class="uil uil-home icon"></i>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" name="city" placeholder="City" required>
+                            <i class="uil uil-home icon"></i>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" name="state" placeholder="State" required>
+                            <i class="uil uil-home icon"></i>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" name="zip" placeholder="Zipcode" required>
+                            <i class="uil uil-home icon"></i>
                         </div>
     
                         <div class="checkbox-text">
@@ -108,7 +137,7 @@
     
                         <div class="input-field button">
                             <!--<input type="button" value="Login Now">-->
-                            <button type="submit" name="submit">Sign up</button>
+                            <button type="submit" name="submit" id="sign-up-btn">Sign up</button>
                         </div>
                     </form>
                     
@@ -133,7 +162,8 @@
 
                                 else if($_GET["error"] == "passwordsdontmatch")
                                 {
-                                    echo "<p>Passwords don't match!</p>";
+                                    // echo "<p>Passwords don't match!</p>";
+                                    echo "<script> location.href='index-login.php'; </script>";
                                 }
 
                                 else if($_GET["error"] == "stmtfailed")

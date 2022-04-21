@@ -1,5 +1,15 @@
 <html>
 <head>
+
+<section class="sub-header">
+        <?php
+            include_once '../header.php';
+        ?>
+       <?php
+            include_once '../includes/dbh.inc.php';
+        ?>
+</section>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Employee Self Services</title>
 <link rel="stylesheet" href="../css/customer-services.css">
@@ -10,9 +20,8 @@
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <section class="sub-header">
+    <!-- <section class="sub-header">
         <nav>
-            <!-- TODO: add redirects based on employee permissions -->
             <a href=""><img src="../images/pinkpostlogo.png"></a>
             <div class="nav-links" id="navLinks">  
                 <ul>
@@ -24,7 +33,7 @@
             </div>
         </nav>
             <h1></h1>
-    </section>
+    </section> --> 
 
     <!-- Side Bar -->
     <section class="side-bar-container">
@@ -48,13 +57,43 @@
                     </span>
                 </div>
 
-                <form method="post" action="cust-pkg-info-2.php">
+                <form method="post" action="cust-pkg-info-2.php" autocomplete="off">
                     <div>
                         <span>
                             <h2>Package ID</h2>
                         </span>
                     </div>
-                    <input type="text" name="pkg-id" placeholder="Enter package's id">
+
+                    <!-- <input type="text" name="pkg-id" placeholder="Enter package's id"> -->
+                    <input type="text" name="pkg-id" placeholder="Select Package ID" list="possible-ids">
+                    <datalist id="possible-ids"> 
+                        <?php
+                            $customerID = $_SESSION["userid"];
+                            $sql = "SELECT * FROM Package WHERE Customer_ID = ?;";
+                            $stmt = mysqli_stmt_init($conn);
+
+                            if (!mysqli_stmt_prepare($stmt, $sql))
+                            {
+                                header("location: ../pages/index-login.php?error=stmtfailed");
+                                exit();
+                            }
+
+                            mysqli_stmt_bind_param($stmt, "i", $customerID);
+                            mysqli_stmt_execute($stmt);
+                            $results = mysqli_stmt_get_result($stmt);
+                            $rows = mysqli_num_rows($results);
+
+                            if($rows > 0){
+                                while($row = mysqli_fetch_assoc($results)){
+                                    echo "<option>". $row['Package_ID'] ."</option>";
+                                }
+                            }
+                            else {
+                                echo "<option> None </option>";
+                            }
+                        ?>
+                    </datalist>
+
                 <button type="submit" class="hero-btn red-btn" id="update-track-get-info">Get Package Info</button>
 
                 <!-- TODO: can't remove: will mess up side bar, so just hide by using color white in css -->
