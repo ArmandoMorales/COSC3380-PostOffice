@@ -224,6 +224,24 @@ function createEmployee($conn, $fname, $lname, $address, $phone, $office, $email
     mysqli_stmt_bind_param($stmt, "ssiiiss", $fname, $lname, $address, $phone, $office, $email, $hashedPwd);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../pages/index.php?error=none");
+    header("location: ../pages/admin-services-newEmp.php?error=none");
+        exit();
+}
+function createEmployeeManaged($conn, $fname, $lname, $address, $phone, $office, $email, $pwd, $super)
+{
+    $sql = "INSERT INTO Employee (First_Name, Last_Name, Employee_Address_Key, Employee_Phone_Num, Office_ID, Super_ID, email, pass) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../pages/index-login.php?error=stmtfailed");
+        exit();
+    }
+
+    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+
+    mysqli_stmt_bind_param($stmt, "ssiiiiss", $fname, $lname, $address, $phone, $office, $super, $email, $hashedPwd);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../pages/admin-services-newEmp.php?error=none");
         exit();
 }
