@@ -18,7 +18,7 @@
 <?php
     include("../includes/dbh.inc.php");
 ?>
-<section class="sub-header">
+<section class="header">
     <?php
         include_once '../header.php';
     ?>

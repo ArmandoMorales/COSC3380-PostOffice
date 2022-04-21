@@ -140,46 +140,8 @@ function uidExists($conn, $email)
 }
 
 //Customer Registration
-function createUser($conn, $fname, $lname, $email, $pwd, $pnum, $bnum, $street, $city, $state, $zip)
+function createUser($conn, $fname, $lname, $email, $pwd)
 {
-    // query to insert new address
-    $sqlAddress = "INSERT INTO Address (Building_Num, Street_Name, City, State, Zipcode) VALUES(?, ?, ?, ?, ?);";
-    $stmtAddress = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmtAddress, $sqlAddress))
-    {
-        header("location: ../pages/index-login.php?error=stmtfailed");
-        exit();
-    }
-    mysqli_stmt_bind_param($stmtAddress, "isssi", $bnum, $street, $city, $state, $zip);
-    // if we execute insert new address query, query into customer using insert_id of address query, which will give us the addresskey of the address query we just inserted
-    if (mysqli_stmt_execute($stmtAddress)) 
-    {
-        $last_id = mysqli_insert_id($conn);
-
-        $sql = "INSERT INTO Customer (First_Name, Last_Name, Customer_Address_Key, Customer_Phone_Num, email, pass) VALUES(?, ?, ?, ?, ?, ?);";
-        $stmt = mysqli_stmt_init($conn);
-        if (!mysqli_stmt_prepare($stmt, $sql))
-        {
-            header("location: ../pages/index-login.php?error=stmtfailed");
-            exit();
-        }
-
-        $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-
-        mysqli_stmt_bind_param($stmt, "ssiiss", $fname, $lname, $last_id, $pnum, $email, $hashedPwd);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt);
-        mysqli_stmt_close($stmtAddress);
-        header("location: ../pages/index.php?error=none");
-        exit();
-    }
-
-    header("location: ../pages/index.php?error=smtmtAddress");
-    exit();
-
-    /*
-    // insert new customer with address key from above
-
     $sql = "INSERT INTO Customer (First_Name, Last_Name, email, pass) VALUES(?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql))
@@ -195,7 +157,6 @@ function createUser($conn, $fname, $lname, $email, $pwd, $pnum, $bnum, $street, 
     mysqli_stmt_close($stmt);
     header("location: ../pages/index.php?error=none");
         exit();
-    */
 }
 
 function emptyInputLogin($username, $pwd)
