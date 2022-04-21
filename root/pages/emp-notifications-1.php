@@ -163,9 +163,13 @@
                                 //Check for results
                                 if($stmtTrack_check > 0){
                                     while($check = mysqli_fetch_assoc($trackStartRow)){
-                                        
+
+
+
+                                        date_default_timezone_set("America/Los_Angeles");
                                         $origin = new DateTime($check['DateArrived']);
-                                        $current = new DateTime(time());
+                                        // $current = new DateTime(time());
+                                        $current = new DateTime(date("Y-m-d H:i:s"));
                                         $interval = date_diff($origin, $current);
                                         $hoursPassed = intval($interval->format("%h"));
 
