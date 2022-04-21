@@ -57,13 +57,6 @@
 
                     <div>
                         <span>
-                            <h2>Middle Initial</h2>
-                        </span>
-                    </div>
-                    <input type="text" name="mname" placeholder="B" >
-
-                    <div>
-                        <span>
                             <h2>Last Name</h2>
                         </span>
                     </div>
@@ -134,7 +127,7 @@
                     <input type="text" name="zipcode" placeholder="*****" required>
                     <div>
                         <span>
-                            <h2>State</h2>
+                            <h2>TX</h2>
                         </span>
                     </div>
                     <input type="text" name="state" placeholder="Texas" required>

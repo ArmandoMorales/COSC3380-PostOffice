@@ -48,6 +48,8 @@
             </div>
         </div>
 
+
+        
         <!-- content -->
         <div class="content">
 
@@ -68,24 +70,45 @@
                         <input type="text" name="package-id" placeholder="Enter package id">
                     <button type="submit" class="hero-btn red-btn" id="update-track-get-info">Get Package Info</button>
 
+                    <!----------------------------------------------------->
+                    <br></br>
+                    <div>
+                        <h5>Packages with no Tracking Assigned</h5>
+                    </div>
+                    
+                    <table class="content-table">
+                        <thead>
+                            <tr> 
+                                <th>Package ID</th>
+                                <th>Customer ID</th>
+                            </tr>    
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Grabbing all packages that do HAVE NOT been added to tracking table
+                            // i.e. packages that have not been updated by an employee in the Update Packing page
+                            $noTrackingSql = "SELECT Package.Package_ID, Package.Customer_ID
+                            FROM PostOffice.Package
+                                LEFT JOIN PostOffice.Tracking ON Package.Package_ID = Tracking.Package_ID
+                            WHERE Tracking_Office_ID IS NULL;";
+                            $result = mysqli_query($conn, $noTrackingSql);
+                            $result_check = mysqli_num_rows($result);
+
+                            //Check for results
+                            if($result_check > 0){
+                                while($row = mysqli_fetch_assoc($result)){
+                                    echo "<tr>
+                                    <td>" . $row['Package_ID'] . "</td>
+                                    <td>" . $row['Customer_ID'] . "</td>
+                                    </tr>";
+                                }
+                            }
+                            ?>
+                        </tbody>    
+                    </table>              
             </div> 
             
             <div class="form-col">
-                    <div>
-                        <i class="fa fa-truck" aria-hidden="true"></i>
-                        <span>
-                            <h5>Update Tracking</h5>
-                        </span>
-                    </div>
-
-                    
-                        <div>
-                            <span>
-                                <h2>Package ID</h2>
-                            </span>
-                        </div>
-                        
-
                     <!-- TODO: can't remove: will mess up side bar, so just hide by using color white in css -->
                     <p class="heading"> HEADING </p>
                     <p class="paragraph"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus blanditiis cumque voluptate laboriosam? Voluptate delectus saepe impedit, dolores aliquam in possimus corporis rerum a quam itaque dolor animi cupiditate expedita.</p>

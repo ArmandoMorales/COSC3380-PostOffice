@@ -10,14 +10,6 @@ if (isset($_POST["submit"]))
     $pwd = $_POST["pwd"];
     $pwdrepeat = $_POST["pwdrepeat"];
 
-    $pnum = (int) $_POST["pnum"];
-    $bnum = (int) $_POST["bnum"];
-    $street = $_POST["street-name"];
-    $city = $_POST["city"];
-    $state = $_POST["state"];
-    $zip = (int) $_POST["zip"];
-
-
     require_once 'dbh.inc.php';
     require_once 'functions.inc.php';
 
@@ -54,7 +46,8 @@ if (isset($_POST["submit"]))
 
     /* UPDATE - REMOVED $username & added $fname, $lname
        Updated actual function - WILL NOT WORK UNTIL I HAVE IT INSERT INTO CUSTOMER*/
-    createUser($conn, $fname, $lname, $email, $pwd, $pnum, $bnum, $street, $city, $state, $zip);
+    createUser($conn, $fname, $lname, $email, $pwd);
+
 
 }
 else
