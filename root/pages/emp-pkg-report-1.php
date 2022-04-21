@@ -101,9 +101,6 @@
                     </div>
                     <input type="text" name="cost" placeholder="Enter max price in dollars...">
 
-                    <input type="text" name="type" placeholder="Enter date">
-
-
                 <button type="submit" class="hero-btn red-btn" id="pkg-report-info">Generate Report</button>
 
                 <!-- TODO: can't remove: will mess up side bar, so just hide by using color white in css -->
