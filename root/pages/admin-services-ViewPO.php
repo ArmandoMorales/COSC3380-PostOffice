@@ -49,7 +49,7 @@
                             <h2>Optional: Manager ID</h2>
                         </span>
                     </div>
-                    <input type="text" name="mID" placeholder="Enter 0 for unmanged Post Offices">
+                    <input type="text" name="mID" placeholder="Enter -1 for unmanged Post Offices">
                 
                     <div>
                         <span>

@@ -114,10 +114,10 @@
                     <input type="text" name="zipcode" placeholder="*****" required>
                     <div>
                         <span>
-                            <h2>TX</h2>
+                            <h2>State</h2>
                         </span>
                     </div>
-                    <input type="text" name="state" placeholder="Texas" required>
+                    <input type="text" name="state" placeholder="TX" required>
 
                     <button type="submit" class="hero-btn red-btn" id="emp-add-emp-btn">Add Employee</button>
 

@@ -14,7 +14,7 @@
         mysqli_stmt_bind_param($stmt1, "i", $employeeID);
         mysqli_stmt_execute($stmt1);
 
-        $sql2 = "UPDATE Post_Office SET Supervisor_ID = 0 WHERE Supervisor_ID = ?;";
+        $sql2 = "UPDATE Post_Office SET Supervisor_ID = -1 WHERE Supervisor_ID = ?;";
         $stmt2 = mysqli_stmt_init($conn);
         
         

@@ -19,6 +19,64 @@
     require_once '../includes/dbh.inc.php';
     require_once '../includes/functions.inc.php';
 
+    $addrRKeys = "SELECT Address_Key FROM PostOffice.Address 
+                                WHERE Building_Num = ? AND Street_Name = ? AND City = ? AND State = ? AND Zipcode = ?;";
+                
+                $stmtRKeys = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmtRKeys, $addrRKeys)){
+                    header("location: ../pages/index-login.php?error=stmtfailed");
+                    exit();   
+                }
+                mysqli_stmt_bind_param($stmtRKeys, "isssi", $building, $street, $city, $stat, $zip);
+                mysqli_stmt_execute($stmtRKeys);
+
+                $resultRKey = mysqli_stmt_get_result($stmtRKeys);
+                $resultRKeyCheck = mysqli_num_rows($resultRKey);
+                
+                
+                if($resultRKeyCheck > 0) {
+                    while($resultRKeyCheck = mysqli_fetch_assoc($resultRKey))
+                    {
+                        $address = $resultRKeyCheck["Address_Key"];       
+                    }
+                } else {
+                    $sqlRaddr = "INSERT INTO PostOffice.Address (Building_Num, Street_Name, City, State, Zipcode)
+                    VALUES (?, ?, ?, ?, ?);";
+                    $stmtRaddr = mysqli_stmt_init($conn);
+                    if (!mysqli_stmt_prepare($stmtRaddr, $sqlRaddr)) {
+                        header("location: ../pages/index-login.php?error=stmtfailed");
+                        exit();
+                    }
+                    mysqli_stmt_bind_param($stmtRaddr, "isssi", $building, $street, $city, $stat, $zip);
+                    mysqli_stmt_execute($stmtRaddr);
+                
+                    $addrRKeys = "SELECT Address_Key FROM PostOffice.Address 
+                                WHERE Building_Num = ? AND Street_Name = ? AND City = ? AND State = ? AND Zipcode = ?;";
+                
+                    $stmtRKeys = mysqli_stmt_init($conn);
+                    if (!mysqli_stmt_prepare($stmtRKeys, $addrRKeys)) {
+                        header("location: ../pages/index-login.php?error=stmtfailed");
+                        exit();   
+                    }
+                    mysqli_stmt_bind_param($stmtRKeys, "isssi", $building, $street, $city, $stat, $zip);
+                    mysqli_stmt_execute($stmtRKeys);
+
+                    $resultRKey = mysqli_stmt_get_result($stmtRKeys);
+                    $resultRKeyCheck = mysqli_num_rows($resultRKey);
+                
+                
+                    if($resultRKeyCheck > 0) {
+                        while($resultRKeyCheck = mysqli_fetch_assoc($resultRKey)) {
+                            $address = $resultRKeyCheck["Address_Key"];       
+                        }
+                    }
+                    else {
+                    echo "error";
+                    }
+                }
+
+
+
     /*if(emptyInputEmp($fname, $lname, $email, $pwd, $phone, $office_id) !== false)
     {
         header("location: ../pages/admin-services-newEmp.php?error=emptyinput");

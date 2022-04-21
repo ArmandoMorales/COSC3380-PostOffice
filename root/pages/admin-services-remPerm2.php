@@ -19,7 +19,7 @@
         $mngOut1 = mysqli_fetch_all($mngRow);
 
         if($isMNG != 0){
-            $sql2 = "UPDATE Post_Office SET Supervisor_ID = 0 WHERE Office_ID = ?;";
+            $sql2 = "UPDATE Post_Office SET Supervisor_ID = -1 WHERE Office_ID = ?;";
             $stmt2 = mysqli_stmt_init($conn);
         
         
