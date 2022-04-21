@@ -76,7 +76,6 @@
                     $holdPkgKey = -1;
                     $holdPkgWeight = -1;
                     $holdPkgVol = -1;
-                    $holdPkgOTAddrKey = -1;
                     
             
                     if ($pkgStartRowCheck > 0)
@@ -89,7 +88,6 @@
                             $holdPkgKey = $pkgStartRowCheck["Package_ID"];
                             $holdPkgWeight = $pkgStartRowCheck["Package_Weight"];     
                             $holdPkgVol = $pkgStartRowCheck["Package_Volume"];  
-                            $holdPkgOTAddrKey = $pkgStartRowCheck["OT_Address_Key"]; 
                         }
             
                         
@@ -101,31 +99,7 @@
                     }
 
                     //Get Destination  Address
-                    $addrSql2 = "SELECT Building_Num, Street_Name, City, State, Zipcode FROM PostOffice.Address, PostOffice.Package WHERE Address.Address_Key = ?;";
-                    $stmtAddrSql2 = mysqli_stmt_init($conn);
-                    if (!mysqli_stmt_prepare($stmtAddrSql2, $addrSql2))
-                    {
-                        header("location: ../pages/index-login.php?error=stmtfailed");
-                        exit();
-                    }
-                    mysqli_stmt_bind_param($stmtAddrSql2, "i", $holdPkgOTAddrKey);
-                    mysqli_stmt_execute($stmtAddrSql2);
-                    
-                    $resultAddrRow2 = mysqli_stmt_get_result($stmtAddrSql2);
-                    $resultAddrRowCheck2 = mysqli_num_rows($resultAddrRow2);
-                    
-                    $holdDAddrBnum = -1;
-                    $holdDStreet = "";
-                    $holdDCity = "";
-                    $holdDState = "";
-                    $holdDZip = -1;
-                    
-                    
-                    //Retired code, keep just in case something else messses up
-                    /**$addrSql2 = "SELECT Building_Num, Street_Name, City, State, Zipcode FROM PostOffice.Address, PostOffice.Package WHERE Address.Address_Key = Package.OT_Address_Key;";
-                    $resultAddrRow2 = mysqli_query($conn, $addrSql2);
-                    $resultAddrRowCheck2 = mysqli_num_rows($resultAddrRow2);
-
+                    $addrSql2 = "SELECT Building_Num, Street_Name, City, State, Zipcode FROM PostOffice.Address, PostOffice.Package WHERE Address.Address_Key = Package.OT_Address_Key;";
                     $resultAddrRow2 = mysqli_query($conn, $addrSql2);
                     $resultAddrRowCheck2 = mysqli_num_rows($resultAddrRow2);
                     
@@ -134,7 +108,6 @@
                     $holdDCity = "";
                     $holdDState = "";
                     $holdDZip = -1;
-                    **/
                     
                     if($resultAddrRowCheck2 > 0){
                         while($resultAddrRowCheck2 = mysqli_fetch_assoc($resultAddrRow2))

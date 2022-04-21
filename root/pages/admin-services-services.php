@@ -173,8 +173,8 @@
                         </p>
                     </span>
                 </div>
-                
-                <a href="admin-services-info-1.php"><button class="hero-btn red-btn" id="emp-edit-info-btn">Edit Information</button></a>
+
+                <a href="emp-edit-info-1.php"><button class="hero-btn red-btn" id="emp-edit-info-btn">Edit Information</button></a>
 
                 <!-- TODO: can't remove: will mess up side bar, so just hide by using color white in css -->
                 <p class="heading"> HEADING </p>
