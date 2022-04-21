@@ -2,7 +2,6 @@
 <head>
 <?php
     $fname = $_POST["fname"];//N
-    $mname = $_POST["mname"];//O
     $lname = $_POST["lname"];//N
     $phone = $_POST["phone-number"];//N
     $address = 1; //FIX HARD-CODED ADDRESS KEY //N
@@ -35,16 +34,10 @@
         header("location: ../pages/admin-services-newEmp.php?error=usernametaken");
         exit();
     }
-    if(empty($mname || $supervisor)){
-        if(empty($mname && $supervisor)){
-            createEmployee($conn, $fname, $lname, $address, $phone, $office_id, $email, $pwd);
-        } else if(empty($mname)){
-            createEmployee1($conn, $fname, $lname, $address, $phone, $office_id, $email, $pwd, $supervisor);
-        } else if(empty($supervisor)){
-            createEmployee2($conn, $fname, $lname, $address, $phone, $office_id, $email, $pwd, $mname);
-        }
+    if(empty($supervisor)){
+        createEmployee($conn, $fname, $lname, $address, $phone, $office_id, $email, $pwd);
     } else {
-        createEmployee3($conn, $fname, $lname, $address, $phone, $office_id, $email, $pwd, $mname, $supervisor);
+        createEmployeeManaged($conn, $fname, $lname, $address, $phone, $office_id, $email, $pwd, $supervisor);
     }
 
     //Replace with createEmployee function
