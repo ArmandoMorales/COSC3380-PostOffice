@@ -57,7 +57,7 @@
                     </span>
                 </div>
 
-                <form method="post" action="cust-pkg-info-2.php">
+                <form method="post" action="cust-pkg-info-2.php" autocomplete="off">
                     <div>
                         <span>
                             <h2>Package ID</h2>
@@ -87,6 +87,9 @@
                                 while($row = mysqli_fetch_assoc($results)){
                                     echo "<option>". $row['Package_ID'] ."</option>";
                                 }
+                            }
+                            else {
+                                echo "<option> None </option>";
                             }
                         ?>
                     </datalist>
