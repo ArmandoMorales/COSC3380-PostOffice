@@ -61,7 +61,7 @@
                     </span>
                     </div>
 
-                    <form method="post" action="admin-services-info-2.php">
+                    <form method="post" action="emp-edit-info-2.php">
                     <div>
                         <span>
                             <h2>First Name</h2>
