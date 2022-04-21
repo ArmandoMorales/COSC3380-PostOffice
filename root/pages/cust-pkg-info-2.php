@@ -69,7 +69,7 @@
                 $rowsWithPkgID = mysqli_num_rows($results); // rows
                 $output = mysqli_fetch_all($results); // columns
 
-                $currentOfficeID = $output[$rowsWithPkgID - 1][4];
+                $currentOfficeID = $output[$rowsWithPkgID - 1][1]; // stopNum not tracking office bc when and employee updates tracking stopnum will update to them which means it has arrived for sure. Tracking office will show where it's heading next / where it was sent
                 $dateArrived = $output[$rowsWithPkgID - 1][2]; // DateArrived col from tracking table
             ?>
 
@@ -89,7 +89,14 @@
 
                 <div>
                     <span>
-                        <p id="display-info">Post Office <?php echo "$currentOfficeID" ?></p>
+                        <?php
+                                if (!isset($currentOfficeID)) {
+                                    echo "<p id='display-info'> Package has not yet been dropped off at a Pink Pastel Post Office to begin delivery <?php echo '$currentOfficeID' ?></p>";
+                                }
+                                else {
+                                    echo "<p id='display-info'>". $currentOfficeID ."<?php echo '$currentOfficeID' ?></p>";
+                                }
+                        ?>
                     </span>
                 </div>
 
@@ -136,7 +143,8 @@
                                 echo "<ul>";
                                 for ($x = 0; $x <= $rowsWithPkgID-1; $x++) {
                                     //echo $output[$x][4];
-                                    echo '<li><span>' .$x. '</span>'. 'Post Office ' .$output[$x][4].'</li>';
+                                    echo '<li><span>' .$x. '</span>'. 'Post Office ' .$output[$x][1].'</li>'; // also changed to stopnum here 
+                                    //echo '<li><span>' .$x. '</span>'. 'Post Office ' .$output[$x][4].'</li>';
                                   }
                                 echo '</ul>';
                             ?>
