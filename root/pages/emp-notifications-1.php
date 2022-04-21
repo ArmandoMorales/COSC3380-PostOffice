@@ -164,20 +164,35 @@
                                 if($stmtTrack_check > 0){
                                     while($check = mysqli_fetch_assoc($trackStartRow)){
                                         
+                                        /*
                                         date_default_timezone_set("America/Los_Angeles");
-
                                         $origin = new DateTime($check['DateArrived']);
                                         // $current = new DateTime(time());
                                         $current = new DateTime(date("Y-m-d H:i:s"));
                                         $interval = date_diff($origin, $current);
                                         $hoursPassed = intval($interval->format("%h"));
+                                        */
 
+                                        $now    = time();
+                                        $target = strtotime($check['DateArrived']);
+                                        $diff   = $now - $target;
+
+                                        // 15 minutes = 15*60 seconds = 900
+                                        if ($diff >= 32400) {
+                                            echo "<tr> 
+                                            <td>" . $check['Package_ID'] . "</td>
+                                            <td>" . $check['DateArrived'] . "</td>
+                                            </tr>";
+                                        }
+
+                                        /*
                                         if ($hoursPassed >= 9) {
                                             echo "<tr> 
                                             <td>" . $check['Package_ID'] . "</td>
                                             <td>" . $check['DateArrived'] . "</td>
                                             </tr>";
                                         }
+                                        */
 
                                     }
                                 }
