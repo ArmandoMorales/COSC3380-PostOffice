@@ -71,27 +71,41 @@
                         </span>
                     </div>
                 </div>
+
+
+                <script type="text/javascript" language="JavaScript"> 
+                // checks to see if passwords match in the registration form.                
+                function checkPasswordMatch(theForm) {
+                    if (theForm.pwd.value != theForm.pwdrepeat.value)
+                    {
+                        alert("Passwords don\'t match! Please resubmit registration form");
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+                </script> 
     
                 <!-- Registration Form that appears upon clicking -->
                 <div class="form signup" id="sign-up-form">
                     <span class="title">Registration</span>
     
-                    <form action="../includes/signup.inc.php" method="post">
+                    <form action="../includes/signup.inc.php" method="post" onsubmit="return checkPasswordMatch(this);">
                         <div class="input-field">
-                            <input type="text" name="fname" placeholder="Enter first name" required>
+                            <input type="text" name="fname" placeholder="Enter first name" pattern="[a-zA-Z]+" title="Only characters allowed" maxlength="20" required>
                             <i class="uil uil-user"></i>
                         </div>
                         <div class="input-field">
-                            <input type="text" name="lname" placeholder="Enter last name" required>
+                            <input type="text" name="lname" placeholder="Enter last name" pattern="[a-zA-Z]+" title="Only characters allowed" maxlength="20" required>
                             <i class="uil uil-user"></i>
                         </div>
                         <div class="input-field">
-                            <input type="text" name="email" placeholder="Enter your email" required>
+                            <input type="email" name="email" placeholder="Enter your email" pattern=".+@+.+\.com" title="email must end in .com" maxlength="40" required>
                             <i class="uil uil-envelope icon"></i>
                         </div>
                         
                         <div class="input-field">
-                            <input type="text" name="pnum" placeholder="Enter Phone Number" required>
+                            <input type="text" name="pnum" placeholder="Enter Phone Number" pattern="[0-9]{10}" title="10 digit no characters" minlength="10" maxlength="10" required>
                             <i class="uil uil-phone icon"></i>
                         </div>
 
@@ -106,23 +120,23 @@
                         </div>
 
                         <div class="input-field">
-                            <input type="text" name="bnum" placeholder="Building Number" required>
+                            <input type="number" name="bnum" placeholder="Building Number" placeholder="Enter building number" min="1">
                             <i class="uil uil-home icon"></i>
                         </div>
                         <div class="input-field">
-                            <input type="text" name="street-name" placeholder="Street Name" required>
+                            <input type="text" name="street-name" placeholder="Street Name" pattern="[a-zA-Z]+" title="Only characters allowed" maxlength="25" required>
                             <i class="uil uil-home icon"></i>
                         </div>
                         <div class="input-field">
-                            <input type="text" name="city" placeholder="City" required>
+                            <input type="text" name="city" placeholder="City" pattern="[a-zA-Z]+" title="Only characters allowed" maxlength="20" required>
                             <i class="uil uil-home icon"></i>
                         </div>
                         <div class="input-field">
-                            <input type="text" name="state" placeholder="State" required>
+                            <input type="text" name="state" placeholder="State" pattern="[a-zA-Z]+" title="Only characters allowed" maxlength="12" required>
                             <i class="uil uil-home icon"></i>
                         </div>
                         <div class="input-field">
-                            <input type="text" name="zip" placeholder="Zipcode" required>
+                            <input type="text" name="zip" placeholder="Zipcode" pattern="[0-9]{5}" title=" 5 digit zipcode" minlength="5" maxlength="5" required>
                             <i class="uil uil-home icon"></i>
                         </div>
     
@@ -131,8 +145,7 @@
                                 <input type="checkbox" id="sigCheck">
                                 <label for="sigCheck" class="text">Remember me</label>
                             </div>
-                            
-                            <a href="#" class="text">Forgot password?</a>
+                    
                         </div>
     
                         <div class="input-field button">

@@ -14,6 +14,7 @@
     <?php
         include_once '../header.php';
     ?>
+</section>
     <!-- This section replaced with universal header above
     <section class="sub-header">
         <nav>
@@ -37,7 +38,7 @@
             <div class="list">
                 <a href="customer-services.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Customer Information</p></div></a>
                 <a href="cust-pkg-info-1.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Package Information</p></div></a>
-                <a href="cust-snd-pkg-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Send Package</p></div></a>
+                <a href="cust-snd-pkg-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Create a Package</p></div></a>
                 <a href="cust-shop.php"><div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Shop</p></div></a>
             </div>
         </div>
@@ -49,11 +50,11 @@
                 <div>
                 <i class="fa fa-truck" aria-hidden="true"></i>
                 <span>
-                    <h5>Send Package</h5>
+                    <h5>Send Package to:</h5>
                 </span>
                 </div>
 
-                <form method="post" action="cust-snd-pkg-2.php">
+                <form method="post" action="cust-snd-pkg-2.php" autocomplete="off">
                 <!-- Decision moved to Employee
                 <div>
                     <span>
@@ -62,51 +63,7 @@
                 </div>
                 <input type="text" name="fname" placeholder="Enter your desired post office"> -->
 
-                <div>
-                    <span>
-                        <h2 style="color:gray;">Return Address</h2>
-                    </span>
-                </div> 
-                <div>
-                    <span>
-                        <h2>Building #</h2>
-                    </span>
-                </div>
-                <input type="text" name="Rbuilding-num" placeholder="Enter building number">
-
-                <div>
-                    <span>
-                        <h2>Street Name</h2>
-                    </span>
-                </div>
-                <input type="text" name="Rstreet-name" placeholder="Enter street name" maxlength="25">
-
-                <div>
-                    <span>
-                        <h2>City</h2>
-                    </span>
-                </div>
-                <input type="text" name="Rcity" placeholder="Enter city" maxlength="20">
                 
-                <div>
-                    <span>
-                        <h2>State</h2>
-                    </span>
-                </div>
-                <input type="text" name="Rstate" placeholder="Enter state">
-
-                <div>
-                    <span>
-                        <h2>Zipcode</h2>
-                    </span>
-                </div>
-                <input type="text" name="Rzip" placeholder="Enter zipcode">
-                
-                <div>
-                    <span>
-                        <h2 style="color:gray;">Destination Address</h2>
-                    </span>
-                </div>    
 
                 <!--OUTGOING INFO BELOW-->
                 <div>
@@ -114,42 +71,47 @@
                             <h2>Building #</h2>
                         </span>
                     </div>
-                    <input type="text" name="Dbuilding-num" placeholder="Enter building number">
+                    <input type="number" name="Dbuilding-num" placeholder="Enter building number" min="1">
 
                     <div>
                         <span>
                             <h2>Street Name</h2>
                         </span>
                     </div>
-                    <input type="text" name="Dstreet-name" placeholder="Enter street name" maxlength="25">
+                    <input type="text" name="Dstreet-name" placeholder="Enter street name" pattern="[a-zA-Z]+" title="Only characters allowed" maxlength="25" required>
 
                     <div>
                         <span>
                             <h2>City</h2>
                         </span>
                     </div>
-                    <input type="text" name="Dcity" placeholder="Enter city" maxlength="20">
+                    <input type="text" name="Dcity" placeholder="Enter city" pattern="[a-zA-Z]+" title="Only characters allowed" maxlength="20" required>
                     
                     <div>
                         <span>
                             <h2>State</h2>
                         </span>
                     </div>
-                    <input type="text" name="Dstate" placeholder="Enter state">
+                    <input type="text" name="Dstate" placeholder="Enter state" pattern="[a-zA-Z]+" title="Only characters allowed" maxlength="12" required>
 
                     <div>
                         <span>
                             <h2>Zipcode</h2>
                         </span>
                     </div>
-                    <input type="text" name="Dzip" placeholder="Enter zipcode">
+                    <input type="text" name="Dzip" placeholder="Enter zipcode" pattern="[0-9]{5}" title=" 5 digit zipcode" minlength="5" maxlength="5" required>
 
                     <div>
                         <span>
                             <h2>Package Type</h2>
                         </span>
                     </div>
-                    <input type="text" name="ptype" placeholder="Enter Package Type (Standard/Fragile)">
+                    <!-- <input type="text" name="ptype" placeholder="Enter Package Type (Standard/Fragile)" required> --> 
+                    <input type="text" name="pkg-id" placeholder="Select package type" list="possible-pkg-typs" required>
+                    <datalist id="possible-pkg-typs"> 
+                        <option> Standard </option>
+                        <option> Fragile </option>
+                    </datalist>
 
 
                     <div>
@@ -157,21 +119,27 @@
                             <h2>Package Weight (lbs)</h2>
                         </span>
                     </div>
-                    <input type="number" name="weight" placeholder="Enter package weight">
+                    <input type="number" name="weight" placeholder="Enter package weight" min="1" required>
 
                     <div>
                         <span>
                             <h2>Package Volume (lbs^3)</h2>
                         </span>
                     </div>
-                    <input type="text" name="vol" placeholder="Enter package volume">
+                    <input type="number" name="vol" placeholder="Enter package volume" min="1" required>
 
                     <div>
                         <span>
                             <h2>Priority</h2>
                         </span>
                     </div>
-                    <input type="text" name="prio" placeholder="Enter priority: 1 2 3">
+                    <!-- <input type="text" name="prio" placeholder="Enter priority: 1 2 3"> --> 
+                    <input type="text" name="pkg-id" placeholder="Select a priority: 1 fastest" list="possible-prios" required>
+                    <datalist id="possible-prios"> 
+                        <option> 1 </option>
+                        <option> 2 </option>
+                        <option> 3 </option>
+                    </datalist>
                     
                     <button type="submit" class="hero-btn red-btn" id="cust-conf-ship-btn">Save Information</button>
 

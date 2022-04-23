@@ -3,7 +3,8 @@
 
 <?php 
     include("../includes/dbh.inc.php");
-    $customID = $_POST["customer-id"];
+    $custemail= $_POST["email"];
+    //$customID = $_POST["customer-id"];
     $Rbuildingnum = $_POST['Rbuilding-num'];
     $Rbnum_converted = (int) $Rbuildingnum;
     $Rstreet = $_POST['Rstreet-name'];
@@ -68,7 +69,49 @@
         <!-- content -->
         <div class="content">
             <?php
-                $addrRKeys = "SELECT Address_Key FROM PostOffice.Address 
+                
+                //Get address key through email
+                $getAddrKey = "SELECT Customer_Address_Key From PostOffice.Customer
+                                WHERE email = ?;";
+                $stmtAddrKey = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmtAddrKey, $getAddrKey)){
+                    header("location: ../pages/index-login.php?error=stmtfailed");
+                    exit();   
+                }
+                mysqli_stmt_bind_param($stmtAddrKey,"s",$custemail);
+                mysqli_stmt_execute($stmtAddrKey);
+
+                $resultAddrKey = mysqli_stmt_get_result($stmtAddrKey);
+                $resultAddrCheck = mysqli_num_rows($resultAddrKey);
+
+                if($resultAddrCheck>0){
+                    while($resultAddrCheck = mysqli_fetch_assoc($resultAddrKey)){
+                        $holdAddrKey = $resultAddrCheck['Customer_Address_Key'];
+                    }
+                }
+
+                //Get Customer ID through email because we still need the Customer's ID to make a package
+                $getCustID = "SELECT Customer_ID FROM PostOffice.Customer
+                                WHERE email = ?;";
+                $stmtCustID =  mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmtCustID, $getCustID)){
+                    header("location: ../pages/index-login.php?error=stmtfailed");
+                    exit();   
+                }
+                mysqli_stmt_bind_param($stmtCustID,"s",$custemail);
+                mysqli_stmt_execute($stmtCustID);
+
+                $resultCustID =  mysqli_stmt_get_result($stmtCustID);
+                $resultCustIDCheck = mysqli_num_rows($resultCustID);
+
+                if($resultCustIDCheck>0){
+                    while($resultCustIDCheck = mysqli_fetch_assoc($resultCustID)){
+                        $holdCustID = $resultCustIDCheck['Customer_ID'];
+                    }
+                }
+                            
+                
+                /**$addrRKeys = "SELECT Address_Key FROM PostOffice.Address 
                                 WHERE Building_Num = ? AND Street_Name = ? AND City = ? AND State = ? AND Zipcode = ?;";
                 
                 $stmtRKeys = mysqli_stmt_init($conn);
@@ -124,7 +167,7 @@
                     else {
                     echo "error";
                     }
-                }
+                } **/
 
 
                 //Retrieve Destination Destination Address Keys
@@ -215,7 +258,7 @@
                         header("location: ../pages/index-login.php?error=stmtfailed");
                         exit();
                     }
-                    mysqli_stmt_bind_param($stmtPkg, "isddiii", $customID, $ptype, $weight, $vol_converted, $holdRaddr,$holdDaddr, $notReceived);
+                    mysqli_stmt_bind_param($stmtPkg, "isddiii", $holdCustID, $ptype, $weight, $vol_converted, $holdAddrKey,$holdDaddr, $notReceived);
                     mysqli_stmt_execute($stmtPkg);
                 ?>
                 <!-- TODO: can't remove: will mess up side bar, so just hide by using color white in css -->
