@@ -48,7 +48,7 @@
             <div class="list">
                 <a href="customer-services.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Customer Information</p></div></a>
                 <a href="cust-pkg-info-1.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Package Information</p></div></a>
-                <a href="cust-snd-pkg-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Send Package</p></div></a>
+                <a href="cust-snd-pkg-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Create a Package</p></div></a>
                 <a href="cust-shop.php"><div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Shop</p></div></a>
             </div>
         </div>
@@ -56,13 +56,14 @@
         <!-- content -->
         <div class="content">
             <?php
-                $Rbuildingnum = $_POST['Rbuilding-num'];
+                
+                /**$Rbuildingnum = $_POST['Rbuilding-num'];
                 $Rbnum_converted = (int) $Rbuildingnum;
                 $Rstreet = $_POST['Rstreet-name'];
                 $Rcity = $_POST['Rcity'];
                 $Rstate = $_POST['Rstate'];
                 $Rzipcode = $_POST['Rzip'];
-                $Rzipcode_coverted = (int) $Rzipcode;
+                $Rzipcode_coverted = (int) $Rzipcode;**/
                 
                 $Dbuildingnum = $_POST['Dbuilding-num'];
                 $Dbnum_converted = (int) $Dbuildingnum;
@@ -78,7 +79,7 @@
                 $vol_converted = (int) $vol;
                 
                 
-                $addrRKeys = "SELECT Address_Key FROM PostOffice.Address 
+                /**$addrRKeys = "SELECT Address_Key FROM PostOffice.Address 
                                 WHERE Building_Num = ? AND Street_Name = ? AND City = ? AND State = ? AND Zipcode = ?;";
                 
                 $stmtRKeys = mysqli_stmt_init($conn);
@@ -134,8 +135,7 @@
                     else {
                     echo "error";
                     }
-                }
-
+                } **/
 
                 //Retrieve Destination Destination Address Keys
                 $addrDKeys = "SELECT Address_Key FROM PostOffice.Address 
@@ -213,9 +213,11 @@
                     header("location: ../pages/index-login.php?error=stmtfailed");
                     exit();
                 }
-                mysqli_stmt_bind_param($stmtPkg, "isddiii", $_SESSION["userid"], $ptype, $weight, $vol_converted, $holdRaddr,$holdDaddr, $notReceived);
-                mysqli_stmt_execute($stmtPkg);            
+                mysqli_stmt_bind_param($stmtPkg, "isddiii", $_SESSION["userid"], $ptype, $weight, $vol_converted, $_SESSION["custAddressKey"],$holdDaddr, $notReceived);
+                mysqli_stmt_execute($stmtPkg);
 
+                // get package_id of package we just inserted
+                $last_id = mysqli_insert_id($conn);
             ?>
             
         
@@ -227,7 +229,7 @@
                 <div>
                 <i class="fa fa-truck" aria-hidden="true"></i>
                 <span>
-                    <h5>Thank You! Visit "Package Information" in your services page to follow your package after it's delivered to your selected post office.</h5>
+                    <h5>Thank You! Visit "Package Information" in your services page to follow your package after it's delivered to your selected post office. The package ID associated with this package is: <?php echo $last_id ?>.</h5>
                 </span>
                 </div>
 

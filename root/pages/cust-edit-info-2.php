@@ -12,6 +12,7 @@
 <?php
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
+    $email = $_POST['email'];
     $buildingnum = $_POST['building-num'];
     $bnum_converted = (int) $buildingnum;
     $street = $_POST['street-name'];
@@ -51,6 +52,23 @@
 
         $_SESSION["lastName"] = $lname;
     }
+
+    // if they enter email to be edited
+    if (isset($email) && $ $email !==""){
+        $sql2 = "UPDATE PostOffice.Customer
+        SET email = ?
+        WHERE Customer_ID = ?;"; 
+        $stmt2 = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt2,$sql2)){
+            header("location: ../pages/index-login.php?error=stmtfailed");
+            exit();
+        }
+        mysqli_stmt_bind_param($stmt2, "ss", $email, $_SESSION["userid"]);
+        mysqli_stmt_execute($stmt2);
+
+        $_SESSION["useruid"] = $email;
+    }
+
     // if they enter Building#
     if (isset($buildingnum) && $buildingnum !==""){
         $sql3 = "UPDATE PostOffice.Address
@@ -93,7 +111,7 @@
         mysqli_stmt_execute($stmt5);
         }
 
-    //if state, State attribute name could be an issue
+    //if state,
     if (isset($state) && $state !==""){
         $sql6 = "UPDATE PostOffice.Address
         SET State = ? 
@@ -121,7 +139,7 @@
         mysqli_stmt_execute($stmt7);
         }
 
-    // if they entered last name to be edited
+    // if they entered phone number to be edited
     if (isset($pnumber) && $pnumber !==""){
         $sql8 = "UPDATE PostOffice.Customer
         SET Customer_Phone_Num = ?

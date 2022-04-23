@@ -10,9 +10,16 @@
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <section class="sub-header">
+
+<section class="sub-header">
+    <?php
+        include_once '../header.php';
+    ?>
+</section>
+
+
+    <!-- <section class="sub-header">
         <nav>
-            <!-- TODO: add redirects based on employee permissions -->
             <a href=""><img src="../images/pinkpostlogo.png"></a>
             <div class="nav-links" id="navLinks">  
                 <ul>
@@ -24,7 +31,8 @@
             </div>
         </nav>
             <h1></h1>
-    </section>
+    </section> -->
+
     <!-- Side Bar -->
     <section class="side-bar-container">
         <div class="side-bar" id="sidebar">
@@ -49,13 +57,13 @@
                 <form method="post" action="emp-create-pkg-2.php">
                     <div>
                         <span>
-                            <h2>Customer ID</h2>
+                            <h2>Customer Email</h2>
                         </span>
                     </div>
-                    <input type="text" name="customer-id" placeholder="Enter customer's id">
+                    <input type="text" name="email" placeholder="Enter customer's email">
                     <div>
                     <span>
-                        <h2 style="color:gray;">Return Address</h2>
+                   <!--     <h2 style="color:gray;">Return Address</h2>
                     </span>
                 </div> 
                 <div>
@@ -97,12 +105,12 @@
                     <span>
                         <h2 style="color:gray;">Destination Address</h2>
                     </span>
-                </div>    
+                </div>    -->
 
                 <!--OUTGOING INFO BELOW-->
                 <div>
                         <span>
-                            <h2>Building #</h2>
+                            <h2>Outgoing Building #</h2>
                         </span>
                     </div>
                     <input type="text" name="Dbuilding-num" placeholder="Enter building number">
