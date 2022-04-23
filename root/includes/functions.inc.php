@@ -263,6 +263,7 @@ function createEmployee($conn, $fname, $lname, $address, $phone, $office, $email
     header("location: ../pages/admin-services-newEmp.php?error=none");
         exit();
 }
+
 function createEmployeeManaged($conn, $fname, $lname, $address, $phone, $office, $email, $pwd, $super)
 {
     $sql = "INSERT INTO Employee (First_Name, Last_Name, Employee_Address_Key, Employee_Phone_Num, Office_ID, Super_ID, email, pass) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
@@ -280,4 +281,24 @@ function createEmployeeManaged($conn, $fname, $lname, $address, $phone, $office,
     mysqli_stmt_close($stmt);
     header("location: ../pages/admin-services-newEmp.php?error=none");
         exit();
+}
+
+// A simplified function to estimate cost for an example program.
+function packageCost($priority, $weight)
+{
+    $price = floatval(3.00 * $priority) + floatval(0.5 * $weight);
+    return $price;
+}
+
+// A simplified function to estimate package delivery date
+function packageDueDate($priority, $sentDate)
+{
+    $origin = new DateTime($sentDate);
+    $current = new DateTime(date("Y-m-d H:i:s"));
+    $interval = date_diff($origin, $current);
+    $daysPassed = intval($interval->format("%d"));
+    $dueDays = (7 * $priority) - ($daysPassed);
+
+    return $dueDays;
+
 }
