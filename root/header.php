@@ -35,7 +35,8 @@
                 else
                 {
                     //echo '<li><a href="index-employee-signup.php">EMPLOYEE REGISTRATION</a></li>';
-                    echo '<li><a href="index-login.php">REGISTER / SIGN IN</a></li>';
+                    // echo '<li><a href="index-login.php">REGISTER / SIGN IN</a></li>';
+                    echo '<li><a href="../pages/index-login.php">REGISTER / SIGN IN</a></li>';
                 }
             ?>
         </ul>
