@@ -1,4 +1,4 @@
-# COSC3380-PostOffice
+# Pink Pastel Post Office
 
 ![Project Image](Images/project.png)
 
