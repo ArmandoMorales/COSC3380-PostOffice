@@ -1,8 +1,8 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Employee Self Services</title>
-<link rel="stylesheet" href="../css/employee-services.css">
+<title>Customer Self Services</title>
+<link rel="stylesheet" href="../css/customer-services.css">
 <!-- font -->
 <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
 <!-- icons -->
@@ -40,15 +40,12 @@
     <section class="side-bar-container">
         <div class="side-bar" id="sidebar">
             <div class="list">
-                <a href="employee-services.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Employee Information</p></div></a>
-                <a href="emp-create-pkg-1.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Start Package</p></div></a>
-                <a href="emp-recieved-pkg-1.php"><div class="icons"><i class="fa fa-check" aria-hidden="true"></i><p id="icon-txt">Mark Recieved</p></div></a>
-                <a href="emp-send-out-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Send Out</p></div></a>
-                <a href="emp-report-lost-1.php"><div class="icons"><i class="fa fa-user-secret" aria-hidden="true"></i><p id="icon-txt">Report Lost</p></div></a>
-                <a href="emp-update-trk-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Update Tracking</p></div></a>
-                <a href="emp-update-inv-1.php"><div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Update Inventory</p></div></a>
-                <a href="emp-pkg-report-1.php"><div class="icons"><i class="fa fa-database" aria-hidden="true"></i><p id="icon-txt">Package Report</p></div></a>
-                <a href="emp-notifications-1.php"><div class="icons"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><p id="icon-txt">Notifications</p></div></a>
+                <a href="customer-services.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Customer Information</p></div></a>
+                <a href="cust-pkg-info-1.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Package Information</p></div></a>
+                <a href="cust-snd-pkg-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Create a Package</p></div></a>
+                <a href="cust-report-lost-1.php"><div class="icons"><i class="fa fa-user-secret" aria-hidden="true"></i><p id="icon-txt">Report Lost</p></div></a>
+
+                <a href="cust-shop.php"><div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Shop</p></div></a>
             </div>
         </div>
 
@@ -59,43 +56,45 @@
 
             <div class="form-col">
                     <div>
-                        <i class="fa fa-truck" aria-hidden="true"></i>
+                        <i class="fa fa-user-secret" aria-hidden="true"></i>
                         <span>
-                            <h5>Mark Packages Recieved</h5>
+                            <h5>Report Lost Package</h5>
                         </span>
                     </div>
 
-                    <form method="post" action="emp-recieved-pkg-2.php" autocomplete="off">
+                    <form method="post" action="cust-report-lost-2.php" autocomplete="off">
                         <div>
                             <span>
                                 <h2>Package ID</h2>
                             </span>
                         </div>
-                        <input type="text" name="package-id" placeholder="Enter package id to mark as recieved">
-                    <button type="submit" class="hero-btn red-btn" id="mark-recieved-btn">Mark Recieved</button>
+                        <input type="text" name="package-id" placeholder="Enter package id to report as lost">
+                    <button type="submit" class="hero-btn red-btn" id="mark-lost-btn">Report</button>
 
                     <!----------------------------------------------------->
                     <br></br>
                     <div>
-                        <h5>Incoming Packages</h5>
+                        <h5>Delivered Packages</h5>
                     </div>
-                    <p>The following packages are expected to be incoming and should be marked as recieved upon their arrival.</p>
+                    <p>The following packages were marked as delieverd. If the destined address never recieved the package, please report it above using the unique package ID</p>
                     
                     <table class="content-table">
                         <thead>
                             <tr> 
                                 <th>Package ID</th>
-                                <th>Customer ID</th>
+                                <th>Type</th>
+                                <th>Weight</th>
+                                <th>Volume</th>
+                                <th>Priority</th>
                             </tr>    
                         </thead>
                         <tbody>
                             <?php
 
-                            // grab all packages in transit who's destination is this office
-                            $incomingSql = "SELECT Package.Package_ID, Package.Customer_ID
+                            $incomingSql = "SELECT Package.Package_ID, Package.Package_Type, Package.Package_Weight, Package.Package_Volume, Package.Priority 
                             FROM PostOffice.Package
                                 LEFT JOIN PostOffice.Tracking_Status ON Package.Package_ID = Tracking_Status.Package_ID
-                            WHERE Destination_Office = ? AND Package_Status = ?;";
+                            WHERE Package_Status = ?;";
 
                             $stmtIncoming = mysqli_stmt_init($conn);
                             if (!mysqli_stmt_prepare($stmtIncoming, $incomingSql)){
@@ -103,8 +102,8 @@
                                 exit();   
                             }
                             
-                            $pkgStatus = 'transit';
-                            mysqli_stmt_bind_param($stmtIncoming, "is", $_SESSION["officeID"], $pkgStatus);
+                            $pkgStatus = 'delivered';
+                            mysqli_stmt_bind_param($stmtIncoming, "s", $pkgStatus);
                             mysqli_stmt_execute($stmtIncoming);
 
                             $results  = mysqli_stmt_get_result($stmtIncoming);
@@ -116,6 +115,9 @@
                                 echo "<tr>
                                     <td>" . $output[$x][0] . "</td>
                                     <td>" . $output[$x][1] . "</td>
+                                    <td>" . $output[$x][2] . "</td>
+                                    <td>" . $output[$x][3] . "</td>
+                                    <td>" . $output[$x][4] . "</td>
                                     </tr>";
                             }
 

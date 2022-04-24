@@ -52,14 +52,13 @@
                 <a href="emp-notifications-1.php"><div class="icons"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><p id="icon-txt">Notifications</p></div></a>
             </div>
         </div>
+        
+        <!-- content -->
+        <div class="content">
 
-        <?php 
-            $pkgID = (int) $_POST["package-id"];
-            $nextDest = $_POST["next-location"];
-
-            // set package status to delivered
-            if ($nextDest === "Deliver To Customer Address") {
-                $sql = "UPDATE Tracking_Status SET Package_Status = 'delivered' WHERE Package_ID = ?;";
+            <?php 
+                $pkgID = (int) $_POST["package-id"];
+                $sql = "UPDATE Tracking_Status SET Package_Status = 'lost' WHERE Package_ID = ?;";
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)){
                     header("location: ../pages/index-login.php?error=stmtfailed");
@@ -67,44 +66,17 @@
                 }
                 mysqli_stmt_bind_param($stmt,"i", $pkgID);
                 mysqli_stmt_execute($stmt);
-            } 
-            else {
-                // find which office they meant to send to, mark as transit and update destination office
-                $destinationOffice = -1;
-
-                if ($nextDest === "Houston Branch") {
-                    $destinationOffice = 1;
-                }
-                elseif ($nextDest === "Austin Branch") {
-                    $destinationOffice = 2;
-                }
-                else {
-                    $destinationOffice = 3;
-                }
-
-                $sql = "UPDATE Tracking_Status SET Package_Status = 'transit', Destination_Office = ? WHERE Package_ID = ?;";
-                $stmt = mysqli_stmt_init($conn);
-                if (!mysqli_stmt_prepare($stmt, $sql)){
-                    header("location: ../pages/index-login.php?error=stmtfailed");
-                    exit();   
-                }
-                mysqli_stmt_bind_param($stmt,"ii", $destinationOffice, $pkgID);
-                mysqli_stmt_execute($stmt);
-            }
-        ?>
-        
-        <!-- content -->
-        <div class="content">
+            ?>
 
             <div class="form-col">
                     <div>
-                        <i class="fa fa-truck" aria-hidden="true"></i>
+                        <i class="fa fa-user-secret" aria-hidden="true"></i>
                         <span>
-                            <h5>Package <?php echo $pkgID; ?> Marked For Send Out</h5>
+                            <h5>Package <?php echo $pkgID; ?> Marked As Lost </h5>
                         </span>
                     </div>
 
-                    <p>The package has been marked for send out: <?php echo $nextDest; ?> </p>
+                    <p>Thank you for reporting this package as lost. This information has been saved into the database and updated on the customer's package information page.</p>
 
             </div> 
             
