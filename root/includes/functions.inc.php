@@ -286,7 +286,7 @@ function createEmployeeManaged($conn, $fname, $lname, $address, $phone, $office,
 // A simplified function to estimate cost for an example program.
 function packageCost($priority, $weight)
 {
-    $price = floatval(3.00 * $priority) + floatval(0.5 * $weight);
+    $price = floatval(15.00/$priority) + floatval(0.5 * $weight);
     return $price;
 }
 
