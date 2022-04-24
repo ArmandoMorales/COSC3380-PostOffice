@@ -49,7 +49,26 @@
             </div>
         </div>
 
+        <?php 
+            $incomingSql = "SELECT Package.Package_ID, Package.Package_Type, Package.Package_Weight, Package.Package_Volume, Package.Priority 
+            FROM PostOffice.Package
+                LEFT JOIN PostOffice.Tracking_Status ON Package.Package_ID = Tracking_Status.Package_ID
+            WHERE Package_Status = ?;";
 
+            $stmtIncoming = mysqli_stmt_init($conn);
+            if (!mysqli_stmt_prepare($stmtIncoming, $incomingSql)){
+                header("location: ../pages/index-login.php?error=stmtfailed");
+                exit();   
+            }
+            
+            $pkgStatus = 'delivered';
+            mysqli_stmt_bind_param($stmtIncoming, "s", $pkgStatus);
+            mysqli_stmt_execute($stmtIncoming);
+
+            $results  = mysqli_stmt_get_result($stmtIncoming);
+            $allRows = mysqli_num_rows($results); // rows
+            $output = mysqli_fetch_all($results); // columns
+        ?>
         
         <!-- content -->
         <div class="content">
@@ -68,7 +87,26 @@
                                 <h2>Package ID</h2>
                             </span>
                         </div>
-                        <input type="text" name="package-id" placeholder="Enter package id to report as lost">
+                        <!-- <input type="text" name="package-id" placeholder="Enter package id to report as lost"> -->
+                        <!-- <input type="text" name="pkg-id" placeholder="Enter package's id"> -->
+                    <input type="text" name="pkg-id" placeholder="Select Package ID From Table Below" list="possible-ids">
+                    <datalist id="possible-ids"> 
+                        <?php
+
+                            // 0 and 1 refer to the items in the select
+                            $enteredLoop = 0;
+                            for ($x = 0; $x <= $allRows-1; $x++) {
+                                echo "<option>". $output[$x][0] ."</option>";
+                                $enteredLoop = 1;
+                            }
+                            if ($enteredLoop === 0) {
+                                echo "<option> None </option>";
+                            }
+                        ?>
+                    </datalist>
+
+
+
                     <button type="submit" class="hero-btn red-btn" id="mark-lost-btn">Report</button>
 
                     <!----------------------------------------------------->
@@ -90,26 +128,6 @@
                         </thead>
                         <tbody>
                             <?php
-
-                            $incomingSql = "SELECT Package.Package_ID, Package.Package_Type, Package.Package_Weight, Package.Package_Volume, Package.Priority 
-                            FROM PostOffice.Package
-                                LEFT JOIN PostOffice.Tracking_Status ON Package.Package_ID = Tracking_Status.Package_ID
-                            WHERE Package_Status = ?;";
-
-                            $stmtIncoming = mysqli_stmt_init($conn);
-                            if (!mysqli_stmt_prepare($stmtIncoming, $incomingSql)){
-                                header("location: ../pages/index-login.php?error=stmtfailed");
-                                exit();   
-                            }
-                            
-                            $pkgStatus = 'delivered';
-                            mysqli_stmt_bind_param($stmtIncoming, "s", $pkgStatus);
-                            mysqli_stmt_execute($stmtIncoming);
-
-                            $results  = mysqli_stmt_get_result($stmtIncoming);
-                            $allRows = mysqli_num_rows($results); // rows
-                            $output = mysqli_fetch_all($results); // columns
-
                             // 0 and 1 refer to the items in the select
                             for ($x = 0; $x <= $allRows-1; $x++) {
                                 echo "<tr>
