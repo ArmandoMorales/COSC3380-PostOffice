@@ -96,7 +96,6 @@
     }
     
 
-
     //Find the average spending per person
     $c = 0;
     $cc = 0;
@@ -274,7 +273,6 @@
                                 echo "<td>" . number_format((float)$perPack, 2, '.', '') . "% </td>";
                                 echo "<td>" . number_format((float)$perCustom, 2, '.', '') . "% </td>";
                             ?>
-                            <td></td>
                         </tr>
                     </tbody>
                 </table>
@@ -355,7 +353,234 @@
                 <input type="submit" name="choosePO" value="Retrieve the Data"/>
                 </form>
 
+                <!--Customer Table-->
+                <span>
+                    <h5 style="color:black">Customer Table</h5>
+                </span>
+                <table class="content-table">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Customer Address Key</th>
+                            <th>Customer Phone Number</th>
+                            <th>Customer ID</th>
+                            <th>Customer Email</th>
+                        </tr>
+                    </thead>
+                    <?php
+                        $sql = "SELECT * FROM Customer;";
+                        $stmt = mysqli_stmt_init($conn);
+
+                        if (!mysqli_stmt_prepare($stmt, $sql))
+                        {
+                            header("location: ../pages/index-login.php?error=stmtfailed");
+                            exit();
+                        }
+
+                        mysqli_stmt_execute($stmt);
+                        $results = mysqli_stmt_get_result($stmt);
+                        $rows = mysqli_num_rows($results);
+
+                        if($rows > 0){
+                            echo '<tbody>';
+                            while($row = mysqli_fetch_assoc($results)){
+                                echo '<tr>';
+                                        echo "<td>" . $row['First_Name'] . "</td>";
+                                        echo "<td>" . $row['Last_Name'] . "</td>";
+                                        echo "<td>" . $row['Customer_Address_Key'] . "</td>";
+                                        echo "<td>" . $row['Customer_Phone_Num'] . "</td>";
+                                        echo "<td>" . $row['Customer_ID'] . "</td>";
+                                        echo "<td>" . $row['email'] . "</td>";
+                                    echo '</tr>';
+                                
+                            }
+                            echo '</tbody>';
+                        }   
+                    ?>
+                </table>
+                <span>
+                    <h5 style="color:black">Packages</h5>
+                </span>
+                <table class="content-table">
+                    <thead>
+                        <tr>
+                            <th>Package ID</th>
+                            <th>Customer ID</th>
+                            <th>Package Type</th>
+                            <th>Package Weight</th>
+                            <th>Package Volume</th>
+                            <th>Return Address Key</th>
+                            <th>Shipping Address Key</th>
+                            <th>Recieved</th>
+                            <th>Priority</th>
+                        </tr>
+                    </thead>
+                    <?php
+                        $sql = "SELECT * FROM Package;";
+                        $stmt = mysqli_stmt_init($conn);
+
+                        if (!mysqli_stmt_prepare($stmt, $sql))
+                        {
+                            header("location: ../pages/index-login.php?error=stmtfailed");
+                            exit();
+                        }
+
+                        mysqli_stmt_execute($stmt);
+                        $results = mysqli_stmt_get_result($stmt);
+                        $rows = mysqli_num_rows($results);
+
+                        if($rows > 0){
+                            echo '<tbody>';
+                            while($row = mysqli_fetch_assoc($results)){
+                                echo '<tr>';
+                                        echo "<td>" . $row['Package_ID'] . "</td>";
+                                        echo "<td>" . $row['Customer_ID'] . "</td>";
+                                        echo "<td>" . $row['Package_Type'] . "</td>";
+                                        echo "<td>" . $row['Package_Weight'] . "</td>";
+                                        echo "<td>" . $row['Package_Volume'] . "</td>";
+                                        echo "<td>" . $row['IC_Address_Key'] . "</td>";
+                                        echo "<td>" . $row['OT_Address_Key'] . "</td>";
+                                        echo "<td>" . $row['Recieved'] . "</td>";
+                                        echo "<td>" . $row['Priority'] . "</td>";
+                                    echo '</tr>';
+                                
+                            }
+                            echo '</tbody>';
+                        }   
+                    ?>
+                </table>
                 
+                <span>
+                    <h5 style="color:black">Tracking Table</h5>
+                </span>
+                <table class="content-table">
+                    <thead>
+                        <tr>
+                            <th>Package_ID</th>
+                            <th>StopNum</th>
+                            <th>DateArrived</th>
+                            <th>DateSent</th>
+                            <th>Tracking_Office_ID</th>
+                        </tr>
+                    </thead>
+                    <?php
+                        $sql = "SELECT * FROM Tracking;";
+                        $stmt = mysqli_stmt_init($conn);
+
+                        if (!mysqli_stmt_prepare($stmt, $sql))
+                        {
+                            header("location: ../pages/index-login.php?error=stmtfailed");
+                            exit();
+                        }
+
+                        mysqli_stmt_execute($stmt);
+                        $results = mysqli_stmt_get_result($stmt);
+                        $rows = mysqli_num_rows($results);
+
+                        if($rows > 0){
+                            echo '<tbody>';
+                            while($row = mysqli_fetch_assoc($results)){
+                                echo '<tr>';
+                                        echo "<td>" . $row['Package_ID'] . "</td>";
+                                        echo "<td>" . $row['StopNum'] . "</td>";
+                                        echo "<td>" . $row['DateArrived'] . "</td>";
+                                        echo "<td>" . $row['DateSent'] . "</td>";
+                                        echo "<td>" . $row['Tracking_Office_ID'] . "</td>";
+                                    echo '</tr>';
+                                
+                            }
+                            echo '</tbody>';
+                        }   
+                    ?>
+                </table>
+                <span>
+                    <h5 style="color:black">Post Office Table</h5>
+                </span>
+                <table class="content-table">
+                    <thead>
+                        <tr>
+                            <th>Office ID</th>
+                            <th>Office Name</th>
+                            <th>Post Office Address Key</th>
+                            <th>Post Office Phone Number</th>
+                            <th>Supervisor ID</th>
+                            <th>Number of Packages</th>
+                        </tr>
+                    </thead>
+                    <?php
+                        $sql = "SELECT * FROM Post_Office;";
+                        $stmt = mysqli_stmt_init($conn);
+
+                        if (!mysqli_stmt_prepare($stmt, $sql))
+                        {
+                            header("location: ../pages/index-login.php?error=stmtfailed");
+                            exit();
+                        }
+
+                        mysqli_stmt_execute($stmt);
+                        $results = mysqli_stmt_get_result($stmt);
+                        $rows = mysqli_num_rows($results);
+
+                        if($rows > 0){
+                            echo '<tbody>';
+                            while($row = mysqli_fetch_assoc($results)){
+                                echo '<tr>';
+                                        echo "<td>" . $row['Office_ID'] . "</td>";
+                                        echo "<td>" . $row['Office_Name'] . "</td>";
+                                        echo "<td>" . $row['PO_Address_Key'] . "</td>";
+                                        echo "<td>" . $row['PO_Phone_Num'] . "</td>";
+                                        echo "<td>" . $row['Supervisor_ID'] . "</td>";
+                                        echo "<td>" . $row['Num_of_Packages'] . "</td>";
+                                    echo '</tr>';
+                            }
+                            echo '</tbody>';
+                        }   
+                    ?>
+                </table>
+                <span>
+                    <h5 style="color:black">Notifications New Employees Table</h5>
+                </span>
+                <table class="content-table">
+                    <thead>
+                        <tr>
+                            <th>Notification New Number</th>
+                            <th>Employee ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Start Date</th>
+                        </tr>
+                    </thead>
+                    <?php
+                        $sql = "SELECT * FROM Notification_New_Employee;";
+                        $stmt = mysqli_stmt_init($conn);
+
+                        if (!mysqli_stmt_prepare($stmt, $sql))
+                        {
+                            header("location: ../pages/index-login.php?error=stmtfailed");
+                            exit();
+                        }
+
+                        mysqli_stmt_execute($stmt);
+                        $results = mysqli_stmt_get_result($stmt);
+                        $rows = mysqli_num_rows($results);
+
+                        if($rows > 0){
+                            echo '<tbody>';
+                            while($row = mysqli_fetch_assoc($results)){
+                                echo '<tr>';
+                                        echo "<td>" . $row['N_number'] . "</td>";
+                                        echo "<td>" . $row['E_ID'] . "</td>";
+                                        echo "<td>" . $row['First_Name'] . "</td>";
+                                        echo "<td>" . $row['Last_Name'] . "</td>";
+                                        echo "<td>" . $row['Start_Date'] . "</td>";
+                                    echo '</tr>';
+                            }
+                            echo '</tbody>';
+                        }   
+                    ?>
+                </table>
+
                 <p class="heading"> HEADING </p>
                 <p class="paragraph"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus blanditiis cumque voluptate laboriosam? Voluptate delectus saepe impedit, dolores aliquam in possimus corporis rerum a quam itaque dolor animi cupiditate expedita.</p>
 
