@@ -79,7 +79,7 @@
         ?>
 
             <div class="form-col">
-            <div>
+                    <div>
                     <i class="fa fa-user" aria-hidden="true"></i>
                     <span>
                         <h5>Employee Information</h5>
@@ -180,7 +180,7 @@
                     <p class="paragraph"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus blanditiis cumque voluptate laboriosam? Voluptate delectus saepe impedit, dolores aliquam in possimus corporis rerum a quam itaque dolor animi cupiditate expedita.</p>
 
                     </form>
-            </div> 
+                </div> 
             
         </div>
 

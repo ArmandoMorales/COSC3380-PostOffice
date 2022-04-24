@@ -23,6 +23,7 @@
 
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
+    $email = $_POST['email'];
     $buildingnum = $_POST['building-num'];
     $bnum_converted = (int) $buildingnum;
     $street = $_POST['street-name'];
@@ -69,6 +70,22 @@
         mysqli_stmt_execute($stmt2);
 
         $_SESSION["lastName"] = $lname;
+    }
+
+    // if they enter email to be edited
+    if (isset($email) && $email !==""){
+        $sql2 = "UPDATE PostOffice.Employee
+        SET email = ?
+        WHERE Employee_ID = ?;"; 
+        $stmt2 = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt2,$sql2)){
+            header("location: ../pages/index-login.php?error=stmtfailed");
+            exit();
+        }
+        mysqli_stmt_bind_param($stmt2, "ss", $email, $_SESSION["empid"]);
+        mysqli_stmt_execute($stmt2);
+
+        $_SESSION["useruid"] = $email;
     }
 
     // if they enter Building#
@@ -141,7 +158,7 @@
         mysqli_stmt_execute($stmt7);
         }
         
-    // if they entered last name to be edited
+    // if they entered phone number to be edited
     if (isset($pnumber) && $pnumber !==""){
         $sql8 = "UPDATE PostOffice.Employee
         SET Employee_Phone_Num = ?
@@ -172,6 +189,6 @@
 
 
     // after gathering form info we'll go back to main page where you can see your profile to see the results.
-    echo "<script> location.href='employee-services.php'; </script>";
+    echo "<script> location.href='admin-services-services.php'; </script>";
     exit;
 ?>

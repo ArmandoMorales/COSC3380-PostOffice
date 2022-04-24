@@ -159,7 +159,7 @@
         mysqli_stmt_execute($stmt7);
         }
         
-    // if they entered last name to be edited
+    // if they entered phone number to be edited
     if (isset($pnumber) && $pnumber !==""){
         $sql8 = "UPDATE PostOffice.Employee
         SET Employee_Phone_Num = ?
