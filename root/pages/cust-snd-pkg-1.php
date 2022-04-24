@@ -107,12 +107,11 @@
                         </span>
                     </div>
                     <!-- <input type="text" name="ptype" placeholder="Enter Package Type (Standard/Fragile)" required> --> 
-                    <input type="text" name="pkg-id" placeholder="Select package type" list="possible-pkg-typs" required>
+                    <input type="text" name="ptype" placeholder="Select package type" list="possible-pkg-typs" required>
                     <datalist id="possible-pkg-typs"> 
                         <option> Standard </option>
                         <option> Fragile </option>
                     </datalist>
-
 
                     <div>
                         <span>
@@ -140,6 +139,22 @@
                         <option> 2 </option>
                         <option> 3 </option>
                     </datalist>
+
+
+                    <div>
+                    <i class="fa fa-truck" aria-hidden="true"></i>
+                    <span>
+                        <h5>Drop Off Location:</h5>
+                    </span>
+                    </div>
+
+                    <input type="text" name="pkg-drop-off-location" placeholder="Select a post office to drop off at" list="possible-locations" required>
+                    <datalist id="possible-locations"> 
+                        <option>Houston Branch</option>
+                        <option>Austin Branch</option>
+                        <option>Dallas Branch</option>
+                    </datalist>
+
                     
                     <button type="submit" class="hero-btn red-btn" id="cust-conf-ship-btn">Save Information</button>
 

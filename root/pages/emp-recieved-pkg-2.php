@@ -10,15 +10,20 @@
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <section class="sub-header">
-        <?php
-            include_once '../header.php';
-        ?>
-    </section>
 
-    <!-- This section replaced with universal header above
+<?php
+    include("../includes/dbh.inc.php");
+?>
+
+<section class="sub-header">
+    <?php
+    include_once '../header.php';
+    ?>
+</section>
+    <!--
     <section class="sub-header">
         <nav>
+           
             <a href=""><img src="../images/pinkpostlogo.png"></a>
             <div class="nav-links" id="navLinks">  
                 <ul>
@@ -30,9 +35,8 @@
             </div>
         </nav>
             <h1></h1>
-    </section> 
-    -->
-    
+    </section> -->
+
     <!-- Side Bar -->
     <section class="side-bar-container">
         <div class="side-bar" id="sidebar">
@@ -45,75 +49,43 @@
                 <a href="emp-update-inv-1.php"><div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Update Inventory</p></div></a>
                 <a href="emp-pkg-report-1.php"><div class="icons"><i class="fa fa-database" aria-hidden="true"></i><p id="icon-txt">Package Report</p></div></a>
                 <a href="emp-notifications-1.php"><div class="icons"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><p id="icon-txt">Notifications</p></div></a>
-
             </div>
         </div>
-
+        
         <!-- content -->
         <div class="content">
 
             <div class="form-col">
-            <div>
-            <i class="fa fa-database" aria-hidden="true"></i>
-                    <span>
-                        <h5>Package Report</h5>
-                    </span>
-                </div>
-
-                <form method="post" action="emp-pkg-report-2.php">
                     <div>
+                        <i class="fa fa-truck" aria-hidden="true"></i>
                         <span>
-                            <h2>Priority Number</h2>
+                            <h5>Package <?php echo $pkgID; ?> Marked Recieved </h5>
                         </span>
                     </div>
-                    <input type="text" name="prio-num" placeholder="1, 2, or 3...">
 
-                    <div>
-                        <span>
-                            <h2>Weight</h2>
-                        </span>
-                    </div>
-                    <input type="text" name="weight" placeholder="Enter max weight in pounds...">
+                    <p>Please go to your employee control panel under "Send Package" to send this to it's next location.</p>
 
-                    <div>
-                        <span>
-                            <h2>Volume</h2>
-                        </span>
-                    </div>
-                    <input type="text" name="volume" placeholder="insert max package volume in inches...">
-
-                    <div>
-                        <span>
-                            <h2>Package Type</h2>
-                        </span>
-                    </div>
-                    <input type="text" name="type" placeholder="Enter 'Standard' or 'Fragile' [Case sensitive]...">
-
-                    <div>
-                        <span>
-                            <h2>Due Within</h2>
-                        </span>
-                    </div>
-                  <input type="text" name="due" placeholder="Enter max days until due...">
-
-                    <div>
-                        <span>
-                            <h2>Max Price</h2>
-                        </span>
-                    </div>
-                    <input type="text" name="cost" placeholder="Enter max price in dollars...">
-
-                    <input type="text" name="type" placeholder="Enter date">
-
-
-                <button type="submit" class="hero-btn red-btn" id="pkg-report-info">Generate Report</button>
-
-                <!-- TODO: can't remove: will mess up side bar, so just hide by using color white in css -->
-                <p class="heading"> HEADING </p>
-                <p class="paragraph"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus blanditiis cumque voluptate laboriosam? Voluptate delectus saepe impedit, dolores aliquam in possimus corporis rerum a quam itaque dolor animi cupiditate expedita.</p>
             </div> 
             
+            <div class="form-col">
+                    <!-- TODO: can't remove: will mess up side bar, so just hide by using color white in css -->
+                    <p class="heading"> HEADING </p>
+                    <p class="paragraph"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus blanditiis cumque voluptate laboriosam? Voluptate delectus saepe impedit, dolores aliquam in possimus corporis rerum a quam itaque dolor animi cupiditate expedita.</p>
+            </div> 
+
         </div>
+
+        <?php 
+            $pkgID = (int) $_POST["package-id"];
+            $sql = "UPDATE Tracking_Status SET Package_Status = 'office' WHERE Package_ID = ?;";
+            $stmt = mysqli_stmt_init($conn);
+            if (!mysqli_stmt_prepare($stmt, $sql)){
+                header("location: ../pages/index-login.php?error=stmtfailed");
+                exit();   
+            }
+            mysqli_stmt_bind_param($stmt,"i", $pkgID);
+            mysqli_stmt_execute($stmt);
+        ?>
 
     </section>
     

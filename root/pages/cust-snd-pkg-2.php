@@ -77,6 +77,8 @@
                 $weight = $_POST['weight'];
                 $vol = $_POST['vol'];
                 $vol_converted = (int) $vol;
+
+                $dropOffLocation = $_POST['pkg-drop-off-location'];
                 
                 
                 /**$addrRKeys = "SELECT Address_Key FROM PostOffice.Address 
@@ -218,6 +220,31 @@
 
                 // get package_id of package we just inserted
                 $last_id = mysqli_insert_id($conn);
+
+
+                // update Tracking_Status table: set package_if of newly created package, set status to transit, destination office to selected by customer
+                $sqlTrkStatus = "INSERT INTO Tracking_Status (Package_ID, Package_Status, Destination_Office) VALUES(?, ?, ?);";
+                $stmtTrkStatus = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmtTrkStatus, $sqlTrkStatus))
+                {
+                    header("location: ../pages/index-login.php?error=stmtfailed");
+                    exit();
+                }
+                $pkgStatus = "transit";
+                $destinationOffice = -1;
+
+                if ($dropOffLocation === "Houston Branch") {
+                    $destinationOffice = 1;
+                }
+                elseif ($dropOffLocation === "Austin Branch") {
+                    $destinationOffice = 2;
+                } else {
+                    $destinationOffice = 3;
+                }
+
+                mysqli_stmt_bind_param($stmtTrkStatus, "isi", $last_id, $pkgStatus, $destinationOffice);
+                mysqli_stmt_execute($stmtTrkStatus);
+
             ?>
             
         
