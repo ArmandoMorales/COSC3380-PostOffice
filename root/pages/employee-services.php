@@ -295,6 +295,12 @@
                                         echo "Dallas Branch";
                                     }
                                 }
+                                if (isset($_SESSION["officeID"]))
+                                {
+                                    if ($_SESSION["officeID"] === 4){
+                                        echo "West Branch";
+                                    }
+                                }
                                 else {
                                     echo "No PO found.";
                                 }

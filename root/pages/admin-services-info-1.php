@@ -10,6 +10,9 @@
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+<?php
+    include("../includes/dbh.inc.php");
+?>
 <section class="sub-header">
     <?php
         include_once '../header.php';
@@ -39,9 +42,34 @@
 
         <!-- content -->
         <div class="content">
+        <?php 
+            $getAddrSql = "SELECT Building_Num, Street_Name, City, State, Zipcode 
+                            FROM PostOffice.Address
+                            WHERE Address_Key = ?;";
+            $stmtGetAddr = mysqli_stmt_init($conn);
+            if (!mysqli_stmt_prepare($stmtGetAddr, $getAddrSql)) {
+                header("location: ../pages/index-login.php?error=stmtfailed");
+                exit();   
+            }
+            mysqli_stmt_bind_param($stmtGetAddr,"i",$_SESSION["empAddressKey"]);
+            mysqli_stmt_execute($stmtGetAddr);
+
+            $resultAddr =  mysqli_stmt_get_result($stmtGetAddr);
+            $resultAddrCheck = mysqli_num_rows($resultAddr);
+
+            if ($resultAddrCheck > 0){
+                while($check=mysqli_fetch_assoc($resultAddr)){
+                    $holdBNum = $check['Building_Num'];
+                    $holdStreet = $check['Street_Name'];
+                    $holdCity = $check['City'];
+                    $holdState = $check['State'];
+                    $holdZip = $check['Zipcode'];
+                }
+            }
+        ?>
 
             <div class="form-col">
-            <div>
+                    <div>
                     <i class="fa fa-user" aria-hidden="true"></i>
                     <span>
                         <h5>Employee Information</h5>
@@ -54,56 +82,88 @@
                             <h2>First Name</h2>
                         </span>
                     </div>
-                    <input type="text" name="fname" placeholder="Enter your updated first name">
+                    <input type="text" name="fname" placeholder="<?php
+                                if (isset($_SESSION["firstName"]))
+                                {
+                                    echo $_SESSION["firstName"];
+                                    
+                                }
+                            ?>">
 
                     <div>
                         <span>
                             <h2>Last Name</h2>
                         </span>
                     </div>
-                    <input type="text" name="lname" placeholder="Enter your updated last name">
+                    <input type="text" name="lname" placeholder="<?php
+                                if (isset($_SESSION["lastName"]))
+                                {
+                                    echo $_SESSION["lastName"];
+                                    
+                                }
+                            ?>">
 
+                    <div>
+                        <span>
+                            <h2>Email</h2>
+                        </span>
+                    </div>
+                    <input type="text" name="email" placeholder="<?php
+                                if (isset($_SESSION["useruid"]))
+                                {
+                                    echo $_SESSION["useruid"];
+                                    
+                                }
+                            ?>">
+
+                    
                     <div>
                         <span>
                             <h2>Building #</h2>
                         </span>
                     </div>
-                    <input type="text" name="building-num" placeholder="Enter your updated building number">
+                    <input type="text" name="building-num" placeholder="<?php echo $holdBNum ?>">
 
                     <div>
                         <span>
                             <h2>Street Name</h2>
                         </span>
                     </div>
-                    <input type="text" name="street-name" placeholder="Enter your updated street name" maxlength="25">
+                    <input type="text" name="street-name" placeholder="<?php echo $holdStreet ?>" maxlength="25">
 
                     <div>
                         <span>
                             <h2>City</h2>
                         </span>
                     </div>
-                    <input type="text" name="city" placeholder="Enter your updated city" maxlength="20">
+                    <input type="text" name="city" placeholder="<?php echo $holdCity ?>" maxlength="20">
                     
                     <div>
                         <span>
                             <h2>State</h2>
                         </span>
                     </div>
-                    <input type="text" name="state" placeholder="Enter your updated state">
+                    <input type="text" name="state" placeholder="<?php echo $holdState ?>">
 
                     <div>
                         <span>
                             <h2>Zipcode</h2>
                         </span>
                     </div>
-                    <input type="text" name="zip" placeholder="Enter your updated zipcode">
+                    <input type="text" name="zip" placeholder="<?php echo $holdZip ?>">
                     
                     <div>
                         <span>
                             <h2>Phone Number</h2>
                         </span>
                     </div>
-                    <input type="text" name="phone-number" placeholder="Enter your updated phone number">
+                    <input type="text" name="phone-number" placeholder="<?php
+                                if (isset($_SESSION["pnum"]))
+                                {
+                                    echo $_SESSION["pnum"];
+                                    
+                                }
+                            ?>">
                     
                     <button type="submit" class="hero-btn red-btn" id="emp-save-info-btn">Save Information</button>
 

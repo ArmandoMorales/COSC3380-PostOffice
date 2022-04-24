@@ -10,6 +10,9 @@
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+<?php
+    include("../includes/dbh.inc.php");
+?>
     <section class="sub-header">
         <?php
             include_once '../header.php';
@@ -41,6 +44,31 @@
 
         <!-- content -->
         <div class="content">
+        <?php 
+            $getAddrSql = "SELECT Building_Num, Street_Name, City, State, Zipcode 
+                            FROM PostOffice.Address
+                            WHERE Address_Key = ?;";
+            $stmtGetAddr = mysqli_stmt_init($conn);
+            if (!mysqli_stmt_prepare($stmtGetAddr, $getAddrSql)) {
+                header("location: ../pages/index-login.php?error=stmtfailed");
+                exit();   
+            }
+            mysqli_stmt_bind_param($stmtGetAddr,"i",$_SESSION["empAddressKey"]);
+            mysqli_stmt_execute($stmtGetAddr);
+
+            $resultAddr =  mysqli_stmt_get_result($stmtGetAddr);
+            $resultAddrCheck = mysqli_num_rows($resultAddr);
+
+            if ($resultAddrCheck > 0){
+                while($check=mysqli_fetch_assoc($resultAddr)){
+                    $holdBNum = $check['Building_Num'];
+                    $holdStreet = $check['Street_Name'];
+                    $holdCity = $check['City'];
+                    $holdState = $check['State'];
+                    $holdZip = $check['Zipcode'];
+                }
+            }
+        ?>
 
             <div class="form-col">
                 <div>
@@ -101,12 +129,112 @@
 
                 <div>
                     <span>
-                        <h2>Address</h2>
-                        <p id="display-info">   
+                        <h2>Employee Email</h2>
+                        <p id="display-info">
                             <?php
-                                if (isset($_SESSION["empAddressKey"]))
+                                if (isset($_SESSION["useruid"]))
                                 {
-                                    echo $_SESSION["empAddressKey"];
+                                    echo $_SESSION["useruid"];
+                                    
+                                }
+                            ?>
+                        </p>
+                    </span>
+                </div>
+
+                <div>
+                    <span>
+                        <h2>Building #</h2>
+                    </span>
+                </div>
+
+                <div>
+                    <span>
+                        <p id="display-info">
+                            <?php
+                                if (isset($holdBNum))
+                                {
+                                    echo $holdBNum;
+                                    
+                                }
+                            ?>
+                        </p>
+                    </span>
+                </div>
+
+                <div>
+                    <span>
+                        <h2>Street Name</h2>
+                    </span>
+                </div>
+
+                <div>
+                    <span>
+                        <p id="display-info">
+                            <?php
+                                if (isset($holdStreet))
+                                {
+                                    echo $holdStreet;
+                                    
+                                }
+                            ?>
+                        </p>
+                    </span>
+                </div>
+                
+                <div>
+                    <span>
+                        <h2>City Name</h2>
+                    </span>
+                </div>
+
+                <div>
+                    <span>
+                        <p id="display-info">
+                            <?php
+                                if (isset($holdCity))
+                                {
+                                    echo $holdCity;
+                                    
+                                }
+                            ?>
+                        </p>
+                    </span>
+                </div>
+                
+                <div>
+                    <span>
+                        <h2>State Name</h2>
+                    </span>
+                </div>
+
+                <div>
+                    <span>
+                        <p id="display-info">
+                            <?php
+                                if (isset($holdState))
+                                {
+                                    echo $holdState;
+                                    
+                                }
+                            ?>
+                        </p>
+                    </span>
+                </div>
+
+                <div>
+                    <span>
+                        <h2>Zipcode</h2>
+                    </span>
+                </div>
+
+                <div>
+                    <span>
+                        <p id="display-info">
+                            <?php
+                                if (isset($holdZip))
+                                {
+                                    echo $holdZip;
                                     
                                 }
                             ?>

@@ -5,13 +5,13 @@
     include("../includes/dbh.inc.php");
     $custemail= $_POST["email"];
     //$customID = $_POST["customer-id"];
-    $Rbuildingnum = $_POST['Rbuilding-num'];
-    $Rbnum_converted = (int) $Rbuildingnum;
-    $Rstreet = $_POST['Rstreet-name'];
-    $Rcity = $_POST['Rcity'];
-    $Rstate = $_POST['Rstate'];
-    $Rzipcode = $_POST['Rzip'];
-    $Rzipcode_coverted = (int) $Rzipcode;
+    //$Rbuildingnum = $_POST['Rbuilding-num'];
+    //$Rbnum_converted = (int) $Rbuildingnum;
+    //$Rstreet = $_POST['Rstreet-name'];
+    //$Rcity = $_POST['Rcity'];
+    //$Rstate = $_POST['Rstate'];
+    //$Rzipcode = $_POST['Rzip'];
+    //$Rzipcode_coverted = (int) $Rzipcode;
                 
     $Dbuildingnum = $_POST['Dbuilding-num'];
     $Dbnum_converted = (int) $Dbuildingnum;
@@ -73,6 +73,33 @@
         <div class="content">
             <?php
                 
+                //Check if email exists
+                $email = "SELECT email FROM PostOffice.Customer
+                            WHERE email = ?;";
+                $stmtEmail = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmtEmail, $email)){
+                    header("location: ../pages/index-login.php?error=stmtfailed");
+                    exit();   
+                }
+                mysqli_stmt_bind_param($stmtEmail, "s", $custemail);
+                mysqli_stmt_execute($stmtEmail);
+
+                $resultEmail = mysqli_stmt_get_result($stmtEmail);
+                $resultEmailCheck = mysqli_num_rows($resultEmail);
+
+                //if email exists, then officially set the inputted customer email to its respective known email
+                if($resultEmailCheck>0){
+                    while($resultEmailCheck = mysqli_fetch_assoc($resultEmail)){
+                        $custemail = $resultEmailCheck["email"];
+                    }
+                }
+                else {
+                    header("location: ../pages/emp-create-pkg-1.php?error=emailexist");
+                    exit();
+                }
+                
+
+
                 //Get address key through email
                 $getAddrKey = "SELECT Customer_Address_Key From PostOffice.Customer
                                 WHERE email = ?;";
