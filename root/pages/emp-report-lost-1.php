@@ -10,7 +10,6 @@
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-
 <?php
     include("../includes/dbh.inc.php");
 ?>
@@ -53,59 +52,76 @@
             </div>
         </div>
 
-        <?php 
-            $pkgID = (int) $_POST["package-id"];
-            $nextDest = $_POST["next-location"];
 
-            // set package status to delivered
-            if ($nextDest === "Deliver To Customer Address") {
-                $sql = "UPDATE Tracking_Status SET Package_Status = 'delivered' WHERE Package_ID = ?;";
-                $stmt = mysqli_stmt_init($conn);
-                if (!mysqli_stmt_prepare($stmt, $sql)){
-                    header("location: ../pages/index-login.php?error=stmtfailed");
-                    exit();   
-                }
-                mysqli_stmt_bind_param($stmt,"i", $pkgID);
-                mysqli_stmt_execute($stmt);
-            } 
-            else {
-                // find which office they meant to send to, mark as transit and update destination office
-                $destinationOffice = -1;
-
-                if ($nextDest === "Houston Branch") {
-                    $destinationOffice = 1;
-                }
-                elseif ($nextDest === "Austin Branch") {
-                    $destinationOffice = 2;
-                }
-                else {
-                    $destinationOffice = 3;
-                }
-
-                $sql = "UPDATE Tracking_Status SET Package_Status = 'transit', Destination_Office = ? WHERE Package_ID = ?;";
-                $stmt = mysqli_stmt_init($conn);
-                if (!mysqli_stmt_prepare($stmt, $sql)){
-                    header("location: ../pages/index-login.php?error=stmtfailed");
-                    exit();   
-                }
-                mysqli_stmt_bind_param($stmt,"ii", $destinationOffice, $pkgID);
-                mysqli_stmt_execute($stmt);
-            }
-        ?>
         
         <!-- content -->
         <div class="content">
 
             <div class="form-col">
                     <div>
-                        <i class="fa fa-truck" aria-hidden="true"></i>
+                        <i class="fa fa-user-secret" aria-hidden="true"></i>
                         <span>
-                            <h5>Package <?php echo $pkgID; ?> Marked For Send Out</h5>
+                            <h5>Mark Lost Package</h5>
                         </span>
                     </div>
 
-                    <p>The package has been marked for send out: <?php echo $nextDest; ?> </p>
+                    <form method="post" action="emp-report-lost-2.php" autocomplete="off">
+                        <div>
+                            <span>
+                                <h2>Package ID</h2>
+                            </span>
+                        </div>
+                        <input type="text" name="package-id" placeholder="Enter package id to mark as lost">
+                    <button type="submit" class="hero-btn red-btn" id="mark-lost-btn">Mark As Lost</button>
 
+                    <!----------------------------------------------------->
+                    <br></br>
+                    <div>
+                        <h5>Incoming Packages</h5>
+                    </div>
+                    <p>The following packages were in transit to this office. If you suspect a package in transit to this office has been lost, please report it above.</p>
+                    
+                    <table class="content-table">
+                        <thead>
+                            <tr> 
+                                <th>Package ID</th>
+                                <th>Customer ID</th>
+                            </tr>    
+                        </thead>
+                        <tbody>
+                            <?php
+
+                            // grab all packages in transit who's destination is this office
+                            $incomingSql = "SELECT Package.Package_ID, Package.Customer_ID
+                            FROM PostOffice.Package
+                                LEFT JOIN PostOffice.Tracking_Status ON Package.Package_ID = Tracking_Status.Package_ID
+                            WHERE Destination_Office = ? AND Package_Status = ?;";
+
+                            $stmtIncoming = mysqli_stmt_init($conn);
+                            if (!mysqli_stmt_prepare($stmtIncoming, $incomingSql)){
+                                header("location: ../pages/index-login.php?error=stmtfailed");
+                                exit();   
+                            }
+                            
+                            $pkgStatus = 'transit';
+                            mysqli_stmt_bind_param($stmtIncoming, "is", $_SESSION["officeID"], $pkgStatus);
+                            mysqli_stmt_execute($stmtIncoming);
+
+                            $results  = mysqli_stmt_get_result($stmtIncoming);
+                            $allRows = mysqli_num_rows($results); // rows
+                            $output = mysqli_fetch_all($results); // columns
+
+                            // 0 and 1 refer to the items in the select
+                            for ($x = 0; $x <= $allRows-1; $x++) {
+                                echo "<tr>
+                                    <td>" . $output[$x][0] . "</td>
+                                    <td>" . $output[$x][1] . "</td>
+                                    </tr>";
+                            }
+
+                            ?>
+                        </tbody>    
+                    </table>              
             </div> 
             
             <div class="form-col">
