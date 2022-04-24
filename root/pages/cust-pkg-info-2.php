@@ -42,6 +42,7 @@
                 <a href="customer-services.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Customer Information</p></div></a>
                 <a href="cust-pkg-info-1.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Package Information</p></div></a>
                 <a href="cust-snd-pkg-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Create a Package</p></div></a>
+                <a href="cust-report-lost-1.php"><div class="icons"><i class="fa fa-user-secret" aria-hidden="true"></i><p id="icon-txt">Report Lost</p></div></a>
                 <a href="cust-shop.php"><div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Shop</p></div></a>
             </div>
         </div>
@@ -70,6 +71,18 @@
                 $output = mysqli_fetch_all($results); // columns
 
                 $currentOfficeID = $output[$rowsWithPkgID - 1][1]; // stopNum not tracking office bc when and employee updates tracking stopnum will update to them which means it has arrived for sure. Tracking office will show where it's heading next / where it was sent
+
+                $currentOfficeName = "";
+
+                if ($currentOfficeID  === 1) {
+                    $currentOfficeName = "Houston Branch";
+                }
+                elseif ($currentOfficeID  === 2) {
+                    $currentOfficeName = "Austin Branch";
+                } else {
+                    $currentOfficeName = "Dallas Branch";
+                }
+
                 $dateArrived = $output[$rowsWithPkgID - 1][2]; // DateArrived col from tracking table
             ?>
 
@@ -94,7 +107,7 @@
                                     echo "<p id='display-info'> Package has not yet been dropped off at a Pink Pastel Post Office to begin delivery <?php echo '$currentOfficeID' ?></p>";
                                 }
                                 else {
-                                    echo "<p id='display-info'>". $currentOfficeID ."<?php echo '$currentOfficeID' ?></p>";
+                                    echo "<p id='display-info'>". $currentOfficeName ."<?php echo '$currentOfficeID' ?></p>";
                                 }
                         ?>
                     </span>
@@ -143,7 +156,18 @@
                                 echo "<ul>";
                                 for ($x = 0; $x <= $rowsWithPkgID-1; $x++) {
                                     //echo $output[$x][4];
-                                    echo '<li><span>' .$x. '</span>'. 'Post Office ' .$output[$x][1].'</li>'; // also changed to stopnum here 
+
+                                    $postOfficeName = "";
+                                    if ($output[$x][1]  === 1) {
+                                        $postOfficeName = "Houston Branch";
+                                    }
+                                    elseif ($output[$x][1]  === 2) {
+                                        $postOfficeName = "Austin Branch";
+                                    } else {
+                                        $postOfficeName = "Dallas Branch";
+                                    }
+
+                                    echo '<li><span>' .$x. '</span>' .$postOfficeName.'</li>'; // also changed to stopnum here 
                                     //echo '<li><span>' .$x. '</span>'. 'Post Office ' .$output[$x][4].'</li>';
                                   }
                                 echo '</ul>';
