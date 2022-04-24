@@ -52,6 +52,29 @@
 
             <?php
                 $packageID = $_POST['pkg-id'];
+
+
+
+                $sqlLost = "SELECT * FROM Tracking_Status WHERE Package_ID = ?;";
+                $stmtLost = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmtLost, $sqlLost)){
+                    header("location: ../pages/index-login.php?error=stmtfailed");
+                    exit();   
+                }
+                mysqli_stmt_bind_param($stmtLost, "i", $packageID);
+                mysqli_stmt_execute($stmtLost);
+
+                $results  = mysqli_stmt_get_result($stmtLost);
+                $rowsWithPkgID = mysqli_num_rows($results); // rows
+                $output = mysqli_fetch_all($results); // columns
+
+                $currentStatus = $output[$rowsWithPkgID - 1][1];
+
+
+
+
+
+
                 //$packageIDConverted = (int) $packageID;
                 $pkgLocation = "SELECT * FROM Tracking WHERE Package_ID = ?;";
 
@@ -124,6 +147,12 @@
                         <p id="display-info"><?php echo "$dateArrived" ?></p>
                     </span>
                 </div>
+
+                <?php 
+                    if ($currentStatus === "lost") {
+                        echo "<p style='color:red'> This package has been marked as lost by it's current package location. Please call one of our offices to see how to proceed.</p>";
+                    }
+                ?>
 
             </div> 
 

@@ -86,16 +86,26 @@
                             <tr> 
                                 <th>Package ID</th>
                                 <th>Customer ID</th>
+                                <th>Customer Email</th>
                             </tr>    
                         </thead>
                         <tbody>
                             <?php
 
                             // grab all packages in transit who's destination is this office
+                            /*
                             $incomingSql = "SELECT Package.Package_ID, Package.Customer_ID
                             FROM PostOffice.Package
                                 LEFT JOIN PostOffice.Tracking_Status ON Package.Package_ID = Tracking_Status.Package_ID
                             WHERE Destination_Office = ? AND Package_Status = ?;";
+                            */
+
+                            $incomingSql = "SELECT subQuery.Package_ID, subQuery.Customer_ID, Customer.email From 
+                            (SELECT Package.Package_ID, Package.Customer_ID
+                            FROM PostOffice.Package
+                                LEFT JOIN PostOffice.Tracking_Status ON Package.Package_ID = Tracking_Status.Package_ID
+                            WHERE Destination_Office = ? AND Package_Status = ?) AS subQuery
+                                LEFT JOIN PostOffice.Customer ON subQuery.Customer_ID = Customer.Customer_ID;";
 
                             $stmtIncoming = mysqli_stmt_init($conn);
                             if (!mysqli_stmt_prepare($stmtIncoming, $incomingSql)){
@@ -116,6 +126,7 @@
                                 echo "<tr>
                                     <td>" . $output[$x][0] . "</td>
                                     <td>" . $output[$x][1] . "</td>
+                                    <td>" . $output[$x][2] . "</td>
                                     </tr>";
                             }
 

@@ -157,7 +157,7 @@
                     </datalist>
 
                     
-                    <button type="submit" class="hero-btn red-btn" id="cust-conf-ship-btn">Save Information</button>
+                    <button type="submit" class="hero-btn red-btn" id="cust-conf-ship-btn">Create</button>
 
                     <p class="heading"> HEADING </p>
                     <p class="paragraph"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus blanditiis cumque voluptate laboriosam? Voluptate delectus saepe impedit, dolores aliquam in possimus corporis rerum a quam itaque dolor animi cupiditate expedita.</p>
