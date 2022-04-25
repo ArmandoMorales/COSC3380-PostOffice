@@ -171,8 +171,18 @@ or leaves an office respectively.
 
 ## Data Queries
 
-#### Data Query Example 1
-filler text filler text filler text filler text filler text filler text
+#### Employee Mark Recieved
+
+As stated earlier, an employee is able to see which packages are in transit to their office under their "Mark Recieved" panel. These are packages that customers created and selected the logged in employee's branch as drop off, or packages that were sent out by a different branch and in transit to our office. They are presented with a table of those in transit to them and can select from those packages to mark as recieved using the drop down menu. As you can see, Edward's package (the example customer we created in the user authentication section) is listed under there because we are currently logged in under digdug@gmail.com, who is an employee assigned to the Houston branch. If you can recall, Edward selected his package to be sent / dropped off to the Houston branch. 
+
+<img src="Images/emp-recieved.png" alt="emp-update-inv.png"/>
+
+Once a package is marked as recieved, it will then automatically appear in the employee's "Send Out" panel where they can fill out a form to send it to a new location and it will appear as in transit to that particular office. So if we send it out to Austin branch, then any employee assigned to the Austin branch would be able to see this as in transit to them and mark it as recieved once it arrives to them. 
+
+#### Employee Send Out
+
+#### Employee Report Lost 
+
 
 [Back To The Top](#pink-pastel-post-office)
 
@@ -181,8 +191,7 @@ filler text filler text filler text filler text filler text filler text
 ## Data Reports
 
 
-#### Data Report Example 1
-filler text filler text filler text filler text filler text filler text
+### Ecample report
 
 [Back To The Top](#pink-pastel-post-office)
 
