@@ -108,7 +108,40 @@ filler text filler text filler text filler text filler text filler text
 ## Triggers
 
 #### Trigger Example 1
-filler text filler text filler text filler text filler text filler text
+Our first trigger involves notifications for new employees.  When a new employee is inserted into the employee table, 
+a notification is sent to the admin to confirm and inform them of the employee's successful registration.  After reading,
+they may mark notifications as read to make them disappear.
+
+![image](https://user-images.githubusercontent.com/91101119/165011110-859c40e6-ae89-4121-a6fb-7b366ee1a1a8.png)
+
+CODE
+
+![image](https://user-images.githubusercontent.com/91101119/165011192-01aac41d-4755-4847-85ca-1e56553f2adc.png)
+
+#### Trigger Example 2
+
+Our second trigger sends a notification when the number of items in stock, such as stamps or envelopes, drops below a
+certain level.
+
+![image](https://user-images.githubusercontent.com/91101119/165011501-0f746628-1f6a-4e45-be24-0f2516b84dba.png)
+
+CODE
+
+![image](https://user-images.githubusercontent.com/91101119/165011540-726b869c-6099-4a01-8295-6f2648c015a7.png)
+
+
+#### Other triggers
+
+We have additional triggers:
+
+-A trigger is used to ensure that an employee cannot be set to their own supervisor.
+
+-Multiple triggers(4) are used to make an Tracking entry whenever a package is entered
+into the Tracking_Status table.  Additionally, these triggers ensure that the number 
+of packages at a post office is incremented or decremented whenever a package enters
+or leaves an office respectively.
+
+[Back To The Top](#pink-pastel-post-office)
 
 [Back To The Top](#pink-pastel-post-office)
 
