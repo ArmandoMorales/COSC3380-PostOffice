@@ -79,7 +79,10 @@ Important Note
 - If you do not use the correct login information you will get an error message in red
 - When registering for an account, validation is in place to make sure proper characters / numbers are used. If create a password and confirm password do not match, the account will not be created and you will be redirected to fix the information.
 
-![Project Image](Images/login-error.png)
+![Error Image Example](Images/login-error.png)
+
+Once you are logged in as a customer, you will see a "Customer Services" Link in your navigation bar on the top right. Clickin that will direct you the the customer control panel, which includes all functionality of a customer: viewing / editing their information, viewing package information, creating packages, and reporting packages as lost.
+![Customer Services](Images/cust-services.png)
 
 [Back To The Top](#pink-pastel-post-office)
 
