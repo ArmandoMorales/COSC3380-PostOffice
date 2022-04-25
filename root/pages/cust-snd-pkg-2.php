@@ -79,6 +79,8 @@
                 $vol = $_POST['vol'];
                 $vol_converted = (int) $vol;
 
+                $priority = (int) $_POST['priority'];
+
                 $dropOffLocation = $_POST['pkg-drop-off-location'];
                 
                 
@@ -208,15 +210,15 @@
                 
                 $notReceived = 0;
                 //Create Package
-                $newPkg = "INSERT INTO PostOffice.Package (Customer_ID, Package_Type, Package_Weight, Package_Volume, IC_Address_Key, OT_Address_Key, Recieved)
-                            VALUES(?,?,?,?,?,?,?);";
+                $newPkg = "INSERT INTO PostOffice.Package (Customer_ID, Package_Type, Package_Weight, Package_Volume, IC_Address_Key, OT_Address_Key, Recieved, Priority)
+                            VALUES(?,?,?,?,?,?,?,?);";
                 $stmtPkg = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmtPkg, $newPkg))
                 {
                     header("location: ../pages/index-login.php?error=stmtfailed");
                     exit();
                 }
-                mysqli_stmt_bind_param($stmtPkg, "isddiii", $_SESSION["userid"], $ptype, $weight, $vol_converted, $_SESSION["custAddressKey"],$holdDaddr, $notReceived);
+                mysqli_stmt_bind_param($stmtPkg, "isddiiii", $_SESSION["userid"], $ptype, $weight, $vol_converted, $_SESSION["custAddressKey"],$holdDaddr, $notReceived, $priority);
                 mysqli_stmt_execute($stmtPkg);
 
                 // get package_id of package we just inserted

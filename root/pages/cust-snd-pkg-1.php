@@ -134,7 +134,7 @@
                         </span>
                     </div>
                     <!-- <input type="text" name="prio" placeholder="Enter priority: 1 2 3"> --> 
-                    <input type="text" name="pkg-id" placeholder="Select a priority: 1 fastest" list="possible-prios" required>
+                    <input type="text" name="priority" placeholder="Select a priority: 1 fastest" list="possible-prios" required>
                     <datalist id="possible-prios"> 
                         <option> 1 </option>
                         <option> 2 </option>
