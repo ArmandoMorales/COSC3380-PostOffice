@@ -24,7 +24,7 @@
         }
         mysqli_stmt_bind_param($stmt2, "i", $employeeID);
         mysqli_stmt_execute($stmt2);
-        
+        echo "<script> location.href='admin-services-remEmp.php'; </script>";
         
     ?>
 

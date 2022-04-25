@@ -1,5 +1,8 @@
 <html>
 <head>
+<?php
+    include("../includes/dbh.inc.php");
+?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Employee Self Services</title>
 <link rel="stylesheet" href="../css/employee-services.css">
@@ -15,10 +18,6 @@
         include_once '../header.php';
     ?>
     </section>
-
-    <?php
-    include("../includes/dbh.inc.php");
-    ?>
 
     <!-- This section replaced with universal header above
     <section class="sub-header">
@@ -39,19 +38,9 @@
 
     <!-- Side Bar -->
     <section class="side-bar-container">
-        <div class="side-bar" id="sidebar">
-            <div class="list">
-                <a href="employee-services.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Employee Information</p></div></a>
-                <a href="emp-create-pkg-1.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Start Package</p></div></a>
-                <a href="emp-recieved-pkg-1.php"><div class="icons"><i class="fa fa-check" aria-hidden="true"></i><p id="icon-txt">Mark Recieved</p></div></a>
-                <a href="emp-send-out-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Send Out</p></div></a>
-                <a href="emp-report-lost-1.php"><div class="icons"><i class="fa fa-user-secret" aria-hidden="true"></i><p id="icon-txt">Report Lost</p></div></a>
-                <!-- <a href="emp-update-trk-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Update Tracking</p></div></a> -->
-                <a href="emp-update-inv-1.php"><div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Update Inventory</p></div></a>
-                <a href="emp-pkg-report-1.php"><div class="icons"><i class="fa fa-database" aria-hidden="true"></i><p id="icon-txt">Package Report</p></div></a>
-                <a href="emp-notifications-1.php"><div class="icons"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><p id="icon-txt">Notifications</p></div></a>
-            </div>
-        </div>
+        <?php
+            include_once '../a-sidebar.php';
+        ?>
 
         <!-- content -->
         <div class="content">
@@ -70,7 +59,6 @@
                             <h2>Item Name</h2>
                         </span>
                     </div>
-                    <!-- <input type="text" name="item-name" placeholder="Enter item's name" required> -->
                     <input type="text" name="item-name" placeholder="Enter item's name" list="possible-items" required>
                         <datalist id="possible-items"> 
                             <?php
@@ -78,8 +66,6 @@
                                 $itemssql = "SELECT * FROM Items;";
                                 $resultDataitem = mysqli_query($conn, $itemssql);
                                 $resultDataitem_check = mysqli_num_rows($resultDataitem);
-
-                                //Check for results
                                 if($resultDataitem_check > 0){
                                     while($check = mysqli_fetch_assoc($resultDataitem)){ 
                                         //compare each row's PO ID to session id, return if match
@@ -92,12 +78,11 @@
                             ?>
                         </datalist>
 
-                    <!-- <div>
+                    <div>
                         <span>
                             <h2>Price</h2>
                         </span>
                     </div>
-                    <input type="text" name="price" placeholder="Enter your item's updated price" required> -->
 
                     <div>
                         <span>

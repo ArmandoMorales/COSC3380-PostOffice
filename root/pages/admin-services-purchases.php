@@ -5,6 +5,7 @@
     include_once '../header.php';
     include_once '../includes/dbh.inc.php';
     ?>
+</section>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Administrator Services</title>
 <link rel="stylesheet" href="../css/admin-services.css">
@@ -24,7 +25,6 @@
         <?php
             include_once '../a-sidebar.php';
         ?>
-
         <!-- content -->
         <div class="content", id="EmpInfo">
 
@@ -90,32 +90,39 @@
                 <input type="text" name="pID" placeholder="Select Post Office" list="possible-ids">
                     <datalist id="possible-ids"> 
                         <?php
-                            $sql = "SELECT * FROM Post_Office;";
-                            $stmt = mysqli_stmt_init($conn);
+                            if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "hq manager")) {
+                                $sql = "SELECT * FROM Post_Office;";
+                                $stmt = mysqli_stmt_init($conn);
 
-                            if (!mysqli_stmt_prepare($stmt, $sql))
-                            {
-                                header("location: ../pages/index-login.php?error=stmtfailed");
-                                exit();
-                            }
-
-                            mysqli_stmt_execute($stmt);
-                            $results = mysqli_stmt_get_result($stmt);
-                            $rows = mysqli_num_rows($results);
-
-                            if($rows > 0){
-                                while($row = mysqli_fetch_assoc($results)){
-                                    echo "<option value=". $row['Office_ID'] .">". $row['Office_Name'] ."</option>";
+                                if (!mysqli_stmt_prepare($stmt, $sql))
+                                {
+                                    header("location: ../pages/index-login.php?error=stmtfailed");
+                                    exit();
                                 }
+
+                                mysqli_stmt_execute($stmt);
+                                $results = mysqli_stmt_get_result($stmt);
+                                $rows = mysqli_num_rows($results);
+
+                                if($rows > 0){
+                                    while($row = mysqli_fetch_assoc($results)){
+                                        echo "<option value=". $row['Office_ID'] .">". $row['Office_Name'] ."</option>";
+                                    }
+                                }
+                                else {
+                                    echo "<option> None </option>";
+                                }
+                                echo '</datalist>';
+                                
                             }
-                            else {
-                                echo "<option> None </option>";
+                            if(Isset($_SESSION["role"]) && (($_SESSION["role"] == "hq manager") || ($_SESSION["role"] == "manager"))){
+                                echo '<input type="submit" name="choosePO" value="Retrieve the Data"/>';
                             }
                         ?>
-                    </datalist>
+                    
 
                
-                <input type="submit" name="choosePO" value="Retrieve the Data"/>
+                
                 </form>
 
 

@@ -55,9 +55,6 @@
                         </span>
                     </div>
                     <input type="text" name="phone-number" placeholder="**********" required>
-
-
-                    <!-- This section should be automatic if they are a normal manager -->
                     
                     <div>
                         <span>
@@ -91,8 +88,11 @@
                         </span>
                     </div>
                     <input type="text" name="state" placeholder="TX" required>
-
-                    <button type="submit" class="hero-btn red-btn" id="emp-add-emp-btn">Add Employee</button>
+                    <?php
+                        if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "hq manager")) {
+                            echo '<button type="submit" class="hero-btn red-btn" id="emp-add-emp-btn">Add Employee</button>';
+                        }
+                    ?>
 
                     <p class="heading"> HEADING </p>
                     <p class="paragraph"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus blanditiis cumque voluptate laboriosam? Voluptate delectus saepe impedit, dolores aliquam in possimus corporis rerum a quam itaque dolor animi cupiditate expedita.</p>

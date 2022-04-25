@@ -4,6 +4,9 @@
 <?php
     include("../includes/dbh.inc.php");
     $postOff = $_POST['pID'];
+    if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "manager")){
+        $postOff = $_SESSION["officeID"];
+    }
     $state = $_POST['state'];
     $city = $_POST['city'];
     $fname = $_POST['fname'];
@@ -144,12 +147,16 @@
                             
                         </tbody>
                     </table>
-                    <a href="admin-services-newEmp.php"><button class="hero-btn red-btn" id="emp-edit-info-btn">Add Employee</button></a>
-                    <a href="admin-services-remEmp.php"><button class="hero-btn red-btn" id="emp-edit-info-btn">Remove Employee</button></a>
-                    <a href="admin-services-newPerm.php"><button class="hero-btn red-btn" id="emp-edit-info-btn">Add Employee Permissions</button></a>
-                    <a href="admin-services-remPerm.php"><button class="hero-btn red-btn" id="emp-edit-info-btn">Remove Employee Permissions</button></a>
-
-                    
+                    <?php
+                    if(Isset($_SESSION["role"]) && (($_SESSION["role"] == "manager") || ($_SESSION["role"] == "hq manager"))) {
+                    echo '<a href="admin-services-newEmp.php"><button class="hero-btn red-btn" id="emp-edit-info-btn">Add Employee</button></a>';
+                    echo '<a href="admin-services-remEmp.php"><button class="hero-btn red-btn" id="emp-edit-info-btn">Remove Employee</button></a>';
+                    if($_SESSION["role"] == "hq manager") {
+                    echo '<a href="admin-services-newPerm.php"><button class="hero-btn red-btn" id="emp-edit-info-btn">Add Employee Permissions</button></a>';
+                    echo '<a href="admin-services-remPerm.php"><button class="hero-btn red-btn" id="emp-edit-info-btn">Remove Employee Permissions</button></a>';
+                    }
+                    }
+                    ?>
                 <p class="heading"> HEADING </p>
                 <p class="paragraph"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus blanditiis cumque voluptate laboriosam? Voluptate delectus saepe impedit, dolores aliquam in possimus corporis rerum a quam itaque dolor animi cupiditate expedita.</p>
 

@@ -6,6 +6,9 @@
     $phone = $_POST["phone-number"];//N
     $address = 1; //FIX HARD-CODED ADDRESS KEY //N
     $office_id = $_POST["location"]; //FIX HARD-CODED OFFICE KEY //N
+    if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "manager")){
+        $office_id = $_SESSION["officeID"];
+    }
     $supervisor = $_POST["supervisor"]; //O
     $email = $_POST["email"]; //N
     $pwd = $_POST["pwd"]; //N

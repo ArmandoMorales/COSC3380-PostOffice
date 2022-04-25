@@ -31,7 +31,7 @@
             mysqli_stmt_bind_param($stmt2, "i", $mngOut1[0][0]);
             mysqli_stmt_execute($stmt2);
         }
-
+        echo "<script> location.href='admin-services-remPerm.php'; </script>";
     ?>
 
     <section class="sub-header">

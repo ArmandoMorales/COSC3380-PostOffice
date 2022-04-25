@@ -41,21 +41,9 @@
     
     <!-- Side Bar -->
     <section class="side-bar-container">
-        <div class="side-bar" id="sidebar">
-            <div class="list">
-                <a href="employee-services.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Employee Information</p></div></a>
-                <a href="emp-create-pkg-1.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Start Package</p></div></a>
-                <a href="emp-recieved-pkg-1.php"><div class="icons"><i class="fa fa-check" aria-hidden="true"></i><p id="icon-txt">Mark Recieved</p></div></a>
-                <a href="emp-send-out-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Send Out</p></div></a>
-                <a href="emp-report-lost-1.php"><div class="icons"><i class="fa fa-user-secret" aria-hidden="true"></i><p id="icon-txt">Report Lost</p></div></a>
-                <!-- <a href="emp-update-trk-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Update Tracking</p></div></a> -->
-                <a href="emp-update-inv-1.php"><div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Update Inventory</p></div></a>
-                <a href="emp-pkg-report-1.php"><div class="icons"><i class="fa fa-database" aria-hidden="true"></i><p id="icon-txt">Package Report</p></div></a>
-                <a href="emp-notifications-1.php"><div class="icons"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><p id="icon-txt">Notifications</p></div></a>
-
-
-            </div>
-        </div>
+        <?php
+            include_once '../a-sidebar.php';
+        ?>
 
         <!-- content -->
         <div class="content">
@@ -76,7 +64,6 @@
                 </div>
                 <p> The following items should be restocked soon </p>
                 <br>
-
                 <table class="content-table">
                         <thead>
                             <tr>
@@ -95,7 +82,11 @@
                                 // log in as digdug@gmail who belongs to office ID 1 and you'll see he gets back the item low in stock
                                 // belonging to PO_ID 1.
                                 $officeID = $_SESSION["officeID"];
-                                $tracksql = "SELECT * from Item_Restock_Notifications WHERE PO_ID = ? AND isNew = 1;";
+                                if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "hq manager")) {
+                                    $tracksql = "SELECT * from Item_Restock_Notifications WHERE isNew = 1;";
+                                } else{
+                                    $tracksql = "SELECT * from Item_Restock_Notifications WHERE PO_ID = ? AND isNew = 1;";
+                                }
                                 $stmtTrack = mysqli_stmt_init($conn);
                              
                                     if (!mysqli_stmt_prepare($stmtTrack, $tracksql))
@@ -103,7 +94,11 @@
                                         header("location: ../pages/index-login.php?error=stmtfailed");
                                         exit();
                                     }
+                                if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "hq manager")) {
+
+                                } else{
                                     mysqli_stmt_bind_param($stmtTrack, "i", $officeID);
+                                }
                                     mysqli_stmt_execute($stmtTrack);
                                     
                                     $trackStartRow = mysqli_stmt_get_result($stmtTrack);

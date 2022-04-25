@@ -10,6 +10,9 @@
     $before = $_POST['before'];
     $after = $_POST['after'];
     $pID = $_POST['pID'];
+    if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "manager")){
+        $pID = $_SESSION["officeID"];
+    }
     if($before>$after){
         header("location: ../pages/admin-services-purchases1.php?error=befgaft");
         exit();

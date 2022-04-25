@@ -3,6 +3,7 @@
 <section class="sub-header">
     <?php
     include_once '../header.php';
+    include_once '../includes/dbh.inc.php';
     ?>
 </section>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,12 +38,41 @@
                 </div>
 
                 <form method="post" action="../pages/admin-services-ViewEmp2.php">
-                <div>
-                <span>
-                    <h2>Post Office ID</h2>
-                </span>
-                </div>
-                <input type="text" name="pID" placeholder="*******" required>
+                <?php
+                    if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "hq manager")) {
+                        echo '<div>
+                        <span>
+                            <h2> Select Post Office </h2>
+                        </span>
+                        </div>
+                        <input type="text" name="pID" placeholder="Select Post Office" list="possible-ids" required>
+                        <datalist id="possible-ids">';
+
+                            $sql = "SELECT * FROM Post_Office;";
+                            $stmt = mysqli_stmt_init($conn);
+
+                            if (!mysqli_stmt_prepare($stmt, $sql))
+                            {
+                                header("location: ../pages/index-login.php?error=stmtfailed");
+                                exit();
+                            }
+
+                            mysqli_stmt_execute($stmt);
+                            $results = mysqli_stmt_get_result($stmt);
+                            $rows = mysqli_num_rows($results);
+
+                            if($rows > 0){
+                                while($row = mysqli_fetch_assoc($results)){
+                                    echo "<option value=". $row['Office_ID'] .">". $row['Office_Name'] ."</option>";
+                                }
+                            }
+                            else {
+                                echo "<option> None </option>";
+                            }
+
+                    echo'</datalist>';
+                    }
+                ?>
                 <div>
                 <span>
                     <h2>Optional: State</h2>

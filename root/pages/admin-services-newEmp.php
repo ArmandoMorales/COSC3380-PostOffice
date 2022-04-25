@@ -3,9 +3,9 @@
 <section class="sub-header">
     <?php
     include_once '../header.php';
+    include_once '../includes/dbh.inc.php';
     ?>
 </section>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Administrator Services</title>
 <link rel="stylesheet" href="../css/admin-services.css">
@@ -59,13 +59,39 @@
 
 
                     <!-- This section should be automatic if they are a normal manager -->
-                    <div>
-                        <span>
-                            <h2>Works At</h2>
-                        </span>
-                    </div>
-                    <input type="text" name="location" placeholder="Post Office ID" required>
+                    <?php
+                    if(isset($_SESSION["role"]) && ($_SESSION["role"] == "hq manager")) {
+                        echo '<div>
+                                <span>
+                                    <h2> Select Post Office </h2>
+                                </span>
+                            </div>';
+                        echo '<input type="text" name="location" placeholder="Select Post Office" list="possible-ids" required>';
+                        echo '<datalist id="possible-ids">';
+                            
+                            $sql = "SELECT * FROM Post_Office;";
+                            $stmt = mysqli_stmt_init($conn);
 
+                            if (!mysqli_stmt_prepare($stmt, $sql))
+                            {
+                                header("location: ../pages/index-login.php?error=stmtfailed");
+                                exit();
+                            }
+                            mysqli_stmt_execute($stmt);
+                            $results = mysqli_stmt_get_result($stmt);
+                            $rows = mysqli_num_rows($results);
+
+                            if($rows > 0){
+                                while($row = mysqli_fetch_assoc($results)){
+                                    echo "<option value=". $row['Office_ID'] .">". $row['Office_Name'] ."</option>";
+                                }
+                            }
+                            else {
+                                echo "<option> None </option>";
+                            }
+                    echo '</datalist>';
+                    }
+                    ?>
                     <div>
                         <span>
                             <h2>Supervisor ID</h2>
@@ -119,8 +145,11 @@
                         </span>
                     </div>
                     <input type="text" name="state" placeholder="TX" required>
-
-                    <button type="submit" class="hero-btn red-btn" id="emp-add-emp-btn">Add Employee</button>
+                    <?php
+                    if(Isset($_SESSION["role"]) && (($_SESSION["role"] == "hq manager") || ($_SESSION["role"] == "manager"))) {
+                        echo '<button type="submit" class="hero-btn red-btn" id="emp-add-emp-btn">Add Employee</button>';
+                    }
+                    ?>
 
                     <p class="heading"> HEADING </p>
                     <p class="paragraph"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus blanditiis cumque voluptate laboriosam? Voluptate delectus saepe impedit, dolores aliquam in possimus corporis rerum a quam itaque dolor animi cupiditate expedita.</p>

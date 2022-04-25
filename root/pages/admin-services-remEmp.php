@@ -4,6 +4,7 @@
 <section class="sub-header">
     <?php
     include_once '../header.php';
+    include_once '../includes/dbh.inc.php';
     ?>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,10 +40,70 @@
                 <form method="post" action="../pages/admin-services-remEmp2.php">
                 <div>
                 <span>
-                    <h2>Employee ID</h2>
+                    <h2>Choose Employee</h2>
                 </span>
                 </div>
-                <input type="text" name="eID" placeholder="*******" required>
+                <?php
+                if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "hq manager")) {
+                        echo '
+                        <input type="text" name="eID" placeholder="Select Employee to Remove" list="possible-ids" required>
+                        <datalist id="possible-ids">';
+
+                            $sql = "SELECT * FROM Employee Where isAdd = 1;";
+                            $stmt = mysqli_stmt_init($conn);
+
+                            if (!mysqli_stmt_prepare($stmt, $sql))
+                            {
+                                header("location: ../pages/index-login.php?error=stmtfailed");
+                                exit();
+                            }
+
+                            mysqli_stmt_execute($stmt);
+                            $results = mysqli_stmt_get_result($stmt);
+                            $rows = mysqli_num_rows($results);
+
+                            if($rows > 0){
+                                while($row = mysqli_fetch_assoc($results)){
+                                //echo '<option> Option </option>';  
+                                echo "<option value=". $row['Employee_ID'] . "> Office ID: " . $row['Office_ID'] . " Name: " . $row['First_Name'] . " " . $row['Last_Name'] . "</option>";
+                                //echo "<option value=". $row['Employee_ID'] . ">" . $row['First_Name'] . " " . $row['Last_Name'] . "</option>";
+                                }
+                            }
+                            else {
+                                echo "<option> None </option>";
+                            }
+
+                    echo'</datalist>';
+                    } else if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "manager")){
+                        echo '
+                        <input type="text" name="eID" placeholder="Select Employee to Remove" list="possible-ids" required>
+                        <datalist id="possible-ids">';
+
+                            $sql = "SELECT * FROM Employee Where Office_ID = ?;";
+                            $stmt = mysqli_stmt_init($conn);
+
+                            if (!mysqli_stmt_prepare($stmt, $sql))
+                            {
+                                header("location: ../pages/index-login.php?error=stmtfailed");
+                                exit();
+                            }
+                            mysqli_stmt_bind_param($stmt1, "i", $_SESSION["officeID"]);
+                            mysqli_stmt_execute($stmt);
+                            $results = mysqli_stmt_get_result($stmt);
+                            $rows = mysqli_num_rows($results);
+
+                            if($rows > 0){
+                                while($row = mysqli_fetch_assoc($results)){
+                                    echo "<option value=". $row['Employee ID'] ."> Office ID: " . $row['Office_ID'] . " Name: " . $row['First_Name'] . " " . $row['Last_Name'] . "</option>";
+                                }
+                            }
+                            else {
+                                echo "<option> None </option>";
+                            }
+
+                    echo'</datalist>';
+                    }
+                ?>
                 <input type="submit" name="choosePO" value="Remove Employee"/>
                 </form>
 

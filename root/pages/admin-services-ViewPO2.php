@@ -45,12 +45,6 @@
                     <h5>View Post Offices</h5>
                 </span>
                 </div>
-
-                <div>
-                <span>
-                    <h2>Post Office Employees</h2>
-                </span>
-                </div>
                 
                 <table class="content-table">
                         <thead>
@@ -140,8 +134,6 @@
                             
                         </tbody>
                     </table>
-                    <a href="admin-services-newPo.php"><button class="hero-btn red-btn" id="emp-edit-info-btn">Add Employee</button></a>
-
                 <p class="heading"> HEADING </p>
                 <p class="paragraph"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus blanditiis cumque voluptate laboriosam? Voluptate delectus saepe impedit, dolores aliquam in possimus corporis rerum a quam itaque dolor animi cupiditate expedita.</p>
 

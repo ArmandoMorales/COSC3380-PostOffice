@@ -59,6 +59,7 @@
                         </thead>
                         <tbody>
                             <?php
+                                if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "hq manager")){
                                 //query Tracking row
                                 $tracksql = "SELECT * FROM Notification_New_Employee WHERE isAdd = 1;";
                                 $stmtTrack = mysqli_stmt_init($conn);
@@ -100,6 +101,7 @@
                                         </tr>";
 
                                     }
+                                }
                                 }
                             ?>
                             

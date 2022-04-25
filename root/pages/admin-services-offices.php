@@ -96,9 +96,10 @@
                                 echo "<option> None </option>";
                             }
 
-                    echo'</datalist>';}
+                    echo'</datalist>';
+                    echo '<input type="submit" name="choosePO" value="Retrieve the Data"/>';
+                    }
                ?>
-                <input type="submit" name="choosePO" value="Retrieve the Data"/>
                 </form>
 
 

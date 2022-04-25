@@ -30,6 +30,7 @@
 
             <div class="form-col">
                 <?php
+                    if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "hq manager")){
                     $officesql = "UPDATE Notification_New_Employee SET isAdd = 0 where N_number > 0;";
                     $stmtOffice = mysqli_stmt_init($conn);
                              
@@ -39,6 +40,7 @@
                     }
                     mysqli_stmt_execute($stmtOffice);
                     echo "<script> location.href='admin-services-ViewNotif2.php'; </script>";
+                }
                 ?>
                 <p class="heading"> HEADING </p>
                 <p class="paragraph"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus blanditiis cumque voluptate laboriosam? Voluptate delectus saepe impedit, dolores aliquam in possimus corporis rerum a quam itaque dolor animi cupiditate expedita.</p>

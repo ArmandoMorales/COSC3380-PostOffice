@@ -5,7 +5,6 @@
     include_once '../header.php';
     ?>
 </section>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Administrator Services</title>
 <link rel="stylesheet" href="../css/admin-services.css">
@@ -51,7 +50,11 @@
                 </span>
                 </div>
                 <input type="text" name="pID" placeholder="*******" required>
-                <input type="submit" name="choosePO" value="Make/Move Manager"/>
+                <?php
+                    if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "hq manager")) {
+                        echo '<input type="submit" name="choosePO" value="Make/Move Manager"/>';
+                    }
+                ?>
                 </form>
 
 

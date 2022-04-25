@@ -10,7 +10,7 @@
 <?php
 
     $itemNameInput = $_POST['item-name'];
-    // $priceInput = $_POST['price'];
+    //$priceInput = $_POST['price'];
     $countIncInput = $_POST['count-inc'];
 
     $converted = (int) $countIncInput;

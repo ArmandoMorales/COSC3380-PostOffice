@@ -1,5 +1,8 @@
 <html>
 <head>
+<?php
+    include_once '../includes/dbh.inc.php';
+?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Employee Self Services</title>
 <link rel="stylesheet" href="../css/employee-services.css">
@@ -35,20 +38,9 @@
     
     <!-- Side Bar -->
     <section class="side-bar-container">
-        <div class="side-bar" id="sidebar">
-            <div class="list">
-                <a href="employee-services.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Employee Information</p></div></a>
-                <a href="emp-create-pkg-1.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Start Package</p></div></a>
-                <a href="emp-recieved-pkg-1.php"><div class="icons"><i class="fa fa-check" aria-hidden="true"></i><p id="icon-txt">Mark Recieved</p></div></a>
-                <a href="emp-send-out-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Send Out</p></div></a>
-                <a href="emp-report-lost-1.php"><div class="icons"><i class="fa fa-user-secret" aria-hidden="true"></i><p id="icon-txt">Report Lost</p></div></a>
-                <!-- <a href="emp-update-trk-1.php"><div class="icons"><i class="fa fa-truck" aria-hidden="true"></i><p id="icon-txt">Update Tracking</p></div></a> -->
-                <a href="emp-update-inv-1.php"><div class="icons"><i class="fa fa-book" aria-hidden="true"></i><p id="icon-txt">Update Inventory</p></div></a>
-                <a href="emp-pkg-report-1.php"><div class="icons"><i class="fa fa-database" aria-hidden="true"></i><p id="icon-txt">Package Report</p></div></a>
-                <a href="emp-notifications-1.php"><div class="icons"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><p id="icon-txt">Notifications</p></div></a>
-
-            </div>
-        </div>
+        <?php
+            include_once '../a-sidebar.php';
+        ?>
 
         <!-- content -->
         <div class="content">
@@ -63,14 +55,13 @@
 
                 <p>Enter fields for which you'd like to filter package reports by. Leave all others blank.</p>
                 <br>
-                
+
                 <form method="post" action="emp-pkg-report-2.php" autocomplete="off">
                     <div>
                         <span>
                             <h2>Priority Number</h2>
                         </span>
                     </div>
-                    <!-- <input type="text" name="prio-num" placeholder="1, 2, or 3..."> -->
                     <input type="text" name="prio-num" placeholder="Select a priority filter" list="possible-prios">
                         <datalist id="possible-prios"> 
                             <option> 1 </option>
@@ -97,13 +88,11 @@
                             <h2>Package Type</h2>
                         </span>
                     </div>
-                    <!-- <input type="text" name="type" placeholder="Enter 'Standard' or 'Fragile' [Case sensitive]..."> -->
                     <input type="text" name="type" placeholder="Select a package type..." list="possible-pkg-typs">
                     <datalist id="possible-pkg-typs"> 
                         <option> Standard </option>
                         <option> Fragile </option>
                     </datalist>
-
 
                     <div>
                         <span>
@@ -118,6 +107,43 @@
                         </span>
                     </div>
                     <input type="text" name="cost" placeholder="Enter max price in dollars...">
+
+                    
+                <?php
+                    if(Isset($_SESSION["role"]) && ($_SESSION["role"] == "hq manager")) {
+                        echo '<div>
+                        <span>
+                            <h2> Select Post Office </h2>
+                        </span>
+                        </div>
+                        <input type="text" name="pID" placeholder="Select Post Office" list="possible-ids" required>
+                        <datalist id="possible-ids">';
+
+                            $sql = "SELECT * FROM Post_Office;";
+                            $stmt = mysqli_stmt_init($conn);
+
+                            if (!mysqli_stmt_prepare($stmt, $sql))
+                            {
+                                header("location: ../pages/index-login.php?error=stmtfailed");
+                                exit();
+                            }
+
+                            mysqli_stmt_execute($stmt);
+                            $results = mysqli_stmt_get_result($stmt);
+                            $rows = mysqli_num_rows($results);
+
+                            if($rows > 0){
+                                while($row = mysqli_fetch_assoc($results)){
+                                    echo "<option value=". $row['Office_ID'] .">". $row['Office_Name'] ."</option>";
+                                }
+                            }
+                            else {
+                                echo "<option> None </option>";
+                            }
+
+                    echo'</datalist>';
+                    }
+                ?>
 
                 <button type="submit" class="hero-btn red-btn" id="pkg-report-info">Generate Report</button>
 
