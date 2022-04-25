@@ -199,6 +199,17 @@ Going back to Edward's package history, we can see the updates.
 
 Instead of marking a package as recieved, the employee can mark any package in transit to them as lost if it has been too long and they have not recieved it. In the backend we have queries to see which packages have been marked as lost and this will automatically let the customer know under their package history that the package has been marked as lost and to call their neareset post office to resolve the issue. 
 
+To see this in action, you could create a package under a cusomer account, send it to an office where you have an employee account to (sending to Houston Branch for example and logging in as digdug@gmail.com with password 123) and the log into Dug's account an mark the package as lost. Or you can keep sending it to another branch and mark it as lost in another branch. When going back to the customer account, the customer will be able to see a message in red stating that the last package it was in transit to has marked it as lost. Again, all of this is handled in th backend using PHP and queries.
+
+#### Customer Report Lost 
+
+Similarly, when an employee marks a package under "Send Out" as out for delivery, the customer can report it as lost or stolen under their "Report Lost" panel if the destination address claims to have never received the package. From the customer page we run queries to collect all packages in transit to a destined address and from those we display them in a drop down menu for selection to the customer as being able to report as stolen. They cannot report a package as lost until it's been out for delivery. If it's lost between transit then an Employee will handle that as we saw above. 
+
+
+#### Customer Package History
+
+Under "Package information", a customer can see the history of a package. Where it's currently in transit to, the time arrived, and a table of it's movement history. This is all collected and displayed from the backend using queries to pull from tracking tables and find a package associated with this customer.
+
 
 [Back To The Top](#pink-pastel-post-office)
 
@@ -207,11 +218,13 @@ Instead of marking a package as recieved, the employee can mark any package in t
 ## Data Reports
 
 
-### Ecample report
+### Example report 1
 
 [Back To The Top](#pink-pastel-post-office)
 
-## Data Reports
+### Example report 2
+
+### Example report 3
 
 
 ## Old Back End File
