@@ -2,7 +2,7 @@
 
 ![Project Image](Images/project.png)
 
-All members of this repo (Armando, Alexander, Derek, Sevilay, and Zachary) contributed equally to this project. You can visit our site by going to team10.online 
+All members of this repo (Armando, Alexander, Derek, Sevilay, and Zachary) contributed equally to this project.
 
 ---
 
@@ -19,7 +19,7 @@ All members of this repo (Armando, Alexander, Derek, Sevilay, and Zachary) contr
 
 ## Description
 
-Our web applications was fully constructed using the following tools and technologies listed below.
+Our web application was constructed using the following tools and technologies listed below.
 
 #### Tools and Technologies
 
@@ -34,6 +34,8 @@ Our web applications was fully constructed using the following tools and technol
 ---
 
 ## How To Use
+
+We recommend you visit our site online, which is hosted at [team10.online](https://team10.online/)
 
 #### Installation
 filler text filler text filler text filler text filler text filler text
