@@ -14,6 +14,7 @@ All members of this repo (Armando, Alexander, Derek, Sevilay, and Zachary) contr
 - [Triggers](#triggers)
 - [Data Queries](#data-queries)
 - [Data Reports](#data-reports)
+- [Old Backend Folder](#data-reports)
 
 ---
 
@@ -133,7 +134,7 @@ filler text filler text filler text filler text filler text filler text
 ## Data Reports
 
 
-#### Old Back End File
+## Old Back End File
 This file consists of routes and services that connect to the database and it's fully tested on POSTman to be working. Initially we wanted to create our backend in this direction but we changed strategy to use php instead. 
 
 [Back To The Top](#pink-pastel-post-office)
