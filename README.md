@@ -75,7 +75,7 @@ Once you click on "Sign Up" an account will be created for you and you can login
 
 ![Project Image](Images/login.png)
 
-Important Note
+Important Notes
 - All user passwords are hashed before being stored into the database for privacy reasons. You can see this in our code when a user is created in the functions.inc.php file inside of the includes folder.
 - If you do not use the correct login information you will get an error message in red
 - When registering for an account, validation is in place to make sure proper characters / numbers are used. If create a password and confirm password do not match, the account will not be created and you will be redirected to fix the information.
@@ -104,6 +104,23 @@ Logging into Edward's account that I created for this example and visiting the C
 <img src="Images/cust-controls.png" alt="login-error"/>
 
 This same functionality also exists in any Employee account. 
+
+#### Customer & Employee Send Package
+A customer may send a package under "Create a Package" by filling out a form detailing the destination address, package type, weight, volume, priority shipping, and which post office to send it to. We use the customer's address that they created when registering for an account as the return address should something go wrong in the delivery process. After filling this out, they're prompted with a thank you message and the unique package ID associated with this package request. This package ID also becomes available under their "Package Information" page, which shows which office the package is in transit to, the time arrived, and a history table. 
+
+<img src="Images/cust-ty-pkg.png" alt="cust-ty-pkg.png"/>
+
+Employees also have the option of creating a package for a customer by filling out a similar form, but we require the customer's email address. Using the customer's email address we look up their return address and necessary information in the backend. 
+
+Important Notes
+- If the customer created a package through their profile at home, the package as marked as "in transit" to the office that they selected. All employees can see packages in transit to their office location and can choose from those to mark them as recieved and automatically update the tracking information in the backend.
+- If the employee creates the package for the customer in the office, then the package is marked as "in office" and automatically marked as recieved by the office of the employee who created the package. All packages marked as recieved can then be seen in the employees "Send Out" service, which prompts them to fill out some information on where to send the package to next. We also have triggers in place to keep track of the marked status of a package so that we can keep track of how many packages are in an office at any given point in time for later reports. More details about this will be provided down below.
+
+#### Employee Update Inventory
+
+Under the "Update Inventory" section of an employee's control panel, they are able to view the inventory in their office and click an update button that prompts them to a form to select from their inventory and apply a count increase (or decrease if a negative number is inserted). This change is then reflected when they return to "Update Inentory" and we have a trigger running in the back that inserts a notification into the employee's "Notifications" panel letting them know that an item needs to be restocked once it falls below a certain threshold. 
+
+<img src="Images/emp-update-inv.png" alt="emp-update-inv.png"/>
 
 
 [Back To The Top](#pink-pastel-post-office)
