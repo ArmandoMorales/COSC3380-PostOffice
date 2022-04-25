@@ -82,7 +82,14 @@ Important Note
 <img src="Images/login-error.png" alt="login-error" width="500"/>
 
 Once you are logged in as a customer, you will see a "Customer Services" Link in your navigation bar on the top right. Clickin that will direct you the the customer control panel, which includes all functionality of a customer: viewing / editing their information, viewing package information, creating packages, and reporting packages as lost.
+
 ![Customer Services](Images/cust-services.png)
+
+Employee accounts can only be created through an administrator, which we will showcase later, but below are example accounts that you can login to:
+- employee@gmail.com
+- admin@gmail.com
+
+Both accounts are using the password 123 for simplicity
 
 [Back To The Top](#pink-pastel-post-office)
 
