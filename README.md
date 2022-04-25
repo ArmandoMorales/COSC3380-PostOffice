@@ -92,6 +92,13 @@ Employee accounts can only be created through an administrator, which we will sh
 
 Both accounts are using the password 123 for simplicity
 
+If you wanted to test sending packages between post offices, you could use 
+- tylerjuan@gmail.com for Post Office #2 
+- barker@gmail.com for Post Office #3.  
+<br>
+If you wish to test with Post Office #4 or more, you must use admin to create a new employee at that location.
+<img src="Images/Create New Employee.png" alt="login-error"/>
+
 [Back To The Top](#pink-pastel-post-office)
 
 ---
@@ -218,11 +225,71 @@ Under "Package information", a customer can see the history of a package. Where 
 ## Data Reports
 
 
-### Example report 1
+### Report 1: Tracking and Delivery
+Report Displays statistics of package deliveries both current and past within the set time period. <br>
+Permissions: Admin<br>
+Title: "Tracking and Delivery Report from [month start, year start] to [month end, year end]" <br>
+Display: <br>
+- Total packages delivered within the time period (Default 1 month) <br>
+- Total packages currently in circulation. <br>
+- Number of late deliveries (Including those delivered and those currently in circulation) <br>
+- Number of packages reported lost within time period (Default 1 month) <br>
+- Package value total & average. <br>
+- Average delivery time by priority. <br>
+<img src="Images/tracking result.png" alt="emp-update-inv.png"/>
+Filters: <br>
+- Time period (In months) <br>
+- Priority level (Optional)<br>
+- Package Type (Optional)<br>
+<img src="Images/tracking 1.png" alt="emp-update-inv.png"/>
 
-### Example report 2
+In addition, underneath this is a single aggregated table of the data used in this table.
 
-### Example report 3
+
+### Report 2: Office Report
+Purpose: Displays statistics relating to each office branch.  <br>
+Permisions: Admin, manager <br>
+Displays:  <br>
+- #Total packages currently in office.  <br>
+- Total packages processed during time interval  <br>
+- % Passthrough (e.g. what percent of packages pass went through this location)  <br>
+- Total value brought in by packages over an interval.  <br>
+- New customers over time period. (How many customers sent their first package through at this post office) <br>
+- New Employees  <br>
+- Number of Current Employees  <br>
+- % of total Employees  <br>
+<img src="Images/OfficeOutput.png" alt="emp-update-inv.png"/>
+Filters:  <br>
+- Time period  <br>
+- Specific office. (Required for Manager)  <br>
+<img src="Images/OfficeInput.png" alt="emp-update-inv.png"/>
+
+Underneath the result table is every table used in the creation of the data, minus the data that could theoretically result in a breach of security or privacy.
+
+### Report 3: Purchase Report
+Displays the spending habits of customers, the uses at a post office, and the amount of new customers <br>
+Permisions: Admin, manager <br>
+Displays: <br>
+- Report the average cost of a package (Can filter by office) <br>
+- Report average customer spending (Can filter by post office) <br>
+- Report total customer spending to the company (can filter by office, ignore results from the shop) <br>
+- Report percentage of customers using this the post office (can filter by post office or be global) <br>
+- Report total number of deliveries sent by customers (can be global or by post office) <br>
+- Report percentage of packages sent starting at this the post office (can filter by post office or be global) <br>
+- Report of new customer's signing up (Can't do as we don't have the capacity to) <br>
+- Reports of the number of customer's who have sent their first package during this time frame (always global) 
+<br>
+<img src="Images/Purchases Output.png" alt="emp-update-inv.png"/>
+
+Filters: <br>
+- Time period<br>
+- Which post office to view (if any, set automatically for managers) <br>
+- Filters out old customers<br>
+- Filters out new customers
+<br>
+<img src="Images/PurchasesInput.png" alt="emp-update-inv.png"/>
+<br>
+Similar to the previous Report, this also has every table used in the creation of the data, minus the data that could theoretically result in a breach of security or privacy.
 
 [Back To The Top](#pink-pastel-post-office)
 
