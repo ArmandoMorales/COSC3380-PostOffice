@@ -82,7 +82,7 @@ Important Note
 
 <img src="Images/login-error.png" alt="login-error" width="500"/>
 
-Once you are logged in as a customer, you will see a "Customer Services" Link in your navigation bar on the top right. Clickin that will direct you the the customer control panel, which includes all functionality of a customer: viewing / editing their information, viewing package information, creating packages, and reporting packages as lost.
+Once you are logged in as a customer, you will see a "Customer Services" Link in your navigation bar on the top right. Clicking that will direct you the the customer control panel, which includes all functionality of a customer: viewing / editing their information, viewing package information, creating packages, and reporting packages as lost.
 
 ![Customer Services](Images/cust-services.png)
 
@@ -98,8 +98,13 @@ Both accounts are using the password 123 for simplicity
 
 ## Data Entry Forms
 
-#### Form Example 1
-filler text filler text filler text filler text filler text filler text
+#### Customer Edit Info & Employee Edit Info
+Logging into Edward's account that I created for this example and visiting the Customer Services control panel, we can click on "Customer Information" to view Edward's saved information. Edward can scroll to the bottom to find an "Edit Info" button. This will allow him to edit any of his customer information (except his unique customer ID assigned to him upon account creation). Any updates will get saved in the database and reflected in the customer's information page.
+
+<img src="Images/cust-controls.png" alt="login-error"/>
+
+This same functionality also exists in any Employee account. 
+
 
 [Back To The Top](#pink-pastel-post-office)
 
