@@ -108,6 +108,8 @@ This same functionality also exists in any Employee account.
 #### Customer & Employee Send Package
 A customer may send a package under "Create a Package" by filling out a form detailing the destination address, package type, weight, volume, priority shipping, and which post office to send it to. We use the customer's address that they created when registering for an account as the return address should something go wrong in the delivery process. After filling this out, they're prompted with a thank you message and the unique package ID associated with this package request. This package ID also becomes available under their "Package Information" page, which shows which office the package is in transit to, the time arrived, and a history table. 
 
+Here I'll create a package under Edward's customer account and select it to be dropped off at the Houston branch.
+
 <img src="Images/cust-ty-pkg.png" alt="cust-ty-pkg.png"/>
 
 Employees also have the option of creating a package for a customer by filling out a similar form, but we require the customer's email address. Using the customer's email address we look up their return address and necessary information in the backend. 
@@ -179,9 +181,23 @@ As stated earlier, an employee is able to see which packages are in transit to t
 
 Once a package is marked as recieved, it will then automatically appear in the employee's "Send Out" panel where they can fill out a form to send it to a new location and it will appear as in transit to that particular office. So if we send it out to Austin branch, then any employee assigned to the Austin branch would be able to see this as in transit to them and mark it as recieved once it arrives to them. 
 
+Here I'll mark Edward's package as recieved. 
+
 #### Employee Send Out
 
+Since we marked Edward's package as recieved, it now appears in our "Send Out" panel, which has a list of all packages in our office that have been marked as recieved and are ready to send out.
+
+<img src="Images/emp-send-out.png" alt="emp-update-inv.png"/>
+
+Here I'll select Edward's package (unique ID 43 as seen in the image), and select to send it out to the Austin Branch. Once this is marked for send out, the Austin branch will be able to see it as in transit to their office. The tracking status will also automatically be updated for Edward under his "Package Information" section. This is all done using queries to our database and PHP in the backend. 
+
+
+Going back to Edward's package history, we can see the updates.
+<img src="Images/edwards-pkg-history.png" alt="emp-update-inv.png"/>
+
 #### Employee Report Lost 
+
+Instead of marking a package as recieved, the employee can mark any package in transit to them as lost if it has been too long and they have not recieved it. In the backend we have queries to see which packages have been marked as lost and this will automatically let the customer know under their package history that the package has been marked as lost and to call their neareset post office to resolve the issue. 
 
 
 [Back To The Top](#pink-pastel-post-office)
