@@ -12,15 +12,16 @@
             echo '<a href="emp-notifications-1.php"><div class="icons"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><p id="icon-txt">Notifications</p></div></a>';
 
             if(($_SESSION["role"] == "manager") || ($_SESSION["role"] == "hq manager")){
-            echo '<a href="admin-services-purchases.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">View Purchases Report</p></div></a>';
             echo '<a href="admin-services-ViewEmp.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">View Employees</p></div></a>';
             echo '<a href="admin-services-newEmp.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Create New Employee</p></div></a>';
             echo '<a href="admin-services-remEmp.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Remove Employee</p></div></a>';
+            echo '<a href="admin-services-offices.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">View Office Reports</p></div></a>';
+            echo '<a href="admin-services-purchases.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">View Purchases Report</p></div></a>';
                 if($_SESSION["role"] == "hq manager"){
                 echo '<a href="admin-services-ViewPO.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">View Post Office</p></div></a>';
                 echo '<a href="admin-services-newPO.php"><div class="icons"><i class="fa fa-dropbox" aria-hidden="true"></i><p id="icon-txt">Create Post Office</p></div></a>';
                 echo '<a href="admin-services-ViewNotif2.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Notifications</p></div></a>';
-                echo '<a href="admin-services-offices.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">View Office Reports</p></div></a>';
+                
                 echo '<a href="report-tracking-1.php"><div class="icons"><i class="fa fa-user" aria-hidden="true"></i><p id="icon-txt">Tracking Report</p></div></a>';
                 }
 
