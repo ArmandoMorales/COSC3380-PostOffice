@@ -53,7 +53,33 @@ If you wish run this on localhost instead, you will need to install [XAMPP](http
 ## User Authentication
 
 #### Registration
-filler text filler text filler text filler text filler text filler text
+
+Once you enter our site, you can click on "REGISTER / SIGN IN" on the top right. You will be prompted to a login screen as shown in the image below. Click on "signup now" and fill out the registration form to create a customer account. For example, I will type in the following information to create an account for a new customer
+
+- First Name: Edward
+- Last Name: Elgar
+- Email: edward@gmail.com
+- Phone Number: 7138853697
+- Create a Password: 123
+- Confirm a Password: 123
+- Building Number: 15
+- Street Name: Brentway
+- City: Austin
+- State: Texas
+- Zipcode: 99032
+
+Once you click on "Sign Up" an account will be created for you and you can login. We have also created a test account for you if you'd like to skip registration and login. The login information is
+- Email: customer@gmail.com
+- Password: 123
+
+![Project Image](Images/login.png)
+
+Important Note
+- All user passwords are hashed before being stored into the database for privacy reasons. You can see this in our code when a user is created in the functions.inc.php file inside of the includes folder.
+- If you do not use the correct login information you will get an error message in red
+- When registering for an account, validation is in place to make sure proper characters / numbers are used. If create a password and confirm password do not match, the account will not be created and you will be redirected to fix the information.
+
+![Project Image](Images/login-error.png)
 
 [Back To The Top](#pink-pastel-post-office)
 
